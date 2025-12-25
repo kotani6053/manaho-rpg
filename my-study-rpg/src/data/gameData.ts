@@ -189,7 +189,7 @@ export const monsterList = [
 
 export const gachaTable = [
   // --- ハズレ枠 (3種類) ---
-  { name: "ボロボロの石ころ", power: 0, img: "🪨", weight: 25, isHazure: true },
+  { name: "ゆうりのうんち", power: 0, img: "💩", weight: 25, isHazure: true },
   { name: "バナナの皮", power: 1, img: "🍌", weight: 15, isHazure: true },
   { name: "ゆうりの靴下", power: 2, img: "🧦", weight: 10, isHazure: true },
   
