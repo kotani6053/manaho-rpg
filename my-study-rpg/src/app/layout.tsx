@@ -1,9 +1,4 @@
-import './globals.css'; // ← これを必ず1行目に追加してください！
-
-export const metadata = {
-  title: '勉強RPG',
-  description: 'たのしく漢字と算数を学ぼう！',
-}
+import './globals.css'; // ← この1行が「絶対に」必要です！
 
 export default function RootLayout({
   children,
@@ -12,7 +7,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja">
-      {/* デザインを反映させるために body に背景色などをつけるとより確実です */}
+      {/* bg-slate-950 を入れることで、画面全体の背景が真っ暗になります */}
       <body className="bg-slate-950">{children}</body>
     </html>
   );
