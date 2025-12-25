@@ -184,14 +184,14 @@ export const monsterList = [
   { name: "✨ダイヤのサメ✨", hp: 2000, img: "🦈", isRare: true },
   { name: "暗黒騎士マナホ", hp: 12000, img: "⚔️", isRare: false },
   { name: "破壊の魔王", hp: 18000, img: "😈", isRare: false },
-  { name: "宇宙の創造神", hp: 40000, img: "👑", isRare: false }
+  { name: "よしおかしずか", hp: 40000, img: "👑", isRare: false }
 ];
 
 export const gachaTable = [
   // --- ハズレ枠 (3種類) ---
   { name: "ボロボロの石ころ", power: 0, img: "🪨", weight: 25, isHazure: true },
   { name: "バナナの皮", power: 1, img: "🍌", weight: 15, isHazure: true },
-  { name: "穴のあいた靴下", power: 2, img: "🧦", weight: 10, isHazure: true },
+  { name: "ゆうりの靴下", power: 2, img: "🧦", weight: 10, isHazure: true },
   
   // --- 通常武器 (4種類) ---
   { name: "銅のつるぎ", power: 10, img: "🗡️", weight: 15, isHazure: false },
