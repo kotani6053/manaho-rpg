@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { kotobaData, monsterList, gachaTable } from '../data/gameData';
 
-export default function UltimateRPG() {
+export default function UltimateStrongestRPG() {
   const [points, setPoints] = useState(0);
   const [playerLv, setPlayerLv] = useState(1);
   const [monsterIdx, setMonsterIdx] = useState(0);
@@ -14,7 +14,6 @@ export default function UltimateRPG() {
   const [isAttacking, setIsAttacking] = useState(false);
   const [gachaResult, setGachaResult] = useState<any>(null);
 
-  // クイズ生成
   const generateQuiz = () => {
     const isMath = Math.random() > 0.4;
     if (isMath) {
@@ -29,9 +28,8 @@ export default function UltimateRPG() {
     setInputValue("");
   };
 
-  // 初期ロードとセーブ
   useEffect(() => {
-    const saved = localStorage.getItem('mana-rpg-vFinal-Ultra');
+    const saved = localStorage.getItem('mana-rpg-vFinal-Ultra-Safe');
     if (saved) {
       const p = JSON.parse(saved);
       setPoints(p.points || 0);
@@ -44,14 +42,12 @@ export default function UltimateRPG() {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('mana-rpg-vFinal-Ultra', JSON.stringify({ points, playerLv, weapon, monsterIdx }));
+    localStorage.setItem('mana-rpg-vFinal-Ultra-Safe', JSON.stringify({ points, playerLv, weapon, monsterIdx }));
   }, [points, playerLv, weapon, monsterIdx]);
 
-  // 回答チェック
   const checkAnswer = (val: string) => {
     if (val === quiz.a) {
       setPoints(p => p + 35);
-      // 正解時、わずかにダメージを与える（レベル比例）
       setMonsterHP(hp => Math.max(0, hp - (10 + playerLv * 2)));
       setMessage("✨ せいかい！ パワーが たまった！ ✨");
       generateQuiz();
@@ -61,15 +57,12 @@ export default function UltimateRPG() {
     }
   };
 
-  // 攻撃アクション（精密なパワーバランス）
   const attack = (isSpecial: boolean) => {
     const cost = isSpecial ? 60 : 25;
     if (points < cost) return;
-    
     setIsAttacking(true);
     setTimeout(() => setIsAttacking(false), 200);
 
-    // ダメージ計算: 基本威力 + (武器の力 * レベル補正)
     const baseDmg = isSpecial ? 150 : 50;
     const weaponBonus = weapon.power * (1 + playerLv * 0.12);
     const dmg = Math.floor(baseDmg + weaponBonus);
@@ -79,7 +72,6 @@ export default function UltimateRPG() {
     setMessage(`${weapon.name}で こうげき！ ${dmg}ダメージ！`);
   };
 
-  // モンスター交代（不具合修正済み堅牢ロジック）
   useEffect(() => {
     if (monsterHP === 0) {
       const current = monsterList[monsterIdx];
@@ -88,22 +80,19 @@ export default function UltimateRPG() {
         setPoints(p => p + 600);
         bonusMsg = " ＋レアボーナス！";
       }
-      
       setPlayerLv(l => l + 1);
       setMessage(`🎊 ${current.name}を たおした！${bonusMsg} 🎊`);
-
       const timer = setTimeout(() => {
         const nextIdx = (monsterIdx + 1) % monsterList.length;
         setMonsterIdx(nextIdx);
-        setMonsterHP(monsterList[nextIdx].hp); // ここで新しい敵のHPに更新
+        setMonsterHP(monsterList[nextIdx].hp);
         setMessage(`${monsterList[nextIdx].name}が あらわれた！`);
       }, 1000);
-
       return () => clearTimeout(timer);
     }
   }, [monsterHP, monsterIdx]);
 
-  // ガチャ
+  // 【修正ポイント】ガチャの持ち替えロジック
   const drawGacha = () => {
     if (points < 100) return;
     setPoints(p => p - 100);
@@ -120,7 +109,11 @@ export default function UltimateRPG() {
       r -= item.weight;
     }
     
-    if (!selected.isHazure) setWeapon(selected);
+    // 今の武器より強い場合のみ更新
+    if (!selected.isHazure && selected.power > weapon.power) {
+      setWeapon(selected);
+    }
+    
     setGachaResult(selected);
     setTimeout(() => setGachaResult(null), 2500);
   };
@@ -155,7 +148,7 @@ export default function UltimateRPG() {
           <div style={{ fontSize: '100px', transform: isAttacking ? 'scale(1.3)' : 'scale(1)', transition: '0.1s' }}>
             {monsterHP > 0 ? monster.img : '💥'}
           </div>
-          <div style={{ position: 'absolute', bottom: '15px', width: '90%', background: 'white', padding: '10px', borderRadius: '20px', boxShadow: '0 4px 15px rgba(0,0,0,0.3)' }}>
+          <div style={{ position: 'absolute', bottom: '15px', width: '90%', background: 'white', padding: '10px', borderRadius: '20px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', color: '#064e3b', fontWeight: 'bold', fontSize: '13px' }}>
               <span>{monster.name}</span>
               <span>HP {monsterHP}</span>
@@ -174,16 +167,16 @@ export default function UltimateRPG() {
               <div style={{ fontSize: '32px', textAlign: 'center', background: '#f0fdf4', marginBottom: '10px', borderRadius: '12px', height: '50px', lineHeight: '50px', border: '2px solid #34d399', fontWeight: '900', color: '#064e3b' }}>{inputValue}</div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px' }}>
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map(n => (
-                  <button key={n} onClick={() => setInputValue(v => v + n)} style={{ height: '42px', fontSize: '18px', background: '#f1f5f9', border: 'none', borderRadius: '10px', fontWeight: 'bold', boxShadow: '0 3px 0 #cbd5e1' }}>{n}</button>
+                  <button key={n} onClick={() => setInputValue(v => v + n)} style={{ height: '42px', fontSize: '18px', background: '#f1f5f9', border: 'none', borderRadius: '10px', fontWeight: 'bold' }}>{n}</button>
                 ))}
-                <button onClick={() => setInputValue("")} style={{ height: '42px', background: '#fee2e2', borderRadius: '10px', border: 'none', fontWeight: 'bold', boxShadow: '0 3px 0 #fca5a5' }}>C</button>
-                <button onClick={() => checkAnswer(inputValue)} style={{ height: '42px', background: '#10b981', color: 'white', borderRadius: '10px', border: 'none', fontWeight: 'bold', boxShadow: '0 3px 0 #059669' }}>OK!</button>
+                <button onClick={() => setInputValue("")} style={{ height: '42px', background: '#fee2e2', borderRadius: '10px', border: 'none', fontWeight: 'bold' }}>C</button>
+                <button onClick={() => checkAnswer(inputValue)} style={{ height: '42px', background: '#10b981', color: 'white', borderRadius: '10px', border: 'none', fontWeight: 'bold' }}>OK!</button>
               </div>
             </div>
           ) : (
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
               {quiz.options.map((opt: string) => (
-                <button key={opt} onClick={() => checkAnswer(opt)} style={{ height: '50px', fontSize: '13px', background: '#f0fdf4', border: '2px solid #34d399', borderRadius: '15px', fontWeight: 'bold', color: '#064e3b', boxShadow: '0 3px 0 #34d399' }}>{opt}</button>
+                <button key={opt} onClick={() => checkAnswer(opt)} style={{ height: '50px', fontSize: '13px', background: '#f0fdf4', border: '2px solid #34d399', borderRadius: '15px', fontWeight: 'bold', color: '#064e3b' }}>{opt}</button>
               ))}
             </div>
           )}
@@ -201,15 +194,17 @@ export default function UltimateRPG() {
       {/* ガチャ演出 */}
       {gachaResult && (
         <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.95)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 100 }}>
-          <div style={{ background: 'white', padding: '30px', borderRadius: '35px', textAlign: 'center', border: '6px solid #fbbf24', animation: 'pop 0.3s ease-out' }}>
-            <div style={{ fontSize: '14px', color: '#666' }}>{gachaResult.isHazure ? "ハズレ..." : "ぶきを 手にいれた！"}</div>
+          <div style={{ background: 'white', padding: '30px', borderRadius: '35px', textAlign: 'center', border: '6px solid #fbbf24' }}>
+            <div style={{ fontSize: '14px', color: '#666' }}>
+              {gachaResult.isHazure ? "ハズレ..." : 
+               gachaResult.power > weapon.power ? "ぶきを 新しくした！" : "今のぶきのほうが つよい！"}
+            </div>
             <div style={{ fontSize: '80px', margin: '15px 0' }}>{gachaResult.img}</div>
             <div style={{ fontSize: '22px', fontWeight: 'bold', color: '#064e3b' }}>{gachaResult.name}</div>
-            {!gachaResult.isHazure && <div style={{ color: '#ef4444', fontWeight: 'bold', marginTop: '5px' }}>こうげき力アップ！</div>}
+            {!gachaResult.isHazure && <div style={{ color: '#ef4444', fontWeight: 'bold', marginTop: '5px' }}>パワー: {gachaResult.power}</div>}
           </div>
         </div>
       )}
-      <style jsx>{` @keyframes pop { 0% { transform: scale(0.5); } 100% { transform: scale(1); } } `}</style>
     </div>
   );
 }
