@@ -1,120 +1,74 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useGameLogic } from '@/hooks/useGameLogic';
+import { kanjiData } from '@/data/kanji';
 
-export default function StudyRPG() {
-  // ステート管理
-  const [points, setPoints] = useState(0);
-  const [monsterHP, setMonsterHP] = useState(100);
-  const [message, setMessage] = useState("モンスターがあらわれた！");
-  const [quiz, setQuiz] = useState({ a: 0, b: 0, answer: 0 });
-  const [inputValue, setInputValue] = useState("");
+export default function GamePage() {
+  const { points, monsterHP, addPoints, attackMonster, setMonsterHP } = useGameLogic();
+  const [ans, setAns] = useState("");
+  const [msg, setMsg] = useState("べんきょうして モンスターを たおそう！");
 
-  // 新しい問題を作成
-  const generateQuiz = () => {
-    const a = Math.floor(Math.random() * 9) + 1;
-    const b = Math.floor(Math.random() * 9) + 1;
-    setQuiz({ a, b, answer: a + b });
-    setInputValue("");
-  };
-
-  useEffect(() => { generateQuiz(); }, []);
-
-  // クイズ回答処理
-  const handleQuizSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (parseInt(inputValue) === quiz.answer) {
-      setPoints(prev => prev + 10);
-      setMessage("せいかい！ 10ポイント ゲット！");
-      generateQuiz();
+  const checkAnswer = () => {
+    // 簡易的なさんすうクイズチェック（例：1+1）
+    if (parseInt(ans) === 2) {
+      addPoints(10);
+      setMsg("せいかい！ 10ポイントゲット！");
+      setAns("");
     } else {
-      setMessage("ざんねん！ もういちど かんがえてみよう。");
-    }
-  };
-
-  // 攻撃処理
-  const handleAttack = (type: 'normal' | 'special') => {
-    let damage = 0;
-    let cost = 0;
-
-    if (type === 'normal') {
-      damage = 20;
-      cost = 10;
-    } else {
-      damage = 50;
-      cost = 30;
-    }
-
-    if (points >= cost) {
-      setMonsterHP(prev => Math.max(0, prev - damage));
-      setPoints(prev => prev - cost);
-      setMessage(`${type === 'normal' ? 'こうげき！' : 'ひっさつわざ！'} ${damage}のダメージ！`);
-    } else {
-      setMessage("ポイントが たりないよ！ べんきょうして ためよう。");
+      setMsg("おしい！もういちど！");
     }
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-blue-50 p-4 font-sans">
-      {/* モンスターエリア */}
-      <div className="w-full max-w-md bg-white rounded-3xl shadow-xl p-6 mb-6 text-center">
-        <div className="text-6xl mb-4 transition-transform hover:scale-110">👾</div>
-        <div className="w-full bg-gray-200 rounded-full h-6 mb-2">
-          <div 
-            className="bg-red-500 h-6 rounded-full transition-all duration-500" 
-            style={{ width: `${monsterHP}%` }}
-          ></div>
+    <main className="min-h-screen bg-green-50 p-4 flex flex-col items-center">
+      <h1 className="text-2xl font-bold mb-4">べんきょうRPG</h1>
+      
+      {/* バトルシーン */}
+      <div className="bg-white p-8 rounded-3xl shadow-lg w-full max-w-sm text-center mb-6">
+        <div className="text-7xl mb-4 animate-bounce">👾</div>
+        <div className="h-4 w-full bg-gray-200 rounded-full">
+          <div className="h-4 bg-red-500 rounded-full transition-all" style={{width: `${monsterHP}%`}} />
         </div>
-        <p className="font-bold text-gray-600">モンスターの HP: {monsterHP}</p>
+        <p className="mt-2 font-bold">HP: {monsterHP}</p>
       </div>
 
-      {/* メッセージエリア */}
-      <div className="mb-6 h-12 text-xl font-bold text-blue-700">{message}</div>
+      <p className="text-blue-600 font-bold mb-4">{msg}</p>
 
-      {/* 学習エリア */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-2xl">
-        <div className="bg-yellow-100 p-6 rounded-2xl shadow-md">
-          <h2 className="text-lg font-bold mb-4">📖 さんすうクイズ</h2>
-          <p className="text-3xl mb-4">{quiz.a} + {quiz.b} = ?</p>
-          <form onSubmit={handleQuizSubmit} className="flex gap-2">
-            <input 
-              type="number" 
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
-              className="w-full p-2 rounded-lg border-2 border-yellow-400 text-2xl"
-            />
-            <button className="bg-yellow-400 px-4 py-2 rounded-lg font-bold">決定</button>
-          </form>
-          <p className="mt-4 font-bold text-orange-600">もってるポイント: {points}</p>
+      {/* アクションパネル */}
+      <div className="grid grid-cols-2 gap-4 w-full max-w-sm">
+        <div className="bg-yellow-100 p-4 rounded-xl border-2 border-yellow-400">
+          <p className="text-xs">もってるポイント: {points}</p>
+          <input 
+            type="number" 
+            className="w-full mt-2 p-1 border rounded" 
+            placeholder="1 + 1 = ?"
+            value={ans}
+            onChange={(e) => setAns(e.target.value)}
+          />
+          <button onClick={checkAnswer} className="w-full mt-2 bg-yellow-400 font-bold rounded">こたえる</button>
         </div>
 
-        {/* 攻撃エリア */}
-        <div className="bg-red-100 p-6 rounded-2xl shadow-md">
-          <h2 className="text-lg font-bold mb-4">⚔️ バトルコマンド</h2>
-          <div className="flex flex-col gap-3">
-            <button 
-              onClick={() => handleAttack('normal')}
-              className="bg-orange-500 text-white p-3 rounded-xl font-bold hover:bg-orange-600"
-            >
-              こうげき (10pt使う)
-            </button>
-            <button 
-              onClick={() => handleAttack('special')}
-              className="bg-purple-600 text-white p-3 rounded-xl font-bold hover:bg-purple-700"
-            >
-              ひっさつわざ (30pt使う)
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {monsterHP === 0 && (
-        <div className="fixed inset-0 bg-black/70 flex items-center justify-center flex-col text-white">
-          <h1 className="text-6xl font-bold mb-4">CLEAR!</h1>
-          <button onClick={() => setMonsterHP(100)} className="bg-white text-black px-6 py-2 rounded-full font-bold">
-            もういちど あそぶ
+        <div className="bg-red-100 p-4 rounded-xl border-2 border-red-400">
+          <button 
+            onClick={() => attackMonster(20, 10)}
+            className="w-full py-1 bg-red-500 text-white rounded mb-2 shadow-md active:translate-y-1"
+          >
+            パンチ (10pt)
+          </button>
+          <button 
+            onClick={() => attackMonster(50, 30)}
+            className="w-full py-1 bg-purple-600 text-white rounded shadow-md active:translate-y-1"
+          >
+            まほう (30pt)
           </button>
         </div>
+      </div>
+      
+      {monsterHP <= 0 && (
+        <button onClick={() => setMonsterHP(100)} className="mt-8 p-4 bg-black text-white rounded-full animate-pulse">
+          つぎの モンスターを よぶ！
+        </button>
       )}
-    </div>
+    </main>
   );
 }
