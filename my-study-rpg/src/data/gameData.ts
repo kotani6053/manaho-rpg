@@ -40,7 +40,7 @@ export const kotobaData = [
   // --- 算数の概念・図形 ---
   { q: "「3つ角」がある形は？", a: "三角形", options: ["四角形", "円", "三角形", "星型"] },
   { q: "「サイコロ」の形は？", a: "四角", options: ["丸", "四角", "三角", "細長い"] },
-  // --- その他追加 ---
+  // --- その他 ---
   { q: "日本の 首都は？", a: "東京", options: ["大阪", "東京", "名古屋", "福岡"] },
   { q: "一番 大きいのは？", a: "クジラ", options: ["メダカ", "マグロ", "クジラ", "サメ"] },
   { q: "「朝」の次は？", a: "昼", options: ["夕方", "夜", "昼", "真夜中"] },
@@ -59,35 +59,51 @@ export const kotobaData = [
   { q: "「長い」の はんたいは？", a: "短い", options: ["細い", "短い", "薄い", "狭い"] },
   { q: "「高い」の はんたいは？", a: "低い", options: ["広い", "浅い", "低い", "細い"] }
 ];
+
 export const monsterList = [
-  { name: "プルプルスライム", hp: 120, img: "👾", color: "from-blue-600 to-blue-900", isRare: false },
-  { name: "✨キンピカ・タートル✨", hp: 50, img: "🐢", color: "from-yellow-400 to-amber-600", isRare: true },
-  { name: "メラメラくん", hp: 250, img: "🔥", color: "from-red-500 to-red-900", isRare: false },
-  { name: "パタパタ・コウモリ", hp: 320, img: "🦇", color: "from-slate-600 to-slate-900", isRare: false },
-  { name: "ビリビリ丸", hp: 450, img: "⚡", color: "from-yellow-500 to-amber-900", isRare: false },
-  { name: "ドクドク・キノコ", hp: 550, img: "🍄", color: "from-purple-500 to-indigo-900", isRare: false },
-  { name: "おばけカボチャ", hp: 700, img: "🎃", color: "from-orange-500 to-black", isRare: false },
-  { name: "✨クリスタル・クラブ✨", hp: 80, img: "🦀", color: "from-cyan-300 to-blue-400", isRare: true },
-  { name: "アイアン・ゴーレム", hp: 1000, img: "🗿", color: "from-gray-500 to-gray-800", isRare: false },
-  { name: "深海のクラーケン", hp: 1300, img: "🦑", color: "from-blue-800 to-black", isRare: false },
-  { name: "毒針ハチ公", hp: 1600, img: "🐝", color: "from-yellow-600 to-black", isRare: false },
-  { name: "✨黄金のスフィンクス✨", hp: 200, img: "🦁", color: "from-yellow-300 to-amber-700", isRare: true },
-  { name: "密林のコブラ", hp: 2000, img: "🐍", color: "from-green-700 to-black", isRare: false },
-  { name: "灼熱のドラゴン", hp: 2500, img: "🐲", color: "from-red-600 to-orange-900", isRare: false },
-  { name: "氷結の巨人", hp: 3200, img: "🧊", color: "from-blue-200 to-blue-600", isRare: false },
-  { name: "古代のロボット", hp: 4000, img: "🤖", color: "from-gray-400 to-slate-700", isRare: false },
-  { name: "✨ダイヤのサメ✨", hp: 500, img: "🦈", color: "from-cyan-100 to-cyan-500", isRare: true },
-  { name: "暗黒騎士マナホ", hp: 5500, img: "⚔️", color: "from-slate-800 to-black", isRare: false },
-  { name: "破壊の魔王", hp: 7500, img: "😈", color: "from-red-900 to-black", isRare: false },
-  { name: "宇宙の創造神", hp: 15000, img: "👑", color: "from-indigo-600 to-black", isRare: false }
+  { name: "プルプルスライム", hp: 150, img: "👾", isRare: false },
+  { name: "✨キンピカ・タートル✨", hp: 300, img: "🐢", isRare: true },
+  { name: "メラメラくん", hp: 450, img: "🔥", isRare: false },
+  { name: "パタパタ・コウモリ", hp: 600, img: "🦇", isRare: false },
+  { name: "ビリビリ丸", hp: 800, img: "⚡", isRare: false },
+  { name: "ドクドク・キノコ", hp: 1000, img: "🍄", isRare: false },
+  { name: "おばけカボチャ", hp: 1300, img: "🎃", isRare: false },
+  { name: "✨クリスタル・クラブ✨", hp: 500, img: "🦀", isRare: true },
+  { name: "アイアン・ゴーレム", hp: 1800, img: "🗿", isRare: false },
+  { name: "深海のクラーケン", hp: 2200, img: "🦑", isRare: false },
+  { name: "毒針ハチ公", hp: 2800, img: "🐝", isRare: false },
+  { name: "✨黄金のスフィンクス✨", hp: 1000, img: "🦁", isRare: true },
+  { name: "密林のコブラ", hp: 3500, img: "🐍", isRare: false },
+  { name: "灼熱のドラゴン", hp: 4500, img: "🐲", isRare: false },
+  { name: "氷結の巨人", hp: 6000, img: "🧊", isRare: false },
+  { name: "古代のロボット", hp: 8000, img: "🤖", isRare: false },
+  { name: "✨ダイヤのサメ✨", hp: 2000, img: "🦈", isRare: true },
+  { name: "暗黒騎士マナホ", hp: 12000, img: "⚔️", isRare: false },
+  { name: "破壊の魔王", hp: 18000, img: "😈", isRare: false },
+  { name: "宇宙の創造神", hp: 40000, img: "👑", isRare: false }
 ];
 
 export const gachaTable = [
-  { name: "ボロボロの石ころ", power: 0, img: "🪨", weight: 35, isHazure: true },
-  { name: "バナナの皮", power: 1, img: "🍌", weight: 20, isHazure: true },
-  { name: "鉄のつるぎ", power: 30, img: "🗡️", weight: 20, isHazure: false },
-  { name: "炎のつえ", power: 75, img: "🔥", weight: 12, isHazure: false },
-  { name: "氷のやり", power: 150, img: "❄️", weight: 7, isHazure: false },
-  { name: "光の聖剣", power: 450, img: "✨", weight: 4, isHazure: false },
-  { name: "銀河の破壊斧", power: 1200, img: "🪓", weight: 2, isHazure: false }
+  // --- ハズレ枠 (3種類) ---
+  { name: "ボロボロの石ころ", power: 0, img: "🪨", weight: 25, isHazure: true },
+  { name: "バナナの皮", power: 1, img: "🍌", weight: 15, isHazure: true },
+  { name: "穴のあいた靴下", power: 2, img: "🧦", weight: 10, isHazure: true },
+  
+  // --- 通常武器 (4種類) ---
+  { name: "銅のつるぎ", power: 10, img: "🗡️", weight: 15, isHazure: false },
+  { name: "鉄のオノ", power: 18, img: "🪓", weight: 10, isHazure: false },
+  { name: "騎士のやり", power: 25, img: "🔱", weight: 8, isHazure: false },
+  { name: "まほうの杖", power: 35, img: "🪄", weight: 6, isHazure: false },
+
+  // --- レア武器 (4種類) ---
+  { name: "炎のつるぎ", power: 50, img: "🔥", weight: 4, isHazure: false },
+  { name: "氷結のハンマー", power: 65, img: "🔨", weight: 3, isHazure: false },
+  { name: "雷鳴のムチ", power: 80, img: "⚡", weight: 2, isHazure: false },
+  { name: "勇者の聖剣", power: 100, img: "⚔️", weight: 1.5, isHazure: false },
+
+  // --- 超レア・伝説 (4種類) ---
+  { name: "光の聖剣", power: 130, img: "✨", weight: 1, isHazure: false },
+  { name: "銀河の破壊斧", power: 180, img: "🌌", weight: 0.5, isHazure: false },
+  { name: "暗黒の魔鎌", power: 220, img: "🌙", weight: 0.3, isHazure: false },
+  { name: "全知全能の杖", power: 300, img: "🌟", weight: 0.1, isHazure: false }
 ];
