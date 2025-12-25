@@ -2,19 +2,18 @@
 import React, { useState, useEffect } from 'react';
 import { kanjiData, monsterList, gachaTable } from '../data/gameData';
 
-export default function FixedLayoutRPG() {
+export default function ColorfulFantasyRPG() {
   const [points, setPoints] = useState(0);
   const [playerLv, setPlayerLv] = useState(1);
   const [monsterIdx, setMonsterIdx] = useState(0);
   const [monsterHP, setMonsterHP] = useState(monsterList[0].hp);
   const [weapon, setWeapon] = useState({ name: "ひのきのぼう", power: 5, img: "🪵" });
-  const [message, setMessage] = useState("ぼうけん スタート！");
+  const [message, setMessage] = useState("ぼうけんが はじまった！");
   const [quiz, setQuiz] = useState({ q: "", a: "" });
   const [inputValue, setInputValue] = useState("");
   const [isAttacking, setIsAttacking] = useState(false);
   const [gachaResult, setGachaResult] = useState<any>(null);
 
-  // クイズ生成
   const generateQuiz = () => {
     const randomType = Math.random();
     if (randomType > 0.4) {
@@ -44,9 +43,8 @@ export default function FixedLayoutRPG() {
     setInputValue("");
   };
 
-  // セーブ・ロード
   useEffect(() => {
-    const savedData = localStorage.getItem('mana-rpg-save-v3');
+    const savedData = localStorage.getItem('mana-rpg-save-v4');
     if (savedData) {
       const parsed = JSON.parse(savedData);
       setPoints(parsed.points || 0);
@@ -61,7 +59,7 @@ export default function FixedLayoutRPG() {
 
   useEffect(() => {
     const dataToSave = { points, playerLv, weapon, monsterIdx };
-    localStorage.setItem('mana-rpg-save-v3', JSON.stringify(dataToSave));
+    localStorage.setItem('mana-rpg-save-v4', JSON.stringify(dataToSave));
   }, [points, playerLv, weapon, monsterIdx]);
 
   const handleAnswer = (e: React.FormEvent) => {
@@ -70,10 +68,10 @@ export default function FixedLayoutRPG() {
       const bonus = quiz.q.split(' ').length > 3 ? 50 : 30;
       setPoints(p => p + bonus);
       setMonsterHP(p => Math.max(0, p - 10)); 
-      setMessage(`✨ 正解！ ${bonus}ポイント！ ✨`);
+      setMessage(`✨ せいかい！ ${bonus}ポイント！ ✨`);
       generateQuiz();
     } else {
-      setMessage("❌ まちがい！ もう一度！ ❌");
+      setMessage("❌ ざんねん！ もういちど！ ❌");
     }
   };
 
@@ -120,101 +118,98 @@ export default function FixedLayoutRPG() {
   const monster = monsterList[monsterIdx];
 
   return (
-    <div style={{ backgroundColor: '#020617', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '15px', fontFamily: 'sans-serif' }}>
+    <div style={{ 
+      background: 'linear-gradient(135deg, #1e3a8a 0%, #4c1d95 50%, #831843 100%)', // 明るいファンタジーグラデ
+      minHeight: '100vh', 
+      display: 'flex', 
+      alignItems: 'center', 
+      justifyContent: 'center', 
+      padding: '15px', 
+      fontFamily: '"Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", sans-serif'
+    }}>
       <div style={{ width: '100%', maxWidth: '800px', display: 'flex', flexDirection: 'column', gap: '15px' }}>
         
-        {/* ステータスバー */}
+        {/* ステータスバー（透明感のあるデザイン） */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))', gap: '10px' }}>
-          <div style={{ backgroundColor: '#1e293b', border: '2px solid #6366f1', borderRadius: '15px', padding: '10px', color: 'white' }}>
-            <div style={{ color: '#818cf8', fontSize: '10px', fontWeight: 'bold' }}>レベル</div>
-            <div style={{ fontSize: '18px', fontWeight: '900' }}>Lv.{playerLv}</div>
+          <div style={{ background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', border: '2px solid rgba(255,255,255,0.2)', borderRadius: '20px', padding: '10px', color: 'white', boxShadow: '0 4px 15px rgba(0,0,0,0.2)' }}>
+            <div style={{ color: '#a5f3fc', fontSize: '10px', fontWeight: 'bold' }}>レベル</div>
+            <div style={{ fontSize: '20px', fontWeight: '900' }}>Lv.{playerLv}</div>
           </div>
-          <div style={{ backgroundColor: '#1e293b', border: '2px solid #f59e0b', borderRadius: '15px', padding: '10px', color: 'white', textAlign: 'center' }}>
-            <div style={{ color: '#fbbf24', fontSize: '10px', fontWeight: 'bold' }}>ポイント</div>
-            <div style={{ fontSize: '18px', fontWeight: '900' }}>{points}</div>
+          <div style={{ background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', border: '2px solid rgba(255,255,255,0.2)', borderRadius: '20px', padding: '10px', color: 'white', textAlign: 'center', boxShadow: '0 4px 15px rgba(0,0,0,0.2)' }}>
+            <div style={{ color: '#fef08a', fontSize: '10px', fontWeight: 'bold' }}>ポイント</div>
+            <div style={{ fontSize: '20px', fontWeight: '900' }}>{points}</div>
           </div>
-          <div style={{ backgroundColor: '#1e293b', border: '2px solid #10b981', borderRadius: '15px', padding: '10px', color: 'white', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div style={{ background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', border: '2px solid rgba(255,255,255,0.2)', borderRadius: '20px', padding: '10px', color: 'white', display: 'flex', justifyContent: 'space-between', alignItems: 'center', boxShadow: '0 4px 15px rgba(0,0,0,0.2)' }}>
             <div style={{ overflow: 'hidden' }}>
-              <div style={{ color: '#10b981', fontSize: '10px', fontWeight: 'bold' }}>ぶき</div>
+              <div style={{ color: '#bbf7d0', fontSize: '10px', fontWeight: 'bold' }}>ぶき</div>
               <div style={{ fontSize: '12px', fontWeight: 'bold', whiteSpace: 'nowrap' }}>{weapon.img}{weapon.name}</div>
             </div>
-            <button onClick={drawGacha} disabled={points < 100} style={{ backgroundColor: '#10b981', color: 'white', fontWeight: 'bold', fontSize: '10px', padding: '5px 8px', borderRadius: '8px', border: 'none', cursor: 'pointer', opacity: points < 100 ? 0.4 : 1, flexShrink: 0, marginLeft: '5px' }}>ガチャ</button>
+            <button onClick={drawGacha} disabled={points < 100} style={{ background: 'linear-gradient(to bottom, #10b981, #059669)', color: 'white', fontWeight: 'bold', fontSize: '10px', padding: '6px 10px', borderRadius: '10px', border: 'none', cursor: 'pointer', opacity: points < 100 ? 0.4 : 1, boxShadow: '0 2px 5px rgba(0,0,0,0.2)' }}>ガチャ</button>
           </div>
         </div>
 
-        {/* モンスターエリア */}
-        <div style={{ height: '300px', borderRadius: '30px', border: monster.isRare ? '5px solid #facc15' : '3px solid rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', background: `linear-gradient(to bottom, #1e1b4b, #020617)`, overflow: 'hidden' }}>
-          {monster.isRare && <div style={{ position: 'absolute', top: '10px', backgroundColor: '#facc15', color: '#000', padding: '2px 15px', borderRadius: '10px', fontSize: '12px', fontWeight: 'bold', zIndex: 10 }}>レア出現！</div>}
-          <div style={{ fontSize: '120px', transform: isAttacking ? 'scale(1.2)' : 'scale(1)', transition: '0.2s' }}>
+        {/* モンスターエリア（光の演出を追加） */}
+        <div style={{ 
+          height: '320px', 
+          borderRadius: '40px', 
+          border: monster.isRare ? '6px solid #fbbf24' : '4px solid rgba(255,255,255,0.2)', 
+          display: 'flex', 
+          alignItems: 'center', 
+          justifyContent: 'center', 
+          position: 'relative', 
+          background: 'rgba(0,0,0,0.3)',
+          boxShadow: monster.isRare ? '0 0 30px rgba(251,191,36,0.5)' : 'inset 0 0 50px rgba(0,0,0,0.3)',
+          overflow: 'hidden' 
+        }}>
+          {monster.isRare && <div style={{ position: 'absolute', top: '15px', backgroundColor: '#fbbf24', color: '#000', padding: '4px 20px', borderRadius: '20px', fontSize: '14px', fontWeight: '900', boxShadow: '0 0 15px #fbbf24' }}>レアモンスター 出現！</div>}
+          <div style={{ fontSize: '140px', transform: isAttacking ? 'scale(1.2)' : 'scale(1)', transition: '0.2s', filter: 'drop-shadow(0 0 20px rgba(255,255,255,0.3))' }}>
             {monsterHP > 0 ? monster.img : '💥'}
           </div>
-          <div style={{ position: 'absolute', bottom: '15px', width: '90%', backgroundColor: 'rgba(0,0,0,0.8)', padding: '12px', borderRadius: '20px', border: '1px solid white' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', color: 'white', fontWeight: 'bold', fontSize: '14px', marginBottom: '5px' }}>
+          <div style={{ position: 'absolute', bottom: '20px', width: '85%', background: 'rgba(255,255,255,0.9)', padding: '15px', borderRadius: '25px', boxShadow: '0 10px 20px rgba(0,0,0,0.3)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', color: '#1e293b', fontWeight: '900', fontSize: '16px', marginBottom: '8px' }}>
               <span>{monster.name}</span>
               <span>HP {monsterHP}</span>
             </div>
-            <div style={{ width: '100%', backgroundColor: '#475569', height: '12px', borderRadius: '6px', overflow: 'hidden' }}>
-              <div style={{ width: `${(monsterHP / monster.hp) * 100}%`, backgroundColor: monster.isRare ? '#fbbf24' : '#ff4d4d', height: '100%', transition: '0.5s' }} />
+            <div style={{ width: '100%', backgroundColor: '#e2e8f0', height: '14px', borderRadius: '7px', overflow: 'hidden' }}>
+              <div style={{ width: `${(monsterHP / monster.hp) * 100}%`, background: 'linear-gradient(to right, #ef4444, #dc2626)', height: '100%', transition: '0.5s ease-out' }} />
             </div>
           </div>
         </div>
 
-        {/* クイズエリア (修正ポイント) */}
-        <div style={{ backgroundColor: 'white', borderRadius: '30px', padding: '20px', boxShadow: '0 10px 0 #cbd5e1', border: '3px solid #1e293b' }}>
-          <h2 style={{ textAlign: 'center', fontSize: '40px', fontWeight: '900', color: '#0f172a', margin: '10px 0', wordBreak: 'break-all' }}>{quiz.q}</h2>
-          <form onSubmit={handleAnswer} style={{ display: 'flex', gap: '10px', width: '100%' }}>
+        {/* クイズエリア（ポップなデザイン） */}
+        <div style={{ backgroundColor: '#ffffff', borderRadius: '35px', padding: '25px', boxShadow: '0 15px 0 rgba(0,0,0,0.2)', border: '4px solid #1e293b' }}>
+          <h2 style={{ textAlign: 'center', fontSize: '50px', fontWeight: '900', color: '#1e293b', margin: '10px 0' }}>{quiz.q}</h2>
+          <form onSubmit={handleAnswer} style={{ display: 'flex', gap: '12px' }}>
             <input 
               type="text" 
               value={inputValue} 
               onChange={(e)=>setInputValue(e.target.value)} 
-              style={{ 
-                flex: '2', 
-                height: '60px', 
-                backgroundColor: '#f8fafc', 
-                borderRadius: '15px', 
-                border: '2px solid #e2e8f0', 
-                fontSize: '28px', 
-                fontWeight: '900', 
-                textAlign: 'center', 
-                color: '#1e293b',
-                minWidth: '0' // はみ出し防止
-              }} 
-              placeholder="?" 
+              style={{ flex: '2', height: '70px', backgroundColor: '#f1f5f9', borderRadius: '20px', border: '3px solid #cbd5e1', fontSize: '32px', fontWeight: '900', textAlign: 'center', color: '#0f172a', outline: 'none' }} 
+              placeholder="答えは？" 
             />
-            <button style={{ 
-              flex: '1', 
-              backgroundColor: '#4f46e5', 
-              color: 'white', 
-              borderRadius: '15px', 
-              border: 'none', 
-              fontSize: '20px', 
-              fontWeight: '900', 
-              cursor: 'pointer', 
-              boxShadow: '0 4px 0 #312e81',
-              whiteSpace: 'nowrap' // 文字の折り返し防止
-            }}>OK!</button>
+            <button style={{ flex: '1', background: 'linear-gradient(to bottom, #4f46e5, #3730a3)', color: 'white', borderRadius: '20px', border: 'none', fontSize: '24px', fontWeight: '900', cursor: 'pointer', boxShadow: '0 5px 0 #1e1b4b' }}>OK!</button>
           </form>
         </div>
 
         {/* ボタンエリア */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
-          <button onClick={() => attack(false)} disabled={points < 25} style={{ height: '70px', backgroundColor: '#334155', border: 'none', borderBottom: '5px solid #0f172a', borderRadius: '20px', color: 'white', fontSize: '18px', fontWeight: '900', cursor: 'pointer', opacity: points < 25 ? 0.3 : 1 }}>⚔️ こうげき</button>
-          <button onClick={() => attack(true)} disabled={points < 60} style={{ height: '70px', background: 'linear-gradient(to bottom, #e11d48, #9f1239)', border: 'none', borderBottom: '5px solid #4c0519', borderRadius: '20px', color: 'white', fontSize: '18px', fontWeight: '900', cursor: 'pointer', opacity: points < 60 ? 0.3 : 1 }}>🔥 ひっさつ</button>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' }}>
+          <button onClick={() => attack(false)} disabled={points < 25} style={{ height: '80px', background: 'rgba(255,255,255,0.15)', border: '2px solid rgba(255,255,255,0.3)', borderRadius: '25px', color: 'white', fontSize: '22px', fontWeight: '900', cursor: 'pointer', opacity: points < 25 ? 0.3 : 1, transition: '0.2s', backdropFilter: 'blur(5px)' }}>⚔️ こうげき</button>
+          <button onClick={() => attack(true)} disabled={points < 60} style={{ height: '80px', background: 'linear-gradient(to bottom, #f43f5e, #be123c)', border: 'none', borderRadius: '25px', color: 'white', fontSize: '22px', fontWeight: '900', cursor: 'pointer', opacity: points < 60 ? 0.3 : 1, boxShadow: '0 6px 0 #4c0519' }}>🔥 ひっさつ</button>
         </div>
         
-        <p style={{ textAlign: 'center', color: '#22d3ee', fontWeight: '900', fontSize: '14px', margin: '0' }}>{message}</p>
+        <p style={{ textAlign: 'center', color: '#a5f3fc', fontWeight: '900', fontSize: '16px', textShadow: '0 2px 4px rgba(0,0,0,0.5)' }}>{message}</p>
       </div>
 
       {/* ガチャ演出 */}
       {gachaResult && (
-        <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.95)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 100, padding: '20px' }}>
-          <div style={{ color: 'white', fontSize: '24px', fontWeight: '900', marginBottom: '20px', textAlign: 'center' }}>
-            {gachaResult.isHazure ? "ハズレちゃった..." : "武器をゲット！"}
+        <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.9)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 100, padding: '20px', backdropFilter: 'blur(10px)' }}>
+          <div style={{ color: 'white', fontSize: '30px', fontWeight: '900', marginBottom: '25px', textShadow: '0 0 20px #6366f1' }}>
+            {gachaResult.isHazure ? "ハズレ！ざんねん！" : "✨ レアアイテム ゲット！ ✨"}
           </div>
-          <div style={{ backgroundColor: 'white', padding: '40px', borderRadius: '40px', textAlign: 'center', width: '100%', maxWidth: '300px' }}>
-            <div style={{ fontSize: '80px' }}>{gachaResult.img}</div>
-            <p style={{ fontSize: '24px', fontWeight: '900', color: '#1e293b' }}>{gachaResult.name}</p>
-            {!gachaResult.isHazure && <p style={{ fontSize: '18px', fontWeight: '900', color: '#db2777' }}>パワー +{gachaResult.power}</p>}
+          <div style={{ backgroundColor: 'white', padding: '50px', borderRadius: '50px', textAlign: 'center', border: '8px solid #6366f1', boxShadow: '0 0 50px #6366f1' }}>
+            <div style={{ fontSize: '100px', marginBottom: '10px' }}>{gachaResult.img}</div>
+            <p style={{ fontSize: '32px', fontWeight: '900', color: '#1e293b' }}>{gachaResult.name}</p>
+            {!gachaResult.isHazure && <p style={{ fontSize: '20px', fontWeight: '900', color: '#db2777' }}>パワー +{gachaResult.power}</p>}
           </div>
         </div>
       )}
