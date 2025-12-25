@@ -182,7 +182,7 @@ export const monsterList = [
   { name: "氷結の巨人", hp: 6000, img: "🧊", isRare: false },
   { name: "古代のロボット", hp: 8000, img: "🤖", isRare: false },
   { name: "✨ダイヤのサメ✨", hp: 2000, img: "🦈", isRare: true },
-  { name: "暗黒騎士マナホ", hp: 12000, img: "⚔️", isRare: false },
+  { name: "暗黒騎士すみ", hp: 12000, img: "⚔️", isRare: false },
   { name: "破壊の魔王", hp: 18000, img: "😈", isRare: false },
   { name: "よしおかしずか", hp: 40000, img: "👑", isRare: false }
 ];
