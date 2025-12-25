@@ -6,25 +6,21 @@ export const kanjiData = [
   { q: "「夜」のよみかたは？", a: "よる" }, { q: "「歩く」のよみかたは？", a: "あるく" },
   { q: "「走る」のよみかたは？", a: "はしる" }, { q: "「止まる」のよみかたは？", a: "とまる" },
   { q: "「強い」のよみかたは？", a: "つよい" }, { q: "「広い」のよみかたは？", a: "ひろい" },
-  { q: "「遠い」のよみかたは？", a: "とおい" }, { q: "「近い」のよみかたは？", a: "ちかい" },
-  { q: "「国」のよみかたは？", a: "くに" }, { q: "「形」のよみかたは？", a: "かたち" }
+  { q: "「岩」のよみかたは？", a: "いわ" }, { q: "「夏」のよみかたは？", a: "なつ" },
+  { q: "「記」のよみかたは？", a: "き" }, { q: "「園」のよみかたは？", a: "えん" },
+  { q: "「遠」のよみかたは？", a: "えん" }, { q: "「科」のよみかたは？", a: "か" }
 ];
 
 export const monsterList = [
-  { name: "プルプルスライム", hp: 80, img: "👾", color: "from-blue-400 to-indigo-600", scale: "scale-100" },
-  { name: "情熱の火の玉", hp: 180, img: "🔥", color: "from-orange-400 to-red-700", scale: "scale-110" },
-  { name: "サンダー・ウルフ", hp: 350, img: "🐺", color: "from-yellow-300 to-amber-600", scale: "scale-125" },
-  { name: "フォレスト・ゴーレム", hp: 600, img: "🗿", color: "from-green-400 to-emerald-800", scale: "scale-150" },
-  { name: "スカイ・フェニックス", hp: 1000, img: "🐦‍🔥", color: "from-cyan-400 to-blue-500", scale: "scale-150" },
-  { name: "古代の魔神", hp: 2000, img: "🏺", color: "from-stone-500 to-stone-900", scale: "scale-175" },
-  { name: "ギャラクシー・ドラゴン", hp: 5000, img: "🐲", color: "from-purple-600 to-black", scale: "scale-[2.0]" }
+  { name: "プルプルスライム", hp: 100, img: "👾", color: "bg-blue-900/40", info: "こたえを ひとつ かくと 10ダメージ！" },
+  { name: "獄炎のケルベロス", hp: 300, img: "🐕‍🦺", color: "bg-red-900/40", info: "火の粉を まきちらしている！" },
+  { name: "メカ・ガーディアン", hp: 600, img: "🤖", color: "bg-slate-800/60", info: "こうてつの ボディーは かたいぞ！" },
+  { name: "古代龍グランギガ", hp: 2500, img: "🐲", color: "bg-purple-900/60", info: "世界を ほろぼす 伝説の龍だ！" }
 ];
 
 export const weaponList = [
-  { name: "木のぼう", power: 5, img: "🥖" },
-  { name: "鉄のつるぎ", power: 15, img: "🗡️" },
-  { name: "魔法の杖", power: 30, img: "🪄" },
-  { name: "勇者の剣", power: 60, img: "⚔️" },
-  { name: "雷神のハンマー", power: 120, img: "🔨" },
-  { name: "銀河の剣", power: 300, img: "🌌" }
+  { name: "ひのつるぎ", power: 20, img: "🔥" },
+  { name: "いなずまの杖", power: 45, img: "⚡" },
+  { name: "ダイヤモンド剣", power: 100, img: "💎" },
+  { name: "マスターソード", power: 300, img: "✨" }
 ];
