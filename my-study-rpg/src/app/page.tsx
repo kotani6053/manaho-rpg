@@ -14,6 +14,14 @@ export default function UltimateStrongestRPG() {
   const [isAttacking, setIsAttacking] = useState(false);
   const [gachaResult, setGachaResult] = useState<any>(null);
 
+  // 【追加】リセット機能
+  const resetGame = () => {
+    if (window.confirm("さいしょから やりなおしますか？（ポイントやレベルも 0になります）")) {
+      localStorage.removeItem('mana-rpg-vFinal-Ultra-Safe');
+      window.location.reload(); // ページをリロードして初期状態に戻す
+    }
+  };
+
   const generateQuiz = () => {
     const isMath = Math.random() > 0.4;
     if (isMath) {
@@ -92,7 +100,6 @@ export default function UltimateStrongestRPG() {
     }
   }, [monsterHP, monsterIdx]);
 
-  // 【修正ポイント】ガチャの持ち替えロジック
   const drawGacha = () => {
     if (points < 100) return;
     setPoints(p => p - 100);
@@ -109,7 +116,6 @@ export default function UltimateStrongestRPG() {
       r -= item.weight;
     }
     
-    // 今の武器より強い場合のみ更新
     if (!selected.isHazure && selected.power > weapon.power) {
       setWeapon(selected);
     }
@@ -126,9 +132,13 @@ export default function UltimateStrongestRPG() {
         
         {/* ステータスバー */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1.3fr', gap: '8px' }}>
-          <div style={{ background: '#022c22', border: '2px solid #34d399', padding: '8px', borderRadius: '15px', color: 'white' }}>
-            <div style={{ fontSize: '10px', color: '#6ee7b7' }}>Lv.</div>
-            <div style={{ fontSize: '18px', fontWeight: '900' }}>{playerLv}</div>
+          <div style={{ background: '#022c22', border: '2px solid #34d399', padding: '8px', borderRadius: '15px', color: 'white', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div>
+              <div style={{ fontSize: '10px', color: '#6ee7b7' }}>Lv.</div>
+              <div style={{ fontSize: '18px', fontWeight: '900' }}>{playerLv}</div>
+            </div>
+            {/* リセットボタン */}
+            <button onClick={resetGame} style={{ background: '#991b1b', color: 'white', border: 'none', borderRadius: '8px', fontSize: '9px', padding: '4px 6px', cursor: 'pointer' }}>リセット</button>
           </div>
           <div style={{ background: '#022c22', border: '2px solid #fbbf24', padding: '8px', borderRadius: '15px', color: 'white', textAlign: 'center' }}>
             <div style={{ fontSize: '10px', color: '#fcd34d' }}>ポイント</div>
@@ -167,16 +177,16 @@ export default function UltimateStrongestRPG() {
               <div style={{ fontSize: '32px', textAlign: 'center', background: '#f0fdf4', marginBottom: '10px', borderRadius: '12px', height: '50px', lineHeight: '50px', border: '2px solid #34d399', fontWeight: '900', color: '#064e3b' }}>{inputValue}</div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px' }}>
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map(n => (
-                  <button key={n} onClick={() => setInputValue(v => v + n)} style={{ height: '42px', fontSize: '18px', background: '#f1f5f9', border: 'none', borderRadius: '10px', fontWeight: 'bold' }}>{n}</button>
+                  <button key={n} onClick={() => setInputValue(v => v + n)} style={{ height: '42px', fontSize: '18px', background: '#f1f5f9', border: 'none', borderRadius: '10px', fontWeight: 'bold', cursor: 'pointer' }}>{n}</button>
                 ))}
-                <button onClick={() => setInputValue("")} style={{ height: '42px', background: '#fee2e2', borderRadius: '10px', border: 'none', fontWeight: 'bold' }}>C</button>
-                <button onClick={() => checkAnswer(inputValue)} style={{ height: '42px', background: '#10b981', color: 'white', borderRadius: '10px', border: 'none', fontWeight: 'bold' }}>OK!</button>
+                <button onClick={() => setInputValue("")} style={{ height: '42px', background: '#fee2e2', borderRadius: '10px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }}>C</button>
+                <button onClick={() => checkAnswer(inputValue)} style={{ height: '42px', background: '#10b981', color: 'white', borderRadius: '10px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }}>OK!</button>
               </div>
             </div>
           ) : (
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
               {quiz.options.map((opt: string) => (
-                <button key={opt} onClick={() => checkAnswer(opt)} style={{ height: '50px', fontSize: '13px', background: '#f0fdf4', border: '2px solid #34d399', borderRadius: '15px', fontWeight: 'bold', color: '#064e3b' }}>{opt}</button>
+                <button key={opt} onClick={() => checkAnswer(opt)} style={{ height: '50px', fontSize: '13px', background: '#f0fdf4', border: '2px solid #34d399', borderRadius: '15px', fontWeight: 'bold', color: '#064e3b', cursor: 'pointer' }}>{opt}</button>
               ))}
             </div>
           )}
@@ -184,8 +194,8 @@ export default function UltimateStrongestRPG() {
 
         {/* アクションボタン */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
-          <button onClick={() => attack(false)} disabled={points < 25 || monsterHP <= 0} style={{ height: '60px', background: '#115e59', color: 'white', borderRadius: '20px', border: 'none', fontSize: '18px', fontWeight: 'bold', boxShadow: '0 5px 0 #042f2e', opacity: (points < 25 || monsterHP <= 0) ? 0.4 : 1 }}>⚔️ こうげき</button>
-          <button onClick={() => attack(true)} disabled={points < 60 || monsterHP <= 0} style={{ height: '60px', background: 'linear-gradient(to bottom, #ef4444, #b91c1c)', color: 'white', borderRadius: '20px', border: 'none', fontSize: '18px', fontWeight: 'bold', boxShadow: '0 5px 0 #7f1d1d', opacity: (points < 60 || monsterHP <= 0) ? 0.4 : 1 }}>🔥 ひっさつ</button>
+          <button onClick={() => attack(false)} disabled={points < 25 || monsterHP <= 0} style={{ height: '60px', background: '#115e59', color: 'white', borderRadius: '20px', border: 'none', fontSize: '18px', fontWeight: 'bold', boxShadow: '0 5px 0 #042f2e', opacity: (points < 25 || monsterHP <= 0) ? 0.4 : 1, cursor: 'pointer' }}>⚔️ こうげき</button>
+          <button onClick={() => attack(true)} disabled={points < 60 || monsterHP <= 0} style={{ height: '60px', background: 'linear-gradient(to bottom, #ef4444, #b91c1c)', color: 'white', borderRadius: '20px', border: 'none', fontSize: '18px', fontWeight: 'bold', boxShadow: '0 5px 0 #7f1d1d', opacity: (points < 60 || monsterHP <= 0) ? 0.4 : 1, cursor: 'pointer' }}>🔥 ひっさつ</button>
         </div>
         
         <p style={{ textAlign: 'center', color: '#d1fae5', fontSize: '13px', fontWeight: 'bold' }}>{message}</p>
