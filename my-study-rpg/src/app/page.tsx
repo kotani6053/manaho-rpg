@@ -1,9 +1,7 @@
 "use client";
 import React, { useState } from 'react';
-import BattleScene from '../components/BattleScene'; // 修正したパス
-import MofunyanGacha from '../components/MofunyanGacha'; // 👈 ガチャコンポーネントを復活！
-import { kotobaData } from '../data/gameData'; // クイズデータのパス
-
+import BattleScene from '../components/BattleScene';
+import { kotobaData, MofunyanGacha } from '../data/gameData'; //
 export default function GamePage() {
   // --- ゲームの状態（ステート） ---
   const [level, setLevel] = useState(5); // まなほのレベル
