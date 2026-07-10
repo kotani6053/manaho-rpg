@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from 'react';
 import BattleScene from '../components/BattleScene';
-import { kotobaData, MofunyanGacha } from '../data/gameData'; //
-export default function GamePage() {
+import ActionPanel from '../components/ActionPanel'; // 👈 ガチャが入っているActionPanelを読み込む
+import { kotobaData } from '../data/gameData'; // gameDataからはクイズだけをもらう
   // --- ゲームの状態（ステート） ---
   const [level, setLevel] = useState(5); // まなほのレベル
   const [score, setScore] = useState(0);
