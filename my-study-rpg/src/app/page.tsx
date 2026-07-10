@@ -130,58 +130,66 @@ export default function Page() {
   const monster = monsterList[monsterIdx];
 
   return (
-    /* 🌟 背景を明るく爽やかなライトグレー/ベージュに変更 */
-    <div className="min-h-screen bg-amber-50/40 flex items-center justify-center p-4 antialiased selection:bg-amber-200">
-      <div className="w-full max-w-md flex flex-col gap-4">
+    <div className="min-h-screen bg-amber-50/40 flex items-center justify-center p-6 antialiased selection:bg-amber-200">
+      {/* 🌟 PC向けに横幅を広く設定 (max-w-5xl) し、タブレット以下では縦並び、PCでは横並び (md:grid-cols-2) に */}
+      <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
         
-        {/* レトロゲーム風ステータスヘッダー（境界線をよりシャープに） */}
-        <div className="grid grid-cols-3 gap-2 text-center text-slate-900 font-bold">
-          <div className="bg-[#fcfcf8] border-4 border-[#b8b8b0] rounded-xl p-2 shadow-[-2px_2px_0_0_#b8b8b0] flex flex-col justify-between items-center">
-            <span className="text-[10px] text-slate-500 uppercase tracking-wider font-black">Trainer</span>
-            <span className="text-xl font-black text-slate-800">Lv.{playerLv}</span>
-            <button onClick={resetGame} className="mt-1 bg-rose-500 text-white text-[9px] px-2 py-0.5 rounded border border-rose-700 hover:bg-rose-600 active:translate-y-0.5 transition-all">リセット</button>
+        {/* ================= 左カラム：ステータス ＆ バトル画面 ================= */}
+        <div className="flex flex-col gap-4">
+          {/* レトロゲーム風ステータスヘッダー */}
+          <div className="grid grid-cols-3 gap-2 text-center text-slate-900 font-bold">
+            <div className="bg-[#fcfcf8] border-4 border-[#b8b8b0] rounded-xl p-2 shadow-[-2px_2px_0_0_#b8b8b0] flex flex-col justify-between items-center">
+              <span className="text-[10px] text-slate-500 uppercase tracking-wider font-black">Trainer</span>
+              <span className="text-xl font-black text-slate-800">Lv.{playerLv}</span>
+              <button onClick={resetGame} className="mt-1 bg-rose-500 text-white text-[9px] px-2 py-0.5 rounded border border-rose-700 hover:bg-rose-600 active:translate-y-0.5 transition-all">リセット</button>
+            </div>
+            <div className="bg-[#fcfcf8] border-4 border-[#b8b8b0] rounded-xl p-2 shadow-[-2px_2px_0_0_#b8b8b0] flex flex-col justify-center items-center">
+              <span className="text-[10px] text-slate-500 uppercase tracking-wider font-black">Points</span>
+              <span className="text-xl font-black text-amber-600 font-mono">{points} <span className="text-xs text-slate-700">pt</span></span>
+            </div>
+            <div className="bg-[#fcfcf8] border-4 border-[#b8b8b0] rounded-xl p-2 shadow-[-2px_2px_0_0_#b8b8b0] flex flex-col justify-between items-center overflow-hidden">
+              <span className="text-[10px] text-slate-600 tracking-wider truncate w-full font-black">{weapon.img}{weapon.name}</span>
+              <button onClick={drawGacha} disabled={points < 100} className="w-full mt-1 bg-amber-500 disabled:bg-slate-200 border-2 border-amber-700 text-white disabled:text-slate-400 font-black text-xs py-1 rounded shadow-md hover:bg-amber-400 disabled:opacity-70 active:translate-y-0.5 transition-all cursor-pointer">ガチャ (100)</button>
+            </div>
           </div>
-          <div className="bg-[#fcfcf8] border-4 border-[#b8b8b0] rounded-xl p-2 shadow-[-2px_2px_0_0_#b8b8b0] flex flex-col justify-center items-center">
-            <span className="text-[10px] text-slate-500 uppercase tracking-wider font-black">Points</span>
-            <span className="text-xl font-black text-amber-600 font-mono">{points} <span className="text-xs text-slate-700">pt</span></span>
-          </div>
-          <div className="bg-[#fcfcf8] border-4 border-[#b8b8b0] rounded-xl p-2 shadow-[-2px_2px_0_0_#b8b8b0] flex flex-col justify-between items-center overflow-hidden">
-            <span className="text-[10px] text-slate-600 tracking-wider truncate w-full font-black">{weapon.img}{weapon.name}</span>
-            <button onClick={drawGacha} disabled={points < 100} className="w-full mt-1 bg-amber-500 disabled:bg-slate-200 border-2 border-amber-700 text-white disabled:text-slate-400 font-black text-xs py-1 rounded shadow-sm hover:bg-amber-400 disabled:opacity-70 active:translate-y-0.5 transition-all cursor-pointer">ガチャ (100)</button>
+
+          {/* 👾 バトルフィールド（PC画面でも間延びしないよう高さを少しアップ） */}
+          <div className="md:h-[340px] flex flex-col justify-stretch">
+            <BattleScene 
+              monster={monster} 
+              monsterHP={monsterHP} 
+              isAttacking={isAttacking} 
+              isTakingDamage={isTakingDamage} 
+            />
           </div>
         </div>
 
-        {/* 👾 1. バトルフィールド */}
-        <BattleScene 
-          monster={monster} 
-          monsterHP={monsterHP} 
-          isAttacking={isAttacking} 
-          isTakingDamage={isTakingDamage} 
-        />
+        {/* ================= 右カラム：クイズ ＆ 操作・ログパネル ================= */}
+        <div className="flex flex-col gap-4">
+          {/* 📝 下部テキストログ */}
+          <div className="bg-white border-4 border-[#b8b8b0] rounded-xl p-2.5 text-center min-h-[48px] flex items-center justify-center shadow-[-2px_2px_0_0_#b8b8b0]">
+            <p className="text-emerald-700 font-black text-xs tracking-wide">{message}</p>
+          </div>
 
-        {/* 📝 下部テキストログ（白ベースの読みやすい枠に） */}
-        <div className="bg-white border-4 border-[#b8b8b0] rounded-xl p-2.5 text-center min-h-[48px] flex items-center justify-center shadow-[-2px_2px_0_0_#b8b8b0]">
-          <p className="text-emerald-700 font-black text-xs tracking-wide">{message}</p>
+          {/* 📝 クイズエリア（PCで見やすい適切なサイズにフィット） */}
+          <Quiz 
+            quiz={quiz} 
+            inputValue={inputValue} 
+            setInputValue={setInputValue} 
+            onCheckAnswer={checkAnswer} 
+          />
+
+          {/* ⚔️ コマンドアクションパネル */}
+          <ActionPanel 
+            points={points} 
+            monsterHP={monsterHP} 
+            onAttack={attack} 
+          />
         </div>
-
-        {/* 📝 2. クイズエリア */}
-        <Quiz 
-          quiz={quiz} 
-          inputValue={inputValue} 
-          setInputValue={setInputValue} 
-          onCheckAnswer={checkAnswer} 
-        />
-
-        {/* ⚔️ 3. コマンドアクションパネル */}
-        <ActionPanel 
-          points={points} 
-          monsterHP={monsterHP} 
-          onAttack={attack} 
-        />
 
       </div>
 
-      {/* 🎰 ガチャリザルト演出 */}
+      {/* 🎰 ガチャリザルト演出（ポップアップ） */}
       {gachaResult && (
         <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-50">
           <div className="bg-[#fcfcf8] border-8 border-amber-400 p-6 rounded-3xl text-center max-w-xs w-full shadow-[0_10px_35px_rgba(0,0,0,0.15)] animate-scaleUp">
