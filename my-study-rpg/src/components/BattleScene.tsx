@@ -15,60 +15,69 @@ type BattleSceneProps = {
 
 export default function BattleScene({ monster, monsterHP, isAttacking, isTakingDamage }: BattleSceneProps) {
   const hpPercentage = Math.max(0, Math.min(100, (monsterHP / monster.hp) * 100));
-  const hpBarColor = hpPercentage > 50 ? 'bg-emerald-500' : hpPercentage > 20 ? 'bg-amber-400' : 'bg-rose-600';
+  
+  // ことだまモンスター風の鮮やかなグリーンのHPバー
+  const hpBarColor = hpPercentage > 50 ? 'bg-[#a3e635]' : hpPercentage > 20 ? 'bg-[#facc15]' : 'bg-[#f87171]';
 
   return (
-    <div className={`flex-1 flex flex-col items-center justify-between p-6 relative overflow-hidden rounded-2xl border-4 
-      ${monster.isRare ? 'border-amber-400 shadow-[0_0_25px_rgba(245,158,11,0.6)] animate-pulse' : 'border-[#b8b8b0]'} 
-      ${monster.isRare ? 'bg-gradient-to-b from-amber-100 via-sky-100 to-emerald-100' : 'bg-gradient-to-b from-sky-100 to-emerald-50'} 
-      shadow-[inset_0_4px_10px_rgba(0,0,0,0.05)]`}
-    >
-      {/* 背景の芝生ライン */}
-      <div className="absolute bottom-20 w-[150%] h-24 bg-emerald-200/50 rounded-full blur-sm -rotate-2"></div>
+    <div className={`flex-1 flex flex-col justify-between p-6 relative overflow-hidden rounded-[2rem] border-[6px] border-[#222222] bg-gradient-to-b from-[#7dd3fc] via-[#bae6fd] to-[#bbf7d0] shadow-[0_12px_0_#111111]`}>
+      
+      {/* 遠景の山と太陽のポップアート風グラフィック */}
+      <div className="absolute top-12 left-4 w-12 h-12 bg-amber-400 rounded-full opacity-60 blur-[1px]"></div>
+      <div className="absolute bottom-20 -left-10 w-[60%] h-24 bg-[#86efac] rounded-full rotate-6"></div>
+      <div className="absolute bottom-16 -right-10 w-[65%] h-28 bg-[#4ade80] rounded-full -rotate-6"></div>
+      <div className="absolute bottom-0 inset-x-0 h-24 bg-[#22c55e]"></div>
 
-      {/* レアモンスター用のキラキラエフェクト */}
-      {monster.isRare && monsterHP > 0 && (
-        <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
-          <span className="absolute text-2xl top-8 left-16 animate-spin duration-1000">🌟</span>
-          <span className="absolute text-xl bottom-24 right-16 animate-ping">✨</span>
-          <span className="absolute text-2xl top-12 right-24 animate-bounce">🌟</span>
-        </div>
-      )}
-
-      {/* モンスター画像エリア (PC向けに少し拡大) */}
-      <div className="flex-1 flex items-center justify-center relative w-full my-4">
-        <div className={`text-9xl transition-all duration-100 relative z-10 select-none
-          ${monsterHP > 0 ? 'scale-100 opacity-100 hover:scale-110' : 'scale-150 opacity-0 duration-700'}
-          ${isAttacking ? 'animate-bounce' : ''}
-          ${isTakingDamage ? 'animate-flash bg-rose-500/30 rounded-full p-4' : ''}
-        `}>
-          {monsterHP > 0 ? monster.img : '💥'}
-        </div>
-        {/* 地面の影 */}
-        {monsterHP > 0 && (
-          <div className="absolute bottom-1 w-36 h-4 bg-emerald-900/15 rounded-full blur-[2px]"></div>
-        )}
-      </div>
-
-      {/* ポケモン風 モンスター情報ステータス窓 */}
-      <div className="w-full bg-[#fcfcf8] border-4 border-[#b8b8b0] rounded-tl-xl rounded-br-xl p-4 shadow-[-4px_4px_0_0_#b8b8b0] relative z-20">
-        <div className="flex justify-between items-end mb-1 text-slate-900 font-bold">
-          <div className="flex items-center gap-1.5 truncate">
-            {monster.isRare && <span className="text-xs bg-amber-400 text-slate-900 px-2 py-0.5 rounded font-black animate-pulse">RARE</span>}
-            <span className="text-lg font-black truncate">{monster.name}</span>
+      {/* ⚔️ 対峙レイアウト (敵は右上、自分は左下) */}
+      <div className="flex-1 flex flex-col justify-between relative z-10 w-full my-2">
+        
+        {/* ＝ 敵モンスターエリア（右上） ＝ */}
+        <div className="flex flex-col items-end w-full pr-4 relative">
+          {/* 敵のステータスバッジ */}
+          <div className="bg-white/95 border-[4px] border-[#222222] rounded-2xl p-2.5 px-4 shadow-[4px_4px_0_#222222] min-w-[200px] mb-2 transform -rotate-1">
+            <div className="flex justify-between items-center mb-1">
+              <span className="font-black text-slate-800 text-sm flex items-center gap-1">
+                {monster.isRare && <span className="text-xs bg-[#facc15] text-amber-950 px-1.5 py-0.5 rounded-full border-2 border-[#222222] animate-bounce">SSR</span>}
+                {monster.name}
+              </span>
+              <span className="text-[11px] font-black text-slate-500">Lv.3</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <span className="text-[10px] font-black text-slate-700">HP</span>
+              <div className="flex-1 bg-[#222222] rounded-full h-3.5 p-[2px] overflow-hidden">
+                <div className={`h-full ${hpBarColor} rounded-full transition-all duration-300 ease-out`} style={{ width: `${hpPercentage}%` }} />
+              </div>
+              <span className="text-[10px] font-mono font-black text-slate-600">{monsterHP}/{monster.hp}</span>
+            </div>
           </div>
-          <span className="text-sm font-mono text-slate-600 font-bold">HP {monsterHP} / {monster.hp}</span>
-        </div>
-        {/* HP外枠 */}
-        <div className="w-full bg-[#c8c8c0] rounded-full h-6 border-2 border-[#989890] p-[1px] flex items-center relative">
-          <span className="absolute left-2 text-[10px] font-black text-slate-700 z-10">HP</span>
-          <div className="w-full h-full bg-slate-900 rounded-full overflow-hidden pl-6 pr-0.5 flex items-center">
-            <div 
-              className={`h-3.5 ${hpBarColor} rounded-full transition-all duration-300 ease-out`}
-              style={{ width: `${hpPercentage}%` }}
-            />
+          {/* 敵グラフィック */}
+          <div className={`text-8xl select-none filter drop-shadow-[0_8px_0_rgba(0,0,0,0.15)] transition-all duration-150 mr-6
+            ${monsterHP > 0 ? 'scale-100 opacity-100 hover:scale-110' : 'scale-150 opacity-0 duration-700 rotate-12'}
+            ${isTakingDamage ? 'animate-ping bg-red-400/30 rounded-full' : ''}
+          `}>
+            {monsterHP > 0 ? monster.img : '💥'}
           </div>
         </div>
+
+        {/* ＝ プレイヤーの相棒キャラエリア（左下） ＝ */}
+        <div className="flex items-end pl-4 mt-2">
+          <div className={`text-7xl select-none filter drop-shadow-[0_8px_0_rgba(0,0,0,0.15)] z-20 transition-transform
+            ${isAttacking ? 'translate-x-12 -translate-y-8 scale-125 rotate-12' : 'animate-pulse'}
+          `}>
+            🐱
+          </div>
+          {/* 相棒の簡易ステータス（ことだま風） */}
+          <div className="bg-white/95 border-[4px] border-[#222222] rounded-2xl p-2 px-3 shadow-[4px_4px_0_#222222] min-w-[160px] ml-2 mb-2 transform rotate-1">
+            <div className="flex justify-between items-center">
+              <span className="font-black text-slate-800 text-xs">モフニャン</span>
+              <span className="text-[10px] font-black text-emerald-600">Lv.5</span>
+            </div>
+            <div className="w-full bg-[#222222] rounded-full h-2 mt-1">
+              <div className="h-full bg-[#a3e635] rounded-full w-[85%]" />
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   );
