@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import BattleScene from '../components/BattleScene'; // 修正したパス
+import MofunyanGacha from '../components/MofunyanGacha'; // 👈 ガチャコンポーネントを復活！
 import { kotobaData } from '../data/gameData'; // クイズデータのパス
 
 export default function GamePage() {
@@ -10,6 +11,9 @@ export default function GamePage() {
   const [currentQuizIndex, setCurrentQuizIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
+
+  // ガチャ用の状態（スコア100ごとに引けるシステム用）
+  const [showGacha, setShowGacha] = useState(false);
 
   // バトルの演出用状態
   const [isAttacking, setIsAttacking] = useState(false);
@@ -60,10 +64,17 @@ export default function GamePage() {
     setIsCorrect(correct);
     
     if (correct) {
-      setScore((prev) => prev + 10);
-      if ((score + 10) % 30 === 0) {
+      const nextScore = score + 10;
+      setScore(nextScore);
+      
+      // 100点たまるごとに自動でレベルアップ ＆ ガチャ画面を開く！
+      if (nextScore % 100 === 0) {
         setLevel((prev) => prev + 5);
+        setTimeout(() => {
+          setShowGacha(true); // ガチャモーダルをオープン！
+        }, 1000);
       }
+      
       handleAttack();
     } else {
       setIsTakingDamage(true);
@@ -95,23 +106,33 @@ export default function GamePage() {
   };
 
   return (
-    // 💡 画面ぴったりでスクロールを防止
-    <main className="h-screen w-screen bg-slate-900 p-4 flex flex-col items-center justify-center font-sans select-none text-slate-800 overflow-hidden">
-      {/* 💡 横幅を最大 5xl (少し広め) に広げて、左右のバランスを良くしました */}
-      <div className="w-full max-w-5xl h-full max-h-[92vh] bg-slate-100 rounded-[2.5rem] border-[6px] border-[#222222] p-4 shadow-[0_12px_0_#000] flex flex-col gap-3 justify-between">
+    <main className="h-screen w-screen bg-slate-900 p-3 sm:p-5 flex flex-col items-center justify-center font-sans select-none text-slate-800 overflow-hidden">
+      {/* 💡 窮屈さを解消するため、max-w-6xl（広め）＆ max-h-[95vh] でゆったり配置 */}
+      <div className="w-full max-w-6xl h-full max-h-[95vh] bg-slate-100 rounded-[2.5rem] border-[6px] border-[#222222] p-4 shadow-[0_12px_0_#000] flex flex-col gap-4 justify-between">
         
         {/* 🏆 ヘッダー */}
-        <div className="flex justify-between items-center bg-white border-[3px] border-[#222222] rounded-xl p-2 px-5 shadow-[3px_3px_0_#222222] shrink-0">
-          <div className="text-xl font-black flex items-center gap-2">
+        <div className="flex justify-between items-center bg-white border-[3px] border-[#222222] rounded-2xl p-2.5 px-6 shadow-[4px_4px_0_#222222] shrink-0">
+          <div className="text-xl md:text-2xl font-black flex items-center gap-2">
             <span>🎒</span> まなほ の べんきょうRPG
           </div>
-          <div className="text-lg font-black bg-amber-400 text-slate-900 py-0.5 px-4 rounded-lg border-2 border-[#222222]">
-            スコア: {score} てん
+          <div className="flex items-center gap-3">
+            {/* ガチャボタンの復活！100点たまるとピカピカ光ります */}
+            <button
+              onClick={() => setShowGacha(true)}
+              className={`text-sm md:text-base font-black py-1 px-3 rounded-lg border-2 border-[#222222] shadow-[2px_2px_0_#222222] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all ${
+                score >= 100 ? "bg-gradient-to-r from-pink-400 to-amber-400 animate-pulse text-white" : "bg-slate-200 text-slate-500"
+              }`}
+            >
+              🎰 ガチャをひく
+            </button>
+            <div className="text-lg md:text-xl font-black bg-amber-400 text-slate-900 py-1 px-4 rounded-xl border-2 border-[#222222]">
+              スコア: {score} てん
+            </div>
           </div>
         </div>
 
-        {/* 🔗 メインコンテンツ（左右2分割エリア） */}
-        <div className="flex-1 min-h-0 w-full grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* 🔗 メインコンテンツ（左右2分割エリア・窮屈さをなくすためgapを広めに） */}
+        <div className="flex-1 min-h-0 w-full grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
           
           {/* 👾 左側：バトルフィールド */}
           <div className="h-full min-h-0 flex flex-col justify-center">
@@ -127,20 +148,20 @@ export default function GamePage() {
           </div>
 
           {/* 📝 右側：クイズエリア */}
-          <div className="h-full min-h-0 bg-white border-[4px] border-[#222222] rounded-[1.5rem] p-4 shadow-[0_6px_0_#222222] flex flex-col justify-between gap-2 overflow-y-auto">
+          <div className="h-full min-h-0 bg-white border-[4px] border-[#222222] rounded-[2rem] p-5 shadow-[0_8px_0_#222222] flex flex-col justify-between gap-4">
             
-            {/* 上部：問題文エリア */}
-            <div className="flex flex-col gap-2">
-              <div className="bg-blue-100 text-blue-800 text-xs font-black py-0.5 px-3 rounded-full w-fit border-2 border-blue-400">
+            {/* 上部：問題文エリア（文字サイズを大きくゆったりと） */}
+            <div className="flex flex-col gap-3">
+              <div className="bg-blue-100 text-blue-800 text-xs md:text-sm font-black py-1 px-4 rounded-full w-fit border-2 border-blue-400">
                 もんだい
               </div>
-              <h2 className="text-xl md:text-2xl font-black text-slate-800 leading-snug">
+              <h2 className="text-2xl md:text-3xl font-black text-slate-800 leading-snug">
                 {quiz.q}
               </h2>
             </div>
 
-            {/* 中部：選択肢ボタン（縦並びで押しやすく、枠に収まるサイズ） */}
-            <div className="flex flex-col gap-2 my-auto">
+            {/* 中部：選択肢ボタン（縦並びでパディングを最適化し、見やすさ重視） */}
+            <div className="flex flex-col gap-3 my-auto">
               {quiz.options.map((option, idx) => {
                 let btnStyle = "bg-white hover:bg-slate-50 text-slate-800 border-[#222222]";
                 if (selectedAnswer === option) {
@@ -154,9 +175,9 @@ export default function GamePage() {
                     key={idx}
                     disabled={selectedAnswer !== null}
                     onClick={() => handleAnswerClick(option)}
-                    className={`w-full border-[3px] shadow-[3px_3px_0_#222222] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[0_0_0_#222222] transition-all text-lg font-black py-2.5 px-4 rounded-xl text-left flex items-center gap-2 ${btnStyle}`}
+                    className={`w-full border-[3px] shadow-[4px_4px_0_#222222] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[0_0_0_#222222] transition-all text-xl font-black py-3 px-5 rounded-2xl text-left flex items-center gap-3 ${btnStyle}`}
                   >
-                    <span className="bg-slate-200 text-slate-700 text-xs w-6 h-6 rounded-full flex items-center justify-center font-mono border-2 border-slate-400 shrink-0">
+                    <span className="bg-slate-200 text-slate-700 text-sm w-7 h-7 rounded-full flex items-center justify-center font-mono border-2 border-slate-400 shrink-0">
                       {idx + 1}
                     </span>
                     {option}
@@ -166,19 +187,19 @@ export default function GamePage() {
             </div>
 
             {/* 下部：まるばつ結果 & 次へ進むボタン */}
-            <div className="h-16 shrink-0 flex items-center justify-center">
+            <div className="h-20 shrink-0 flex items-center justify-center">
               {selectedAnswer && (
-                <div className="w-full p-2 px-4 rounded-xl border-[3px] border-[#222222] flex justify-between items-center gap-2 bg-slate-50 animate-fadeIn">
+                <div className="w-full p-3 px-5 rounded-2xl border-[3px] border-[#222222] flex justify-between items-center gap-3 bg-slate-50 animate-fadeIn shadow-[2px_2px_0_#222222]">
                   <div className="flex items-center gap-2">
                     {isCorrect ? (
-                      <span className="text-lg md:text-xl font-black text-emerald-500">⭕ せいかい！</span>
+                      <span className="text-xl md:text-2xl font-black text-emerald-500 animate-bounce">⭕ せいかい！</span>
                     ) : (
-                      <span className="text-lg md:text-xl font-black text-rose-500">❌ こたえ: {quiz.a}</span>
+                      <span className="text-xl md:text-2xl font-black text-rose-500">❌ こたえ: {quiz.a}</span>
                     )}
                   </div>
                   <button
                     onClick={handleNextQuiz}
-                    className="bg-blue-500 hover:bg-blue-600 text-white font-black text-base py-1.5 px-4 rounded-lg border-[3px] border-[#222222] shadow-[3px_3px_0_#222222] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0_#222222] transition-all"
+                    className="bg-blue-500 hover:bg-blue-600 text-white font-black text-lg py-2 px-6 rounded-xl border-[3px] border-[#222222] shadow-[3px_3px_0_#222222] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0_#222222] transition-all"
                   >
                     つぎへ ➡️
                   </button>
@@ -191,6 +212,11 @@ export default function GamePage() {
         </div>
 
       </div>
+
+      {/* 🎰 ガチャのポップアップ画面（開いた時だけ上に重なって表示されます） */}
+      {showGacha && (
+        <MofunyanGacha onClose={() => setShowGacha(false)} />
+      )}
     </main>
   );
 }
