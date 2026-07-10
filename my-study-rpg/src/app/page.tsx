@@ -8,7 +8,7 @@ import ActionPanel from '../components/ActionPanel';
 
 export default function Page() {
   const [points, setPoints] = useState(0);
-  const [playerLv, setPlayerLv] = useState(1);
+  const [playerLv, setPlayerLv] = useState(5); // 初期Lvを画像に合わせて5に
   const [monsterIdx, setMonsterIdx] = useState(0);
   const [monsterHP, setMonsterHP] = useState(monsterList[0].hp);
   const [weapon, setWeapon] = useState({ name: "ひのきのぼう", power: 5, img: "🪵" });
@@ -20,7 +20,7 @@ export default function Page() {
   const [gachaResult, setGachaResult] = useState<any>(null);
 
   const resetGame = () => {
-    if (window.confirm("さいしょから やりなおしますか？（データがすべて消えます）")) {
+    if (window.confirm("さいしょから ぼうけんを やりなおしますか？")) {
       localStorage.removeItem('mana-rpg-vFinal-Ultra-Safe');
       window.location.reload();
     }
@@ -45,7 +45,7 @@ export default function Page() {
     if (saved) {
       const p = JSON.parse(saved);
       setPoints(p.points || 0);
-      setPlayerLv(p.playerLv || 1);
+      setPlayerLv(p.playerLv || 5);
       setWeapon(p.weapon || { name: "ひのきのぼう", power: 5, img: "🪵" });
       setMonsterIdx(p.monsterIdx || 0);
       setMonsterHP(monsterList[p.monsterIdx || 0].hp);
@@ -60,13 +60,13 @@ export default function Page() {
   const checkAnswer = (val: string) => {
     if (val === quiz.a) {
       setPoints(p => p + 35);
-      setIsTakingDamage(true);
-      setTimeout(() => setIsTakingDamage(false), 500);
+      setIsAttacking(true);
+      setTimeout(() => setIsAttacking(false), 500);
       setMonsterHP(hp => Math.max(0, hp - (10 + playerLv * 2)));
-      setMessage("✨ せいかい！ パワーが たまった！ ✨");
+      setMessage("✨ すばらしい！ せいかいだ！ ✨");
       generateQuiz();
     } else {
-      setMessage("❌ まちがい！ もういちど えらぼう ❌");
+      setMessage("❌ おしい！ もういちど かんがえてみよう！ ❌");
       setInputValue("");
     }
   };
@@ -88,7 +88,7 @@ export default function Page() {
 
     setPoints(p => p - cost);
     setMonsterHP(hp => Math.max(0, hp - dmg));
-    setMessage(`${weapon.name}で こうげき！ ${dmg}ダメージ！`);
+    setMessage(`⚔️ ${weapon.name}の ひっさつこうげき！ ${dmg}ダメージ！`);
   };
 
   useEffect(() => {
@@ -97,15 +97,15 @@ export default function Page() {
       let bonusMsg = "";
       if (current.isRare) {
         setPoints(p => p + 300);
-        bonusMsg = " ＋レアボーナス！";
+        bonusMsg = " ＋スペシャルボーナス！";
       }
       setPlayerLv(l => l + 1);
-      setMessage(`🎊 ${current.name}を たおした！${bonusMsg} 🎊`);
+      setMessage(`🎊 プレミアム！ ${current.name}を つかまえた！${bonusMsg} 🎊`);
       const timer = setTimeout(() => {
         const nextIdx = (monsterIdx + 1) % monsterList.length;
         setMonsterIdx(nextIdx);
         setMonsterHP(monsterList[nextIdx].hp);
-        setMessage(`${monsterList[nextIdx].name}が あらわれた！`);
+        setMessage(`あっ！ ${monsterList[nextIdx].name}が とびだしてきた！`);
       }, 1200);
       return () => clearTimeout(timer);
     }
@@ -130,30 +130,44 @@ export default function Page() {
   const monster = monsterList[monsterIdx];
 
   return (
-    <div className="min-h-screen bg-amber-50/40 flex items-center justify-center p-8 antialiased selection:bg-amber-200">
-      {/* 🌟 max-w-6xl にサイズアップ ＆ md:items-stretch で左右の高さをピッタリ均等に整列 */}
+    // 🌟 全体の背景を『ことだまモンスター』風の明るく楽しいスカイブルー＆マップ背景風に
+    <div className="min-h-screen bg-gradient-to-tr from-[#e0f2fe] via-[#fef08a]/30 to-[#e0f2fe] flex items-center justify-center p-8 antialiased">
       <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
         
         {/* ================= 左カラム：ステータス ＆ バトル画面 ================= */}
-        <div className="flex flex-col gap-4">
-          {/* レトロゲーム風ステータスヘッダー */}
-          <div className="grid grid-cols-3 gap-2 text-center text-slate-900 font-bold">
-            <div className="bg-[#fcfcf8] border-4 border-[#b8b8b0] rounded-xl p-3 shadow-[-2px_2px_0_0_#b8b8b0] flex flex-col justify-between items-center">
-              <span className="text-[11px] text-slate-500 uppercase tracking-wider font-black">Trainer</span>
-              <span className="text-2xl font-black text-slate-800">Lv.{playerLv}</span>
-              <button onClick={resetGame} className="mt-2 bg-rose-500 text-white text-[10px] px-2.5 py-1 rounded border border-rose-700 hover:bg-rose-600 active:translate-y-0.5 transition-all">リセット</button>
+        <div className="flex flex-col gap-6">
+          
+          {/* 👑 ことだまモンスター風・極太ポップヘッダー */}
+          <div className="grid grid-cols-3 gap-3 text-center">
+            {/* ゆうしゃ枠 */}
+            <div className="bg-[#4fbbf6] border-[4px] border-[#222222] rounded-2xl p-3 shadow-[0_6px_0_#222222] flex flex-col justify-between items-center text-white">
+              <span className="text-[11px] font-black tracking-widest bg-[#1e3a8a]/30 px-2 py-0.5 rounded-full">YUSHA</span>
+              <span className="text-2xl font-black filter drop-shadow-[0_2px_0_rgba(0,0,0,0.3)]">Lv.{playerLv}</span>
+              <button onClick={resetGame} className="mt-1.5 bg-[#ef4444] text-white text-[10px] font-black px-3 py-1 rounded-full border-2 border-[#222222] shadow-[0_3px_0_#222222] active:translate-y-0.5 active:shadow-none transition-all">やりなおす</button>
             </div>
-            <div className="bg-[#fcfcf8] border-4 border-[#b8b8b0] rounded-xl p-3 shadow-[-2px_2px_0_0_#b8b8b0] flex flex-col justify-center items-center">
-              <span className="text-[11px] text-slate-500 uppercase tracking-wider font-black">Points</span>
-              <span className="text-2xl font-black text-amber-600 font-mono">{points} <span className="text-sm text-slate-700">pt</span></span>
+            
+            {/* コイン・ポイント枠 */}
+            <div className="bg-[#ffcb2b] border-[4px] border-[#222222] rounded-2xl p-3 shadow-[0_6px_0_#222222] flex flex-col justify-center items-center text-[#451a03]">
+              <span className="text-[11px] font-black tracking-widest bg-[#b45309]/20 px-2 py-0.5 rounded-full">COIN</span>
+              <span className="text-2xl font-black font-mono mt-1 flex items-center gap-1">
+                🪙{points} <span className="text-xs font-black">pt</span>
+              </span>
             </div>
-            <div className="bg-[#fcfcf8] border-4 border-[#b8b8b0] rounded-xl p-3 shadow-[-2px_2px_0_0_#b8b8b0] flex flex-col justify-between items-center overflow-hidden">
-              <span className="text-[11px] text-slate-600 tracking-wider truncate w-full font-black">{weapon.img}{weapon.name}</span>
-              <button onClick={drawGacha} disabled={points < 100} className="w-full mt-2 bg-amber-500 disabled:bg-slate-200 border-2 border-amber-700 text-white disabled:text-slate-400 font-black text-sm py-1.5 rounded shadow-md hover:bg-amber-400 disabled:opacity-70 active:translate-y-0.5 transition-all cursor-pointer">ガチャ (100)</button>
+
+            {/* 武器・ガチャ枠 */}
+            <div className="bg-[#a3e635] border-[4px] border-[#222222] rounded-2xl p-3 shadow-[0_6px_0_#222222] flex flex-col justify-between items-center text-slate-900">
+              <span className="text-[11px] font-black tracking-widest bg-[#3f6212]/20 px-2 py-0.5 rounded-full truncate w-full">{weapon.img}{weapon.name}</span>
+              <button 
+                onClick={drawGacha} 
+                disabled={points < 100} 
+                className="w-full mt-1.5 bg-[#f97316] disabled:bg-slate-300 border-[3px] border-[#222222] text-white disabled:text-slate-500 font-black text-xs py-1.5 rounded-xl shadow-[0_4px_0_#222222] disabled:shadow-none hover:bg-[#ea580c] active:translate-y-0.5 active:shadow-none transition-all cursor-pointer disabled:cursor-not-allowed"
+              >
+                ガチャ 🎪
+              </button>
             </div>
           </div>
 
-          {/* 👾 バトルフィールド（flex-1 で右側の高さに合わせて自動で縦に引き伸ばされます） */}
+          {/* 👾 バトルフィールド */}
           <BattleScene 
             monster={monster} 
             monsterHP={monsterHP} 
@@ -163,13 +177,14 @@ export default function Page() {
         </div>
 
         {/* ================= 右カラム：クイズ ＆ 操作・ログパネル ================= */}
-        <div className="flex flex-col gap-4 justify-between">
-          {/* 📝 テキストログ */}
-          <div className="bg-white border-4 border-[#b8b8b0] rounded-xl p-3 text-center min-h-[56px] flex items-center justify-center shadow-[-2px_2px_0_0_#b8b8b0]">
-            <p className="text-emerald-700 font-black text-sm tracking-wide">{message}</p>
+        <div className="flex flex-col gap-6 justify-between">
+          
+          {/* 💬 ナレーション・メッセージログ（吹き出し風） */}
+          <div className="bg-white border-[4px] border-[#222222] rounded-2xl p-4 text-center shadow-[0_6px_0_#222222] relative">
+            <p className="text-[#1e3a8a] font-black text-base tracking-wide">{message}</p>
           </div>
 
-          {/* 📝 クイズエリア（コンテンツの量に合わせて自然に広がります） */}
+          {/* 📝 クイズエリア */}
           <div className="flex-1 flex flex-col justify-stretch">
             <Quiz 
               quiz={quiz} 
@@ -189,17 +204,17 @@ export default function Page() {
 
       </div>
 
-      {/* 🎰 ガチャリザルト演出（ポップアップ） */}
+      {/* 🎪 超ポップなガチャリザルト演出 */}
       {gachaResult && (
-        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center z-50">
-          <div className="bg-[#fcfcf8] border-8 border-amber-400 p-6 rounded-3xl text-center max-w-xs w-full shadow-[0_10px_35px_rgba(0,0,0,0.15)] animate-scaleUp">
-            <span className="text-xs font-bold text-slate-400 uppercase tracking-widest block mb-1">Gacha Result</span>
-            <div className="text-[11px] font-black text-slate-700 bg-[#c8c8c0] py-1 px-3 rounded-full inline-block">
-              {gachaResult.isHazure ? "しんぴの クズひろい..." : gachaResult.power > weapon.power ? "🔥 ぶきを こうしん！" : "🛡️ 今のほうが つよい"}
+        <div className="fixed inset-0 bg-slate-900/70 backdrop-blur-md flex items-center justify-center z-50 animate-fadeIn">
+          <div className="bg-white border-[8px] border-[#222222] p-8 rounded-[2.5rem] text-center max-w-sm w-full shadow-[0_16px_0_#111111] transform scale-100 transition-transform">
+            <span className="text-sm font-black text-amber-500 block mb-1 tracking-widest animate-pulse">✨ GACHA GET !! ✨</span>
+            <div className="text-xs font-black text-white bg-[#4fbbf6] py-1 px-4 rounded-full border-2 border-[#222222] inline-block shadow-[0_3px_0_#222222]">
+              {gachaResult.isHazure ? "ざんねんアイテム..." : "おめでとう！新しいぶき！"}
             </div>
-            <div className="text-8xl my-6 animate-bounce select-none">{gachaResult.img}</div>
-            <h3 className="text-2xl font-black text-slate-900 tracking-tight">{gachaResult.name}</h3>
-            {!gachaResult.isHazure && <div className="mt-2 text-rose-600 font-mono font-black text-lg">ATK +{gachaResult.power}</div>}
+            <div className="text-9xl my-6 animate-bounce select-none filter drop-shadow-[0_10px_0_rgba(0,0,0,0.1)]">{gachaResult.img}</div>
+            <h3 className="text-3xl font-black text-slate-900 tracking-tight">{gachaResult.name}</h3>
+            {!gachaResult.isHazure && <div className="mt-2 text-[#ef4444] font-black text-xl">こうげきりょく +{gachaResult.power}</div>}
           </div>
         </div>
       )}
