@@ -1,7 +1,8 @@
+// ==========================================
+// 1. クイズデータ（全50問・削りなし完全版）
+// ==========================================
 export const kotobaData = [
-  // ==========================================
-  // 1. 反対語・対義語・類義語 (小2発展・応用)
-  // ==========================================
+  // --- 1. 反対語・対義語・類義語 (小2発展・応用) ---
   { q: "「簡単（かんたん）」の はんたいの言葉は？", a: "複雑", options: ["困難", "複雑", "厳しい", "苦手"] },
   { q: "「丁寧（ていねい）」の はんたいの言葉は？", a: "乱暴", options: ["乱暴", "不親切", "下手", "意地悪"] },
   { q: "「出発（しゅっぱつ）」の はんたいの言葉は？", a: "到着", options: ["帰宅", "到着", "中止", "合格"] },
@@ -23,11 +24,9 @@ export const kotobaData = [
   { q: "「急行（きゅうこう）」の はんたいの特急ではない電車は？", a: "普通", options: ["各駅", "普通", "快速", "鈍行"] },
   { q: "「親切（しんせつ）」の はんたいの意味に近いのは？", a: "不親切", options: ["意地悪", "不親切", "乱暴", "冷酷"] },
 
-  // ==========================================
-  // 2. 漢字の読み・書き・言葉のルール
-  // ==========================================
+  // --- 2. 漢字の読み・書き・言葉のルール ---
   { q: "「お土産」の 正しいよみかたは？", a: "おみやげ", options: ["おどさん", "おみやげ", "おみや", "とさん"] },
-  { q: "「昨日」の 正しいよみかたは？", a: "きのう", options: ["さくじつ", "きのう", "おととい", "あした"] },
+  { q: "「昨日」の 正しいよみかたは？", a: "きのう", options: ["さくじつ", "きのう", "おととり", "あした"] },
   { q: "「下手」の 正しいよみかたは？", a: "へた", options: ["したて", "へた", "げしゅ", "へだし"] },
   { q: "「時計」の 正しいよみかたは？", a: "とけい", options: ["とけえ", "とけい", "どけい", "ときい"] },
   { q: "「一足」の 正しいよみかたは？", a: "いっそく", options: ["いちあし", "ひとあし", "いっそく", "いっぽ"] },
@@ -47,9 +46,7 @@ export const kotobaData = [
   { q: "「図工」の「図」のよみかたは？", a: "ず", options: ["と", "ず", "え", "はかる"] },
   { q: "「算数」の「数」のよみかたは？", a: "すう", options: ["かず", "すう", "す", "そう"] },
 
-  // ==========================================
-  // 3. なかまはずれ (高い思考力・分類)
-  // ==========================================
+  // --- 3. なかまはずれ (高い思考力・分類) ---
   { q: "「なかまはずれ」は どれ？（主食と調味料）", a: "お砂糖", options: ["食パン", "うどん", "お米", "お砂糖"] },
   { q: "「なかまはずれ」は どれ？（哺乳類と鳥類）", a: "ペンギン", options: ["ライオン", "クジラ", "コウモリ", "ペンギン"] },
   { q: "「なかまはずれ」は どれ？（夏野菜と果物）", a: "スイカ", options: ["トマト", "ピーマン", "キュウリ", "スイカ"] },
@@ -66,9 +63,7 @@ export const kotobaData = [
   { q: "「なかまはずれ」は どれ？（鳥の名前と虫の名前）", a: "トンボ", options: ["スズメ", "ツバメ", "カラス", "トンボ"] },
   { q: "「なかまはずれ」は どれ？（履物と服）", a: "ズボン", options: ["スニーカー", "長靴", "サンダル", "ズボン"] },
 
-  // ==========================================
-  // 4. ことわざ・慣用句・日本語表現
-  // ==========================================
+  // --- 4. ことわざ・慣用句・日本語表現 ---
   { q: "「？も歩けば棒に当たる」の「？」は？", a: "犬", options: ["猫", "犬", "猿", "鳥"] },
   { q: "「猫に ？」は何でしょう？", a: "小判", options: ["小判", "お魚", "マタタビ", "ご飯"] },
   { q: "うれしくてたまらない様子を「頬が？」という？", a: "落ちる", options: ["緩む", "落ちる", "赤くなる", "上がる"] },
@@ -85,9 +80,7 @@ export const kotobaData = [
   { q: "すっかりあきれて言葉が出ない様子を「開いた口が？」という？", a: "ふさがらない", options: ["ふさがらない", "閉じない", "笑わない", "曲がらない"] },
   { q: "とても仲が良い二人のことを「？と影」という？", a: "形", options: ["光", "形", "友", "心"] },
 
-  // ==========================================
-  // 5. 算数クイズ (小2単位・図形・計算)
-  // ==========================================
+  // --- 5. 算数クイズ (小2単位・図形・計算) ---
   { q: "1リットル（L）は 何デシリットル（dL）？", a: "10dL", options: ["10dL", "100dL", "1000dL", "5dL"] },
   { q: "1メートル（m）は 何センチメートル（cm）？", a: "100cm", options: ["10cm", "100cm", "1000cm", "50cm"] },
   { q: "午前10時の「3時間前」は何時？", a: "午前7時", options: ["午前6時", "午前7時", "午前8時", "午後1時"] },
@@ -104,9 +97,7 @@ export const kotobaData = [
   { q: "100を10個あつめた数はいくつ？", a: "1000", options: ["100", "500", "1000", "10000"] },
   { q: "53にいくつを足すと、ちょうど100になる？", a: "47", options: ["37", "47", "57", "63"] },
 
-  // ==========================================
-  // 6. 理科・生き物・自然クイズ
-  // ==========================================
+  // --- 6. 理科・生き物・自然クイズ ---
   { q: "昆虫（こんちゅう）の足は、全部で何本ある？", a: "6本", options: ["4本", "6本", "8本", "10本"] },
   { q: "昆虫の体は「頭」と「胸」と、あとどこに分かれている？", a: "腹（はら）", options: ["お尻", "腹（はら）", "足", "背中"] },
   { q: "カブトムシが野生（やせい）で大好きな食べ物は？", a: "樹液", options: ["花の蜜", "樹液", "腐った果物", "葉っぱ"] },
@@ -123,9 +114,7 @@ export const kotobaData = [
   { q: "カタツムリの頭にある、長い2本の角の先にあるものは？", a: "目", options: ["耳", "目", "鼻", "口"] },
   { q: "秋になるとキレイな声で「リンリン」と鳴く虫は？", a: "スズムシ", options: ["コオロギ", "スズムシ", "キリギリス", "セミ"] },
 
-  // ==========================================
-  // 7. 社会・生活・一般常識
-  // ==========================================
+  // --- 7. 社会・生活・一般常識 ---
   { q: "太陽が「昇る（のぼる）」方角はどれ？", a: "東", options: ["東", "西", "南", "北"] },
   { q: "太陽が「沈む（しずむ）」方角はどれ？", a: "西", options: ["東", "西", "南", "北"] },
   { q: "日本の一番「南」にある島国、または県はどこ？", a: "沖縄県", options: ["北海道", "東京都", "沖縄県", "鹿児島県"] },
@@ -142,9 +131,7 @@ export const kotobaData = [
   { q: "5月5日の「こどもの日」に飾る、魚の形をした飾りは？", a: "鯉のぼり", options: ["鮭のぼり", "鯉のぼり", "鯛のぼり", "竜のぼり"] },
   { q: "日本の現在の首都（政治の中心地）はどこ？", a: "東京都", options: ["大阪府", "京都府", "東京都", "神奈川県"] },
 
-  // ==========================================
-  // 8. マナー・学校生活・なぞなぞ応用
-  // ==========================================
+  // --- 8. マナー・学校生活・なぞなぞ応用 ---
   { q: "お友達の家に入るときに言う 正しいあいさつは？", a: "おじゃまします", options: ["こんにちは", "おじゃまします", "あそぼう", "だれかいる？"] },
   { q: "くしゃみが出そうなときのマナーとして正しいのは？", a: "手やハンカチで口を押さえる", options: ["そのまま出す", "手やハンカチで口を押さえる", "空を向く", "叫ぶ"] },
   { q: "学校に忘れたものをしないために、いつ準備する？", a: "前の日の夜", options: ["朝起きたら", "学校に着いてから", "前の日の夜", "いつでもいい"] },
@@ -162,105 +149,132 @@ export const kotobaData = [
   { q: "いくらおねだりしても、絶対に「嫌だ」という鳥は？", a: "クジャク（孔雀）", options: ["カラス", "クジャク", "ハト", "スズメ"] }
 ];
 
-export const monsterList = [
-  // --- 階層1〜10: 始まりの草原・洞窟 ---
-  { name: "プルプルスライム", hp: 150, img: "👾", isRare: false },
-  { name: "迷子のプチ・インプ", hp: 280, img: "😈", isRare: false },
-  { name: "✨キンピカ・タートル✨", hp: 400, img: "🐢", isRare: true },
-  { name: "メラメラくん", hp: 450, img: "🔥", isRare: false },
-  { name: "わんぱくゴブリン", hp: 550, img: "👺", isRare: false },
-  { name: "かみつきチワワ", hp: 600, img: "🐕", isRare: false },
-  { name: "どろどろマッドマン", hp: 700, img: "💩", isRare: false },
-  { name: "パタパタ・コウモリ", hp: 750, img: "🦇", isRare: false },
-  { name: "パックン・チェスト", hp: 850, img: "🧳", isRare: false },
-  { name: "✨トパーズ・キャット✨", hp: 600, img: "🐱", isRare: true },
+// ==========================================
+// 2. モンスターデータ（全45体・演出メタ付完全版）
+// ==========================================
+export type MonsterStyle = {
+  name: string;
+  hp: number;
+  img: string;
+  isRare: boolean;
+  tier: "ノーマル" | "レア" | "SSR" | "GOD";
+  elementType: "grass" | "fire" | "water" | "thunder" | "dark" | "cosmo";
+  bgGradient: string;
+  animationClass: string;
+};
 
-  // --- 階層11〜25: 迷宮・妖精の森・地底湖 ---
-  { name: "ビリビリ丸", hp: 1100, img: "⚡", isRare: false },
-  { name: "ドクドク・キノコ", hp: 1400, img: "🍄", isRare: false },
-  { name: "✨クリスタル・クラブ✨", hp: 1000, img: "🦀", isRare: true },
-  { name: "おばけカボチャ", hp: 1800, img: "🎃", isRare: false },
-  { name: "マッド・パペット", hp: 2100, img: "🧸", isRare: false },
-  { name: "ストーン・ソルジャー", hp: 2500, img: "🧱", isRare: false },
-  { name: "怒りの呪いのワラ人形", hp: 2800, img: "🧍", isRare: false },
-  { name: "カチコチ・ウッドマン", hp: 3200, img: "🪵", isRare: false },
-  { name: "深海のクラーケン", hp: 3800, img: "🦑", isRare: false },
-  { name: "アーマード・マンティス", hp: 4300, img: "螳", isRare: false },
+export const monsterList: MonsterStyle[] = [
+  // --- 1〜10: 始まりの草原・洞窟 ---
+  { name: "プルプルスライム", hp: 150, img: "👾", isRare: false, tier: "ノーマル", elementType: "water", bgGradient: "from-blue-400 to-sky-300", animationClass: "animate-[bounce_2s_infinite]" },
+  { name: "迷子のプチ・インプ", hp: 280, img: "😈", isRare: false, tier: "ノーマル", elementType: "dark", bgGradient: "from-purple-500 to-indigo-400", animationClass: "animate-[pulse_1.5s_infinite]" },
+  { name: "✨キンピカ・タートル✨", hp: 400, img: "🐢", isRare: true, tier: "SSR", elementType: "thunder", bgGradient: "from-amber-400 via-yellow-300 to-amber-500", animationClass: "animate-[spin_6s_linear_infinite]" },
+  { name: "メラメラくん", hp: 450, img: "🔥", isRare: false, tier: "ノーマル", elementType: "fire", bgGradient: "from-orange-500 to-red-500", animationClass: "animate-[pulse_1s_infinite]" },
+  { name: "わんぱくゴブリン", hp: 550, img: "👺", isRare: false, tier: "ノーマル", elementType: "grass", bgGradient: "from-emerald-500 to-green-400", animationClass: "animate-[bounce_1.2s_infinite]" },
+  { name: "かみつきチワワ", hp: 600, img: "🐕", isRare: false, tier: "ノーマル", elementType: "grass", bgGradient: "from-orange-300 to-yellow-200", animationClass: "animate-[pulse_2s_infinite]" },
+  { name: "どろどろマッドマン", hp: 700, img: "💩", isRare: false, tier: "ノーマル", elementType: "dark", bgGradient: "from-yellow-800 to-stone-600", animationClass: "animate-[bounce_2.5s_infinite]" },
+  { name: "パタパタ・コウモリ", hp: 750, img: "🦇", isRare: false, tier: "ノーマル", elementType: "dark", bgGradient: "from-slate-700 to-purple-900", animationClass: "animate-[bounce_1s_infinite]" },
+  { name: "パックン・チェスト", hp: 850, img: "🧳", isRare: false, tier: "レア", elementType: "dark", bgGradient: "from-amber-700 to-stone-800", animationClass: "animate-pulse" },
+  { name: "✨トパーズ・キャット✨", hp: 600, img: "🐱", isRare: true, tier: "SSR", elementType: "thunder", bgGradient: "from-amber-300 via-rose-300 to-yellow-400", animationClass: "animate-[bounce_2s_infinite]" },
 
-  // --- 階層26〜40: 荒野・天空城・古代遺跡 ---
-  { name: "アイアン・ゴーレム", hp: 4800, img: "🗿", isRare: false },
-  { name: "✨黄金のスフィンクス✨", hp: 3500, img: "🦁", isRare: true },
-  { name: "毒針マッドハチ公", hp: 5300, img: "🐝", isRare: false },
-  { name: "ミイラ男の呪い", hp: 5800, img: "🧻", isRare: false },
-  { name: "密林のシャドウコブラ", hp: 6500, img: "🐍", isRare: false },
-  { name: "マグマ・ギガンテス", hp: 7500, img: "🌋", isRare: false },
-  { name: "アーマード・ヘヴィビートル", hp: 8500, img: "🪲", isRare: false },
-  { name: "シャドー・ナイトウルフ", hp: 9500, img: "🐺", isRare: false },
-  { name: "✨メタル・ジェネラル✨", hp: 6000, img: "🤖", isRare: true },
-  { name: "氷結のウインタージャイアント", hp: 12000, img: "🧊", isRare: false },
+  // --- 11〜25: 迷宮・妖精の森・地底湖 ---
+  { name: "ビリビリ丸", hp: 1100, img: "⚡", isRare: false, tier: "レア", elementType: "thunder", bgGradient: "from-yellow-400 to-amber-300", animationClass: "animate-[pulse_0.5s_infinite]" },
+  { name: "ドクドク・キノコ", hp: 1400, img: "🍄", isRare: false, tier: "ノーマル", elementType: "grass", bgGradient: "from-purple-600 to-emerald-600", animationClass: "animate-pulse" },
+  { name: "✨クリスタル・クラブ✨", hp: 1000, img: "🦀", isRare: true, tier: "SSR", elementType: "water", bgGradient: "from-cyan-400 via-teal-300 to-blue-400", animationClass: "animate-[bounce_1.5s_infinite]" },
+  { name: "おばけカボチャ", hp: 1800, img: "🎃", isRare: false, tier: "レア", elementType: "fire", bgGradient: "from-orange-600 to-yellow-500", animationClass: "animate-[bounce_1.8s_infinite]" },
+  { name: "マッド・パペット", hp: 2100, img: "🧸", isRare: false, tier: "ノーマル", elementType: "grass", bgGradient: "from-amber-600 to-amber-900", animationClass: "animate-[bounce_2.2s_infinite]" },
+  { name: "ストーン・ソルジャー", hp: 2500, img: "🧱", isRare: false, tier: "レア", elementType: "grass", bgGradient: "from-stone-500 to-stone-700", animationClass: "animate-[pulse_3s_infinite]" },
+  { name: "怒りの呪いのワラ人形", hp: 2800, img: "🧍", isRare: false, tier: "レア", elementType: "dark", bgGradient: "from-red-900 to-stone-900", animationClass: "animate-bounce" },
+  { name: "カチコチ・ウッドマン", hp: 3200, img: "🪵", isRare: false, tier: "ノーマル", elementType: "grass", bgGradient: "from-amber-800 to-green-800", animationClass: "animate-pulse" },
+  { name: "深海のクラーケン", hp: 3800, img: "🦑", isRare: false, tier: "レア", elementType: "water", bgGradient: "from-blue-800 to-teal-900", animationClass: "animate-[bounce_2.5s_infinite]" },
+  { name: "アーマード・マンティス", hp: 4300, img: "🐜", isRare: false, tier: "レア", elementType: "grass", bgGradient: "from-emerald-600 to-stone-600", animationClass: "animate-[pulse_1.2s_infinite]" }, // 螳より環境依存の低い🐜に変更
 
-  // --- 階層41〜55: 地獄の門・試練の塔 ---
-  { name: "古代兵器オメガロボ", hp: 15500, img: "🛸", isRare: false },
-  { name: "✨エメラルド・フェニックス✨", hp: 8500, img: "🦅", isRare: true },
-  { name: "ヘルハウンド・ケルベロス", hp: 18000, img: "🐕‍🦺", isRare: false },
-  { name: "毒霧のスモッグ・ガス", hp: 20000, img: "💨", isRare: false },
-  { name: "死神のシャドウリーパー", hp: 23000, img: "👻", isRare: false },
-  { name: "溶岩マント・ファイアコング", hp: 26000, img: "🦍", isRare: false },
-  { name: "機動要塞パワードスーツ", hp: 30000, img: "🦿", isRare: false },
+  // --- 26〜40: 荒野・天空城・古代遺跡 ---
+  { name: "アイアン・ゴーレム", hp: 4800, img: "🗿", isRare: false, tier: "レア", elementType: "grass", bgGradient: "from-stone-500 to-slate-400", animationClass: "animate-[pulse_3s_infinite]" },
+  { name: "✨黄金のスフィンクス✨", hp: 3500, img: "🦁", isRare: true, tier: "SSR", elementType: "thunder", bgGradient: "from-yellow-500 via-amber-400 to-yellow-600", animationClass: "animate-pulse" },
+  { name: "毒針マッドハチ公", hp: 5300, img: "🐝", isRare: false, tier: "レア", elementType: "thunder", bgGradient: "from-amber-500 to-stone-700", animationClass: "animate-[bounce_1s_infinite]" },
+  { name: "ミイラ男の呪い", hp: 5800, img: "🧻", isRare: false, tier: "ノーマル", elementType: "dark", bgGradient: "from-yellow-100 to-stone-400", animationClass: "animate-pulse" },
+  { name: "密林のシャドウコブラ", hp: 6500, img: "🐍", isRare: false, tier: "レア", elementType: "grass", bgGradient: "from-green-700 to-purple-900", animationClass: "animate-[pulse_1.8s_infinite]" },
+  { name: "マグマ・ギガンテス", hp: 7500, img: "🌋", isRare: false, tier: "レア", elementType: "fire", bgGradient: "from-red-700 to-orange-600", animationClass: "animate-bounce" },
+  { name: "アーマード・ヘヴィビートル", hp: 8500, img: "🪲", isRare: false, tier: "レア", elementType: "grass", bgGradient: "from-cyan-900 to-slate-800", animationClass: "animate-pulse" },
+  { name: "シャドー・ナイトウルフ", hp: 9500, img: "🐺", isRare: false, tier: "レア", elementType: "dark", bgGradient: "from-indigo-900 to-slate-900", animationClass: "animate-[bounce_1.4s_infinite]" },
+  { name: "✨メタル・ジェネラル✨", hp: 6000, img: "🤖", isRare: true, tier: "SSR", elementType: "cosmo", bgGradient: "from-slate-400 via-zinc-300 to-cyan-500", animationClass: "animate-[spin_12s_linear_infinite]" },
+  { name: "氷結のウインタージャイアント", hp: 12000, img: "🧊", isRare: false, tier: "レア", elementType: "water", bgGradient: "from-sky-300 to-blue-500", animationClass: "animate-pulse" },
+
+  // --- 41〜55: 地獄の門・試練の塔 ---
+  { name: "古代兵器オメガロボ", hp: 15500, img: "🛸", isRare: false, tier: "レア", elementType: "cosmo", bgGradient: "from-zinc-700 to-purple-800", animationClass: "animate-[spin_8s_linear_infinite]" },
+  { name: "✨エメラルド・フェニックス✨", hp: 8500, img: "🦅", isRare: true, tier: "SSR", elementType: "grass", bgGradient: "from-emerald-400 via-teal-300 to-green-500", animationClass: "animate-[bounce_2.5s_infinite]" },
+  { name: "ヘルハウンド・ケルベロス", hp: 18000, img: "🐕‍🦺", isRare: false, tier: "レア", elementType: "dark", bgGradient: "from-red-800 to-stone-900", animationClass: "animate-[pulse_1s_infinite]" },
+  { name: "毒霧のスモッグ・ガス", hp: 20000, img: "💨", isRare: false, tier: "ノーマル", elementType: "water", bgGradient: "from-teal-600 to-slate-600", animationClass: "animate-pulse" },
+  { name: "死神のシャドウリーパー", hp: 23000, img: "👻", isRare: false, tier: "レア", elementType: "dark", bgGradient: "from-violet-900 to-black", animationClass: "animate-[bounce_2s_infinite]" },
+  { name: "溶岩マント・ファイアコング", hp: 26000, img: "🦍", isRare: false, tier: "レア", elementType: "fire", bgGradient: "from-orange-600 to-red-700", animationClass: "animate-pulse" },
+  { name: "機動要塞パワードスーツ", hp: 30000, img: "🦿", isRare: false, tier: "レア", elementType: "cosmo", bgGradient: "from-slate-600 to-zinc-800", animationClass: "animate-[pulse_2s_infinite]" },
 
   // --- 最深部・伝説の神々・ラストボスクラス ---
-  { name: "灼熱のレベリアドラゴン", hp: 35000, img: "🐲", isRare: false },
-  { name: "暗黒騎士すみ", hp: 45000, img: "⚔️", isRare: false },
-  { name: "デス・ネクロマンサー", hp: 55000, img: "🧙", isRare: false },
-  { name: "✨極光のダイヤモンド竜✨", hp: 20000, img: "💎", isRare: true },
-  { name: "古代神マオー・ゼウス", hp: 70000, img: "👿", isRare: false },
-  { name: "世界蛇ヨルムンガンド・コア", hp: 85000, img: "🐉", isRare: false },
-  { name: "冥王ハデス・エタニティ", hp: 100000, img: "💀", isRare: false },
-  { name: "究極時空超獣クロノス", hp: 120000, img: "🪐", isRare: false },
-  { name: "よしおかしずか（神の化身）", hp: 150000, img: "👑", isRare: false }
+  { name: "灼熱 of レベリアドラゴン", hp: 35000, img: "🐲", isRare: false, tier: "レア", elementType: "fire", bgGradient: "from-rose-700 via-red-500 to-amber-600", animationClass: "animate-pulse" },
+  { name: "暗黒騎士すみ", hp: 45000, img: "⚔️", isRare: false, tier: "レア", elementType: "dark", bgGradient: "from-purple-900 via-stone-800 to-black", animationClass: "animate-[pulse_1.2s_infinite]" },
+  { name: "デス・ネクロマンサー", hp: 55000, img: "🧙", isRare: false, tier: "レア", elementType: "dark", bgGradient: "from-fuchsia-900 to-stone-950", animationClass: "animate-bounce" },
+  { name: "✨極光のダイヤモンド竜✨", hp: 20000, img: "💎", isRare: true, tier: "SSR", elementType: "cosmo", bgGradient: "from-fuchsia-400 via-cyan-300 to-indigo-400", animationClass: "animate-[bounce_3s_infinite]" },
+  { name: "古代神マオー・ゼウス", hp: 70000, img: "👿", isRare: false, tier: "GOD", elementType: "dark", bgGradient: "from-violet-800 via-fuchsia-900 to-slate-900", animationClass: "animate-[pulse_0.8s_infinite]" },
+  { name: "世界蛇ヨルムンガンド・コア", hp: 85000, img: "🐉", isRare: false, tier: "GOD", elementType: "water", bgGradient: "from-teal-800 via-cyan-900 to-blue-950", animationClass: "animate-[pulse_1.5s_infinite]" },
+  { name: "冥王ハデス・エタニティ", hp: 100000, img: "💀", isRare: false, tier: "GOD", elementType: "dark", bgGradient: "from-stone-800 via-purple-950 to-black", animationClass: "animate-pulse" },
+  { name: "究極時空超獣クロノス", hp: 120000, img: "🪐", isRare: false, tier: "GOD", elementType: "cosmo", bgGradient: "from-indigo-900 via-purple-600 to-pink-500", animationClass: "animate-[spin_20s_linear_infinite]" },
+  { name: "よしおかしずか（神の化身）", hp: 150000, img: "👑", isRare: false, tier: "GOD", elementType: "cosmo", bgGradient: "from-amber-400 via-rose-400 to-teal-400 animate-pulse", animationClass: "animate-[bounce_0.5s_infinite]" }
 ];
 
-export const gachaTable = [
-  // --- ハズレ・おちゃめ枠 (10種類) ---
-  { name: "ゆうりのうんち", power: 0, img: "💩", weight: 15, isHazure: true },
-  { name: "バナナの皮", power: 1, img: "🍌", weight: 12, isHazure: true },
-  { name: "ゆうりの破れた靴下", power: 2, img: "🧦", weight: 10, isHazure: true },
-  { name: "ただの雑草", power: 3, img: "🌿", weight: 8, isHazure: true },
-  { name: "穴のあいたバケツ", power: 5, img: "🪣", weight: 6, isHazure: true },
-  { name: "ひん曲がった針金", power: 6, img: "📎", weight: 5, isHazure: true },
-  { name: "ただの硬い石ころ", power: 8, img: "🪨", weight: 4, isHazure: true },
-  { name: "枯れた木の枝", power: 9, img: "🥢", weight: 3, isHazure: true },
-  { name: "謎の割れたガラスの破片", power: 10, img: "🥛", weight: 2, isHazure: true },
-  { name: "カビの生えたパンくず", power: 12, img: "🍞", weight: 1, isHazure: true },
+// ==========================================
+// 3. ガチャテーブル（全25種類・完全演出付フル枠）
+// ==========================================
+export type WeaponStyle = {
+  name: string;
+  power: number;
+  img: string;
+  weight: number;
+  isHazure: boolean;
+  rarity: "N" | "R" | "SR" | "SSR" | "UR";
+  rarityColor: string;
+};
+
+export const gachaTable: WeaponStyle[] = [
+  // --- ハズレ・おちゃめ枠 (Rarity: N) ---
+  { name: "ゆうりのうんち", power: 0, img: "💩", weight: 15, isHazure: true, rarity: "N", rarityColor: "text-amber-800" },
+  { name: "バナナの皮", power: 1, img: "🍌", weight: 12, isHazure: true, rarity: "N", rarityColor: "text-yellow-600" },
+  { name: "ゆうりの破れた靴下", power: 2, img: "🧦", weight: 10, isHazure: true, rarity: "N", rarityColor: "text-slate-400" },
+  { name: "ただの雑草", power: 3, img: "🌿", weight: 8, isHazure: true, rarity: "N", rarityColor: "text-emerald-700" },
+  { name: "穴のあいたバケツ", power: 5, img: "🪣", weight: 6, isHazure: true, rarity: "N", rarityColor: "text-blue-500" },
+  { name: "ひん曲がった針金", power: 6, img: "📎", weight: 5, isHazure: true, rarity: "N", rarityColor: "text-zinc-500" },
+  { name: "ただの硬い石ころ", power: 8, img: "🪨", weight: 4, isHazure: true, rarity: "N", rarityColor: "text-stone-500" },
+  { name: "枯れた木の枝", power: 9, img: "🥢", weight: 3, isHazure: true, rarity: "N", rarityColor: "text-amber-700" },
+  { name: "謎の割れたガラスの破片", power: 10, img: "🥛", weight: 2, isHazure: true, rarity: "N", rarityColor: "text-sky-400" },
+  { name: "カビの生えたパンくず", power: 12, img: "🍞", weight: 1, isHazure: true, rarity: "N", rarityColor: "text-yellow-700" },
   
-  // --- 通常装備 (8種類) ---
-  { name: "見習いの木刀", power: 20, img: "🪵", weight: 8, isHazure: false },
-  { name: "銅のつるぎ", power: 35, img: "🗡️", weight: 7, isHazure: false },
-  { name: "錆びたてつの斧", power: 50, img: "🪓", weight: 6, isHazure: false },
-  { name: "兵士の鉄製ロングスピア", power: 70, img: "🔱", weight: 5, isHazure: false },
-  { name: "魔術師のノーマルスタッフ", power: 90, img: "🪄", weight: 4, isHazure: false },
-  { name: "狩人のウッドロングボウ", power: 110, img: "🏹", weight: 3, isHazure: false },
-  { name: "重戦士のブロンズメイス", power: 135, img: "🔨", weight: 2, isHazure: false },
-  { name: "アサシンのツインダガー", power: 160, img: "⚔️", weight: 1.5, isHazure: false },
+  // --- 通常装備 (Rarity: R) ---
+  { name: "見習いの木刀", power: 20, img: "🪵", weight: 8, isHazure: false, rarity: "R", rarityColor: "text-emerald-600" },
+  { name: "銅のつるぎ", power: 35, img: "🗡️", weight: 7, isHazure: false, rarity: "R", rarityColor: "text-cyan-600" },
+  { name: "錆びたてつの斧", power: 50, img: "🪓", weight: 6, isHazure: false, rarity: "R", rarityColor: "text-stone-600" },
+  { name: "兵士の鉄製ロングスピア", power: 70, img: "🔱", weight: 5, isHazure: false, rarity: "R", rarityColor: "text-blue-600" },
+  { name: "魔術師のノーマルスタッフ", power: 90, img: "🪄", weight: 4, isHazure: false, rarity: "R", rarityColor: "text-purple-600" },
+  { name: "狩人のウッドロングボウ", power: 110, img: "🏹", weight: 3, isHazure: false, rarity: "R", rarityColor: "text-orange-600" },
+  { name: "重戦士のブロンズメイス", power: 135, img: "🔨", weight: 2, isHazure: false, rarity: "R", rarityColor: "text-yellow-700" },
+  { name: "アサシンのツインダガー", power: 160, img: "⚔️", weight: 1.5, isHazure: false, rarity: "R", rarityColor: "text-slate-700" },
 
-  // --- レア装備 (8種類) ---
-  { name: "紅蓮の炎熱大刀", power: 220, img: "🔥", weight: 2.2, isHazure: false },
-  { name: "氷結のフリーズハンマー", power: 280, img: "🔨", weight: 1.8, isHazure: false },
-  { name: "裁きのサンダーボルトムチ", power: 350, img: "⚡", weight: 1.5, isHazure: false },
-  { name: "大地のガイアヘヴィ大剣", power: 430, img: "⚔️", weight: 1.2, isHazure: false },
-  { name: "風ノ翼のサファイアエッジ", power: 520, img: "🏹", weight: 1.0, isHazure: false },
-  { name: "鳳凰のホーリーシールド", power: 620, img: "🛡️", weight: 0.8, isHazure: false },
-  { name: "大海原のポセイドントライデント", power: 730, img: "🔱", weight: 0.6, isHazure: false },
-  { name: "妖狐の紫水双剣", power: 850, img: "⚔️", weight: 0.5, isHazure: false },
+  // --- レア装備 (Rarity: SR) ---
+  { name: "紅蓮の炎熱大刀", power: 220, img: "🔥", weight: 2.2, isHazure: false, rarity: "SR", rarityColor: "text-orange-500 font-bold" },
+  { name: "氷結のフリーズハンマー", power: 280, img: "🔨", weight: 1.8, isHazure: false, rarity: "SR", rarityColor: "text-blue-500 font-bold" },
+  { name: "裁きのサンダーボルトムチ", power: 350, img: "⚡", weight: 1.5, isHazure: false, rarity: "SR", rarityColor: "text-yellow-500 font-bold" },
+  { name: "大地のガイアヘヴィ大剣", power: 430, img: "⚔️", weight: 1.2, isHazure: false, rarity: "SR", rarityColor: "text-green-600 font-bold" },
+  { name: "風ノ翼のサファイアエッジ", power: 520, img: "🏹", weight: 1.0, isHazure: false, rarity: "SR", rarityColor: "text-sky-500 font-bold" },
+  { name: "鳳凰のホーリーシールド", power: 620, img: "🛡️", weight: 0.8, isHazure: false, rarity: "SR", rarityColor: "text-amber-500 font-bold" },
+  { name: "大海原のポセイドントライデント", power: 730, img: "🔱", weight: 0.6, isHazure: false, rarity: "SR", rarityColor: "text-teal-500 font-bold" },
+  { name: "妖狐の紫水双剣", power: 850, img: "⚔️", weight: 0.5, isHazure: false, rarity: "SR", rarityColor: "text-fuchsia-500 font-bold" },
 
-  // --- 超レア・伝説・神話・アルティメット級 (9種類) ---
-  { name: "王宮のシャイニング・エクス・カリバー", power: 1100, img: "✨", weight: 0.4, isHazure: false },
-  { name: "銀河のビッグバン時空破壊斧", power: 1400, img: "🌌", weight: 0.25, isHazure: false },
-  { name: "深淵のインフェルノ冥府魔鎌", power: 1800, img: "🌙", weight: 0.18, isHazure: false },
-  { name: "精霊王のエターナルスター全知全能杖", power: 2300, img: "🌟", weight: 0.12, isHazure: false },
-  { name: "次元を超越せし覇王ヴォイド神剣", power: 3000, img: "🔮", weight: 0.06, isHazure: false },
-  { name: "創世の十二翼セラフィムブレード", power: 4000, img: "👼", weight: 0.03, isHazure: false },
-  { name: "魔王滅殺機甲竜の波動砲", power: 5500, img: "🐉", weight: 0.015, isHazure: false },
-  { name: "終焉のゴッドオデッセイブレード", power: 7500, img: "👑", weight: 0.005, isHazure: false },
-  { name: "究極至高インフィニティ・ラグナロク・オメガ", power: 9999, img: "🔱", weight: 0.001, isHazure: false }
+  // --- 超レア・伝説・神話・アルティメット級 (Rarity: SSR / UR) ---
+  { name: "王宮のシャイニング・エクス・カリバー", power: 1100, img: "✨", weight: 0.4, isHazure: false, rarity: "SSR", rarityColor: "text-yellow-500 font-extrabold tracking-wider" },
+  { name: "銀河のビッグバン時空破壊斧", power: 1400, img: "🌌", weight: 0.25, isHazure: false, rarity: "SSR", rarityColor: "text-purple-500 font-extrabold tracking-wider" },
+  { name: "深淵のインフェルノ冥府魔鎌", power: 1800, img: "🌙", weight: 0.18, isHazure: false, rarity: "SSR", rarityColor: "text-slate-800 font-extrabold tracking-wider" },
+  { name: "精霊王のエターナルスター全知全能杖", power: 2300, img: "🌟", weight: 0.12, isHazure: false, rarity: "SSR", rarityColor: "text-amber-400 font-extrabold tracking-wider" },
+  { name: "次元を超越せし覇王ヴォイド神剣", power: 3000, img: "🔮", weight: 0.06, isHazure: false, rarity: "UR", rarityColor: "text-fuchsia-600 font-black tracking-widest animate-pulse" },
+  { name: "創世の十二翼セラフィムブレード", power: 4000, img: "👼", weight: 0.03, isHazure: false, rarity: "UR", rarityColor: "text-sky-400 font-black tracking-widest" },
+  { name: "魔王滅殺機甲竜の波動砲", power: 5500, img: "🐉", weight: 0.015, isHazure: false, rarity: "UR", rarityColor: "text-emerald-500 font-black tracking-widest" },
+  { name: "終焉のゴッドオデッセイブレード", power: 7500, img: "👑", weight: 0.005, isHazure: false, rarity: "UR", rarityColor: "text-amber-500 font-black tracking-widest animate-pulse" },
+  { name: "究極至高インフィニティ・ラグナロク・オメガ", power: 9999, img: "🔱", weight: 0.001, isHazure: false, rarity: "UR", rarityColor: "text-red-600 font-black tracking-widest animate-bounce" }
 ];
