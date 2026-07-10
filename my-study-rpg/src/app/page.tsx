@@ -192,9 +192,13 @@ export default function GamePage() {
               </div>
             </div>
 
-            {/* 下半分：ガチャ機能つきActionPanelをここに綺麗に配置！ */}
+            {/* 下半分：必要なデータをしっかり渡してActionPanelを配置！ */}
             <div className="shrink-0">
-              <ActionPanel />
+              <ActionPanel 
+                points={score} 
+                monsterHP={monsterHP} 
+                onAttack={handleAttack} 
+              />
             </div>
 
           </div>
