@@ -480,46 +480,46 @@ export type WeaponStyle = {
 };
 
 export const gachaTable: WeaponStyle[] = [
-  // --- ハズレ・おちゃめ枠 (Rarity: N) ---
-  { name: "ゆうりのうんち", power: 0, img: "💩", weight: 15, isHazure: true, rarity: "N", rarityColor: "text-amber-800" },
-  { name: "バナナの皮", power: 1, img: "🍌", weight: 12, isHazure: true, rarity: "N", rarityColor: "text-yellow-600" },
-  { name: "ゆうりの破れた靴下", power: 2, img: "🧦", weight: 10, isHazure: true, rarity: "N", rarityColor: "text-slate-400" },
-  { name: "ただの雑草", power: 3, img: "🌿", weight: 8, isHazure: true, rarity: "N", rarityColor: "text-emerald-700" },
-  { name: "穴のあいたバケツ", power: 5, img: "🪣", weight: 6, isHazure: true, rarity: "N", rarityColor: "text-blue-500" },
-  { name: "ひん曲がった針金", power: 6, img: "📎", weight: 5, isHazure: true, rarity: "N", rarityColor: "text-zinc-500" },
-  { name: "ただの硬い石ころ", power: 8, img: "🪨", weight: 4, isHazure: true, rarity: "N", rarityColor: "text-stone-500" },
-  { name: "枯れた木の枝", power: 9, img: "🥢", weight: 3, isHazure: true, rarity: "N", rarityColor: "text-amber-700" },
-  { name: "謎の割れたガラスの破片", power: 10, img: "🥛", weight: 2, isHazure: true, rarity: "N", rarityColor: "text-sky-400" },
-  { name: "カビの生えたパンくず", power: 12, img: "🍞", weight: 1, isHazure: true, rarity: "N", rarityColor: "text-yellow-700" },
+  // --- ハズレ・おちゃめわく (Rarity: N) ---
+  { name: "ゆうりのうんち", power: 10, img: "💩", weight: 15, isHazure: true, rarity: "N", rarityColor: "text-amber-800" },
+  { name: "バナナの皮", power: 20, img: "🍌", weight: 12, isHazure: true, rarity: "N", rarityColor: "text-yellow-600" },
+  { name: "ゆうりのやぶれた靴下", power: 30, img: "🧦", weight: 10, isHazure: true, rarity: "N", rarityColor: "text-slate-400" },
+  { name: "ただの雑草", power: 40, img: "🌿", weight: 8, isHazure: true, rarity: "N", rarityColor: "text-emerald-700" },
+  { name: "穴のあいたバケツ", power: 50, img: "🪣", weight: 6, isHazure: true, rarity: "N", rarityColor: "text-blue-500" },
+  { name: "まがった針金", power: 60, img: "📎", weight: 5, isHazure: true, rarity: "N", rarityColor: "text-zinc-500" },
+  { name: "ただの固い石ころ", power: 80, img: "🪨", weight: 4, isHazure: true, rarity: "N", rarityColor: "text-stone-500" },
+  { name: "かれた木の枝", power: 100, img: "🥢", weight: 3, isHazure: true, rarity: "N", rarityColor: "text-amber-700" },
+  { name: "われたガラスのかけら", power: 120, img: "🥛", weight: 2, isHazure: true, rarity: "N", rarityColor: "text-sky-400" },
+  { name: "カビの生えたパンくず", power: 150, img: "🍞", weight: 1, isHazure: true, rarity: "N", rarityColor: "text-yellow-700" },
   
-  // --- 通常装備 (Rarity: R) ---
-  { name: "見習いの木刀", power: 20, img: "🪵", weight: 8, isHazure: false, rarity: "R", rarityColor: "text-emerald-600" },
-  { name: "銅のつるぎ", power: 35, img: "🗡️", weight: 7, isHazure: false, rarity: "R", rarityColor: "text-cyan-600" },
-  { name: "錆びたてつの斧", power: 50, img: "🪓", weight: 6, isHazure: false, rarity: "R", rarityColor: "text-stone-600" },
-  { name: "兵士の鉄製ロングスピア", power: 70, img: "🔱", weight: 5, isHazure: false, rarity: "R", rarityColor: "text-blue-600" },
-  { name: "魔術師のノーマルスタッフ", power: 90, img: "🪄", weight: 4, isHazure: false, rarity: "R", rarityColor: "text-purple-600" },
-  { name: "狩人のウッドロングボウ", power: 110, img: "🏹", weight: 3, isHazure: false, rarity: "R", rarityColor: "text-orange-600" },
-  { name: "重戦士のブロンズメイス", power: 135, img: "🔨", weight: 2, isHazure: false, rarity: "R", rarityColor: "text-yellow-700" },
-  { name: "アサシンのツインダガー", power: 160, img: "⚔️", weight: 1.5, isHazure: false, rarity: "R", rarityColor: "text-slate-700" },
+  // --- ふつうの武器 (Rarity: R) ---
+  { name: "見習いの木刀", power: 500, img: "🪵", weight: 8, isHazure: false, rarity: "R", rarityColor: "text-emerald-600" },
+  { name: "どうのつるぎ", power: 800, img: "🗡️", weight: 7, isHazure: false, rarity: "R", rarityColor: "text-cyan-600" },
+  { name: "てつのオノ", power: 1200, img: "🪓", weight: 6, isHazure: false, rarity: "R", rarityColor: "text-stone-600" },
+  { name: "兵隊さんのロングスピア", power: 1800, img: "🔱", weight: 5, isHazure: false, rarity: "R", rarityColor: "text-blue-600" },
+  { name: "まほう使いのステッキ", power: 2500, img: "🪄", weight: 4, isHazure: false, rarity: "R", rarityColor: "text-purple-600" },
+  { name: "ハンターの木の弓矢", power: 3200, img: "🏹", weight: 3, isHazure: false, rarity: "R", rarityColor: "text-orange-600" },
+  { name: "パワフルブロンズハンマー", power: 4000, img: "🔨", weight: 2, isHazure: false, rarity: "R", rarityColor: "text-yellow-700" },
+  { name: "忍者のダブルナイフ", power: 5000, img: "⚔️", weight: 1.5, isHazure: false, rarity: "R", rarityColor: "text-slate-700" },
 
-  // --- レア装備 (Rarity: SR) ---
-  { name: "紅蓮の炎熱大刀", power: 220, img: "🔥", weight: 2.2, isHazure: false, rarity: "SR", rarityColor: "text-orange-500 font-bold" },
-  { name: "氷結のフリーズハンマー", power: 280, img: "🔨", weight: 1.8, isHazure: false, rarity: "SR", rarityColor: "text-blue-500 font-bold" },
-  { name: "裁きのサンダーボルトムチ", power: 350, img: "⚡", weight: 1.5, isHazure: false, rarity: "SR", rarityColor: "text-yellow-500 font-bold" },
-  { name: "大地のガイアヘヴィ大剣", power: 430, img: "⚔️", weight: 1.2, isHazure: false, rarity: "SR", rarityColor: "text-green-600 font-bold" },
-  { name: "風ノ翼のサファイアエッジ", power: 520, img: "🏹", weight: 1.0, isHazure: false, rarity: "SR", rarityColor: "text-sky-500 font-bold" },
-  { name: "鳳凰のホーリーシールド", power: 620, img: "🛡️", weight: 0.8, isHazure: false, rarity: "SR", rarityColor: "text-amber-500 font-bold" },
-  { name: "大海原のポセイドントライデント", power: 730, img: "🔱", weight: 0.6, isHazure: false, rarity: "SR", rarityColor: "text-teal-500 font-bold" },
-  { name: "妖狐の紫水双剣", power: 850, img: "⚔️", weight: 0.5, isHazure: false, rarity: "SR", rarityColor: "text-fuchsia-500 font-bold" },
+  // --- レアな武器 (Rarity: SR) ---
+  { name: "メラメラほのおの大刀", power: 8000, img: "🔥", weight: 2.2, isHazure: false, rarity: "SR", rarityColor: "text-orange-500 font-bold" },
+  { name: "カチコチこおりのハンマー", power: 10000, img: "🔨", weight: 1.8, isHazure: false, rarity: "SR", rarityColor: "text-blue-500 font-bold" },
+  { name: "バリバリ雷光ピカピカムチ", power: 13000, img: "⚡", weight: 1.5, isHazure: false, rarity: "SR", rarityColor: "text-yellow-500 font-bold" },
+  { name: "大地のガイアごつい大剣", power: 16000, img: "⚔️", weight: 1.2, isHazure: false, rarity: "SR", rarityColor: "text-green-600 font-bold" },
+  { name: "かぜのつばさサファイアボウ", power: 20000, img: "🏹", weight: 1.0, isHazure: false, rarity: "SR", rarityColor: "text-sky-500 font-bold" },
+  { name: "ゴールドホーリーシールド", power: 25000, img: "🛡️", weight: 0.8, isHazure: false, rarity: "SR", rarityColor: "text-amber-500 font-bold" },
+  { name: "海の王様ポセイドン三またヤリ", power: 30000, img: "🔱", weight: 0.6, isHazure: false, rarity: "SR", rarityColor: "text-teal-500 font-bold" },
+  { name: "きつねの忍者むらさき刀", power: 38000, img: "⚔️", weight: 0.5, isHazure: false, rarity: "SR", rarityColor: "text-fuchsia-500 font-bold" },
 
-  // --- 超レア・伝説・神話・アルティメット級 (Rarity: SSR / UR) ---
-  { name: "王宮のシャイニング・エクス・カリバー", power: 1100, img: "✨", weight: 0.4, isHazure: false, rarity: "SSR", rarityColor: "text-yellow-500 font-extrabold tracking-wider" },
-  { name: "銀河のビッグバン時空破壊斧", power: 1400, img: "🌌", weight: 0.25, isHazure: false, rarity: "SSR", rarityColor: "text-purple-500 font-extrabold tracking-wider" },
-  { name: "深淵のインフェルノ冥府魔鎌", power: 1800, img: "🌙", weight: 0.18, isHazure: false, rarity: "SSR", rarityColor: "text-slate-800 font-extrabold tracking-wider" },
-  { name: "精霊王のエターナルスター全知全能杖", power: 2300, img: "🌟", weight: 0.12, isHazure: false, rarity: "SSR", rarityColor: "text-amber-400 font-extrabold tracking-wider" },
-  { name: "次元を超越せし覇王ヴォイド神剣", power: 3000, img: "🔮", weight: 0.06, isHazure: false, rarity: "UR", rarityColor: "text-fuchsia-600 font-black tracking-widest animate-pulse" },
-  { name: "創世の十二翼セラフィムブレード", power: 4000, img: "👼", weight: 0.03, isHazure: false, rarity: "UR", rarityColor: "text-sky-400 font-black tracking-widest" },
-  { name: "魔王滅殺機甲竜の波動砲", power: 5500, img: "🐉", weight: 0.015, isHazure: false, rarity: "UR", rarityColor: "text-emerald-500 font-black tracking-widest" },
-  { name: "終焉のゴッドオデッセイブレード", power: 7500, img: "👑", weight: 0.005, isHazure: false, rarity: "UR", rarityColor: "text-amber-500 font-black tracking-widest animate-pulse" },
-  { name: "究極至高インフィニティ・ラグナロク・オメガ", power: 9999, img: "🔱", weight: 0.001, isHazure: false, rarity: "UR", rarityColor: "text-red-600 font-black tracking-widest animate-bounce" }
+  // --- スーパーレア・伝説の神クラス (Rarity: SSR / UR) ---
+  { name: "ピカピカ光るエクスカリバー", power: 55000, img: "✨", weight: 0.4, isHazure: false, rarity: "SSR", rarityColor: "text-yellow-500 font-extrabold tracking-wider" },
+  { name: "うちゅうのビッグバン大ばくはつオノ", power: 70000, img: "🌌", weight: 0.25, isHazure: false, rarity: "SSR", rarityColor: "text-purple-500 font-extrabold tracking-wider" },
+  { name: "暗やみの地獄おばけカマ", power: 85000, img: "🌙", weight: 0.18, isHazure: false, rarity: "SSR", rarityColor: "text-slate-800 font-extrabold tracking-wider" },
+  { name: "まほう王のエターナルスターつえ", power: 100000, img: "🌟", weight: 0.12, isHazure: false, rarity: "SSR", rarityColor: "text-amber-400 font-extrabold tracking-wider" },
+  { name: "時空をこえる覇王ヴォイド神剣", power: 130000, img: "🔮", weight: 0.06, isHazure: false, rarity: "UR", rarityColor: "text-fuchsia-600 font-black tracking-widest animate-pulse" },
+  { name: "天使の十二枚のつばさブレード", power: 160000, img: "👼", weight: 0.03, isHazure: false, rarity: "UR", rarityColor: "text-sky-400 font-black tracking-widest" },
+  { name: "まおうをやっつけるロボドラゴンの大ほう", power: 200000, img: "🐉", weight: 0.015, isHazure: false, rarity: "UR", rarityColor: "text-emerald-500 font-black tracking-widest" },
+  { name: "せかいのおわりゴッドオデッセイソード", power: 250000, img: "👑", weight: 0.005, isHazure: false, rarity: "UR", rarityColor: "text-amber-500 font-black tracking-widest animate-pulse" },
+  { name: "最強インフィニティ・オメガ・ウェポン", power: 999999, img: "🔱", weight: 0.001, isHazure: false, rarity: "UR", rarityColor: "text-red-600 font-black tracking-widest animate-bounce" }
 ];
