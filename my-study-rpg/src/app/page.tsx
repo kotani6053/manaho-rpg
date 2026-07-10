@@ -12,13 +12,14 @@ export default function UltimateStrongestRPG() {
   const [quiz, setQuiz] = useState<any>({ q: "", a: "", type: "math" });
   const [inputValue, setInputValue] = useState("");
   const [isAttacking, setIsAttacking] = useState(false);
+  const [isTakingDamage, setIsTakingDamage] = useState(false);
   const [gachaResult, setGachaResult] = useState<any>(null);
 
-  // 【追加】リセット機能
+  // リセット機能
   const resetGame = () => {
     if (window.confirm("さいしょから やりなおしますか？（ポイントやレベルも 0になります）")) {
       localStorage.removeItem('mana-rpg-vFinal-Ultra-Safe');
-      window.location.reload(); // ページをリロードして初期状態に戻す
+      window.location.reload();
     }
   };
 
@@ -56,6 +57,8 @@ export default function UltimateStrongestRPG() {
   const checkAnswer = (val: string) => {
     if (val === quiz.a) {
       setPoints(p => p + 35);
+      setIsTakingDamage(true); // クイズ正解時もモンスターにダメージ演出
+      setTimeout(() => setIsTakingDamage(false), 500);
       setMonsterHP(hp => Math.max(0, hp - (10 + playerLv * 2)));
       setMessage("✨ せいかい！ パワーが たまった！ ✨");
       generateQuiz();
@@ -68,8 +71,13 @@ export default function UltimateStrongestRPG() {
   const attack = (isSpecial: boolean) => {
     const cost = isSpecial ? 60 : 25;
     if (points < cost) return;
+    
     setIsAttacking(true);
-    setTimeout(() => setIsAttacking(false), 200);
+    setIsTakingDamage(true);
+    setTimeout(() => {
+      setIsAttacking(false);
+      setIsTakingDamage(false);
+    }, 500);
 
     const baseDmg = isSpecial ? 150 : 50;
     const weaponBonus = weapon.power * (1 + playerLv * 0.12);
@@ -95,7 +103,7 @@ export default function UltimateStrongestRPG() {
         setMonsterIdx(nextIdx);
         setMonsterHP(monsterList[nextIdx].hp);
         setMessage(`${monsterList[nextIdx].name}が あらわれた！`);
-      }, 1000);
+      }, 1200);
       return () => clearTimeout(timer);
     }
   }, [monsterHP, monsterIdx]);
@@ -125,93 +133,167 @@ export default function UltimateStrongestRPG() {
   };
 
   const monster = monsterList[monsterIdx];
+  const hpPercentage = Math.max(0, Math.min(100, (monsterHP / monster.hp) * 100));
+  const hpBarColor = hpPercentage > 50 ? 'bg-emerald-500' : hpPercentage > 20 ? 'bg-amber-400' : 'bg-rose-600';
 
   return (
-    <div style={{ background: 'linear-gradient(135deg, #064e3b, #065f46, #047857)', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '15px', fontFamily: 'sans-serif' }}>
-      <div style={{ width: '100%', maxWidth: '650px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+    <div className="min-h-screen bg-slate-900 flex items-center justify-center p-4 antialiased selection:bg-amber-200">
+      <div className="w-full max-w-md flex flex-col gap-4">
         
-        {/* ステータスバー */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1.3fr', gap: '8px' }}>
-          <div style={{ background: '#022c22', border: '2px solid #34d399', padding: '8px', borderRadius: '15px', color: 'white', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <div>
-              <div style={{ fontSize: '10px', color: '#6ee7b7' }}>Lv.</div>
-              <div style={{ fontSize: '18px', fontWeight: '900' }}>{playerLv}</div>
-            </div>
-            {/* リセットボタン */}
-            <button onClick={resetGame} style={{ background: '#991b1b', color: 'white', border: 'none', borderRadius: '8px', fontSize: '9px', padding: '4px 6px', cursor: 'pointer' }}>リセット</button>
+        {/* レトロゲーム風ステータスヘッダー */}
+        <div className="grid grid-cols-3 gap-2 text-center text-gray-950 font-bold">
+          {/* レベル */}
+          <div className="bg-[#f8f8f0] border-4 border-[#c0c0b8] rounded-xl p-2 shadow-[-2px_2px_0_0_#c0c0b8] flex flex-col justify-between items-center">
+            <span className="text-[10px] text-gray-500 uppercase tracking-wider">Trainer</span>
+            <span className="text-xl font-black">Lv.{playerLv}</span>
+            <button onClick={resetGame} className="mt-1 bg-rose-600 text-white text-[9px] px-2 py-0.5 rounded border border-rose-800 hover:bg-rose-500 active:translate-y-0.5 transition-all">
+              リセット
+            </button>
           </div>
-          <div style={{ background: '#022c22', border: '2px solid #fbbf24', padding: '8px', borderRadius: '15px', color: 'white', textAlign: 'center' }}>
-            <div style={{ fontSize: '10px', color: '#fcd34d' }}>ポイント</div>
-            <div style={{ fontSize: '18px', fontWeight: '900' }}>{points}</div>
+          {/* 残りポイント */}
+          <div className="bg-[#f8f8f0] border-4 border-[#c0c0b8] rounded-xl p-2 shadow-[-2px_2px_0_0_#c0c0b8] flex flex-col justify-center items-center">
+            <span className="text-[10px] text-gray-500 uppercase tracking-wider">Points</span>
+            <span className="text-xl font-black text-amber-600 font-mono">{points} <span className="text-xs text-gray-700">pt</span></span>
           </div>
-          <div style={{ background: '#022c22', border: '2px solid #34d399', padding: '8px', borderRadius: '15px', color: 'white', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <div style={{ overflow: 'hidden' }}>
-              <div style={{ fontSize: '10px', color: '#6ee7b7' }}>ぶき</div>
-              <div style={{ fontSize: '10px', fontWeight: 'bold' }}>{weapon.img}{weapon.name}</div>
-            </div>
-            <button onClick={drawGacha} disabled={points < 100} style={{ background: '#059669', color: 'white', padding: '6px 8px', borderRadius: '10px', border: 'none', cursor: 'pointer', fontSize: '10px', fontWeight: 'bold' }}>ガチャ</button>
-          </div>
-        </div>
-
-        {/* モンスター表示 */}
-        <div style={{ height: '220px', borderRadius: '35px', border: monster.isRare ? '6px solid #fbbf24' : '3px solid rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', background: 'rgba(0,0,0,0.3)' }}>
-          <div style={{ fontSize: '100px', transform: isAttacking ? 'scale(1.3)' : 'scale(1)', transition: '0.1s' }}>
-            {monsterHP > 0 ? monster.img : '💥'}
-          </div>
-          <div style={{ position: 'absolute', bottom: '15px', width: '90%', background: 'white', padding: '10px', borderRadius: '20px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', color: '#064e3b', fontWeight: 'bold', fontSize: '13px' }}>
-              <span>{monster.name}</span>
-              <span>HP {monsterHP}</span>
-            </div>
-            <div style={{ width: '100%', background: '#d1fae5', height: '10px', borderRadius: '5px', overflow: 'hidden', marginTop: '5px' }}>
-              <div style={{ width: `${(monsterHP / monster.hp) * 100}%`, background: '#ef4444', height: '100%', transition: '0.3s' }} />
-            </div>
+          {/* 現在の武器 ＆ ガチャ */}
+          <div className="bg-[#f8f8f0] border-4 border-[#c0c0b8] rounded-xl p-2 shadow-[-2px_2px_0_0_#c0c0b8] flex flex-col justify-between items-center overflow-hidden">
+            <span className="text-[10px] text-gray-500 tracking-wider truncate w-full">{weapon.img}{weapon.name}</span>
+            <button 
+              onClick={drawGacha} 
+              disabled={points < 100}
+              className="w-full mt-1 bg-amber-500 disabled:bg-gray-300 border-2 border-amber-700 text-white font-black text-xs py-1 rounded shadow-md hover:bg-amber-400 disabled:opacity-50 active:translate-y-0.5 transition-all cursor-pointer disabled:cursor-not-allowed"
+            >
+              ガチャ (100)
+            </button>
           </div>
         </div>
 
-        {/* クイズエリア */}
-        <div style={{ background: 'white', borderRadius: '25px', padding: '15px', border: '4px solid #064e3b', boxShadow: '0 8px 0 rgba(0,0,0,0.2)' }}>
-          <h2 style={{ textAlign: 'center', fontSize: '24px', fontWeight: '900', color: '#064e3b', margin: '5px 0' }}>{quiz.q}</h2>
+        {/* 👾 ポケモン風 バトルフィールド */}
+        <div className={`h-64 rounded-2xl border-4 ${monster.isRare ? 'border-amber-400 shadow-[0_0_20px_#f59e0b]' : 'border-[#c0c0b8]'} bg-gradient-to-b from-sky-200 to-emerald-100 flex flex-col items-center justify-between p-4 relative overflow-hidden shadow-inner`}>
+          {/* 背景の芝生ライン */}
+          <div className="absolute bottom-16 w-[150%] h-16 bg-emerald-200/60 rounded-full blur-sm -rotate-3"></div>
+
+          {/* モンスター画像エリア */}
+          <div className="flex-1 flex items-center justify-center relative w-full">
+            <div className={`text-8xl transition-all duration-100 relative z-10
+              ${monsterHP > 0 ? 'scale-100 opacity-100 hover:-translate-y-2' : 'scale-150 opacity-0 duration-700'}
+              ${isAttacking ? 'animate-bounce' : ''}
+              ${isTakingDamage ? 'animate-pulse bg-red-500/20 rounded-full' : ''}
+            `}>
+              {monsterHP > 0 ? monster.img : '💥'}
+            </div>
+            {/* 地面の影 */}
+            {monsterHP > 0 && (
+              <div className="absolute bottom-4 w-24 h-3 bg-emerald-900/10 rounded-full blur-[1px]"></div>
+            )}
+          </div>
+
+          {/* ポケモン風 モンスター情報ステータス窓 */}
+          <div className="w-full bg-[#f8f8f0] border-4 border-[#c0c0b8] rounded-tl-xl rounded-br-xl p-3 shadow-[-3px_3px_0_0_#c0c0b8] relative z-20">
+            <div className="flex justify-between items-end mb-1 text-gray-950 font-bold">
+              <span className="text-base font-black truncate">{monster.name}</span>
+              <span className="text-xs font-mono text-gray-600">HP {monsterHP} / {monster.hp}</span>
+            </div>
+            {/* HP外枠 */}
+            <div className="w-full bg-[#c0c0b8] rounded-full h-5 border-2 border-[#888880] p-[1px] flex items-center relative">
+              <span className="absolute left-1.5 text-[9px] font-bold text-slate-800 z-10">HP</span>
+              <div className="w-full h-full bg-slate-950 rounded-full overflow-hidden pl-5 pr-0.5 flex items-center">
+                <div 
+                  className={`h-2.5 ${hpBarColor} rounded-full transition-all duration-300 ease-out`}
+                  style={{ width: `${hpPercentage}%` }}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* 📝 下部テキストログ */}
+        <div className="bg-slate-950 border-2 border-slate-800 rounded-xl p-2.5 text-center min-h-[44px] flex items-center justify-center">
+          <p className="text-emerald-400 font-bold text-xs tracking-wide">{message}</p>
+        </div>
+
+        {/* 📝 クイズエリア：ゲームの核 */}
+        <div className="bg-[#f8f8f0] border-4 border-[#c0c0b8] rounded-2xl p-4 shadow-[-4px_4px_0_0_#c0c0b8] text-gray-950">
+          <span className="text-[10px] bg-[#c0c0b8] px-2 py-0.5 rounded font-bold text-gray-700 uppercase tracking-wider">
+            {quiz.type === "math" ? "🔢 さんすうクエスト" : "🔤 ことばクエスト"}
+          </span>
+          <h2 className="text-center text-3xl font-black my-4 tracking-tight text-slate-900">{quiz.q}</h2>
+          
           {quiz.type === "math" ? (
-            <div>
-              <div style={{ fontSize: '32px', textAlign: 'center', background: '#f0fdf4', marginBottom: '10px', borderRadius: '12px', height: '50px', lineHeight: '50px', border: '2px solid #34d399', fontWeight: '900', color: '#064e3b' }}>{inputValue}</div>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '6px' }}>
+            <div className="flex flex-col gap-3">
+              {/* 電卓風入力欄 */}
+              <div className="text-2xl text-center bg-slate-950 text-emerald-400 rounded-xl h-12 flex items-center justify-center border-2 border-[#c0c0b8] font-mono font-bold shadow-inner">
+                {inputValue || " "}
+              </div>
+              {/* テンキー */}
+              <div className="grid grid-cols-3 gap-1.5 font-mono">
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map(n => (
-                  <button key={n} onClick={() => setInputValue(v => v + n)} style={{ height: '42px', fontSize: '18px', background: '#f1f5f9', border: 'none', borderRadius: '10px', fontWeight: 'bold', cursor: 'pointer' }}>{n}</button>
+                  <button key={n} onClick={() => setInputValue(v => v + n)} className="h-10 bg-white border-2 border-[#c0c0b8] rounded-lg font-black text-lg text-slate-800 shadow hover:bg-gray-100 active:translate-y-0.5 transition-all">
+                    {n}
+                  </button>
                 ))}
-                <button onClick={() => setInputValue("")} style={{ height: '42px', background: '#fee2e2', borderRadius: '10px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }}>C</button>
-                <button onClick={() => checkAnswer(inputValue)} style={{ height: '42px', background: '#10b981', color: 'white', borderRadius: '10px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }}>OK!</button>
+                <button onClick={() => setInputValue("")} className="h-10 bg-rose-100 border-2 border-rose-300 rounded-lg font-black text-rose-700 shadow hover:bg-rose-200 active:translate-y-0.5 transition-all">
+                  C
+                </button>
+                <button onClick={() => checkAnswer(inputValue)} className="h-10 bg-emerald-600 border-2 border-emerald-800 text-white rounded-lg font-black text-sm shadow hover:bg-emerald-500 active:translate-y-0.5 transition-all">
+                  OK!
+                </button>
               </div>
             </div>
           ) : (
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
-              {quiz.options.map((opt: string) => (
-                <button key={opt} onClick={() => checkAnswer(opt)} style={{ height: '50px', fontSize: '13px', background: '#f0fdf4', border: '2px solid #34d399', borderRadius: '15px', fontWeight: 'bold', color: '#064e3b', cursor: 'pointer' }}>{opt}</button>
+            /* 4択クイズ（言葉） */
+            <div className="grid grid-cols-2 gap-2">
+              {quiz.options?.map((opt: string) => (
+                <button key={opt} onClick={() => checkAnswer(opt)} className="group relative text-left pl-6 pr-2 py-3 bg-white border-2 border-[#c0c0b8] rounded-xl font-bold text-xs text-slate-800 shadow hover:border-amber-500 hover:bg-amber-50/50 active:translate-y-0.5 transition-all">
+                  <span className="absolute left-2 opacity-0 group-hover:opacity-100 text-amber-600 transition-opacity">▶</span>
+                  {opt}
+                </button>
               ))}
             </div>
           )}
         </div>
 
-        {/* アクションボタン */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
-          <button onClick={() => attack(false)} disabled={points < 25 || monsterHP <= 0} style={{ height: '60px', background: '#115e59', color: 'white', borderRadius: '20px', border: 'none', fontSize: '18px', fontWeight: 'bold', boxShadow: '0 5px 0 #042f2e', opacity: (points < 25 || monsterHP <= 0) ? 0.4 : 1, cursor: 'pointer' }}>⚔️ こうげき</button>
-          <button onClick={() => attack(true)} disabled={points < 60 || monsterHP <= 0} style={{ height: '60px', background: 'linear-gradient(to bottom, #ef4444, #b91c1c)', color: 'white', borderRadius: '20px', border: 'none', fontSize: '18px', fontWeight: 'bold', boxShadow: '0 5px 0 #7f1d1d', opacity: (points < 60 || monsterHP <= 0) ? 0.4 : 1, cursor: 'pointer' }}>🔥 ひっさつ</button>
+        {/* ⚔️ ポケモン風 コマンドアクションパネル */}
+        <div className="bg-[#101010] border-4 border-[#c0c0b8] rounded-2xl p-2.5 grid grid-cols-2 gap-2 shadow-[-4px_4px_0_0_#c0c0b8]">
+          <button 
+            onClick={() => attack(false)} 
+            disabled={points < 25 || monsterHP <= 0} 
+            className="group relative flex flex-col justify-between items-start text-left bg-[#f8f8f0] disabled:bg-neutral-700 disabled:opacity-30 text-gray-950 p-2.5 rounded-xl border-2 border-transparent hover:border-amber-500 transition-all cursor-pointer disabled:cursor-not-allowed min-h-[76px]"
+          >
+            <span className="absolute left-1 top-3 text-xs opacity-0 group-hover:opacity-100 text-gray-950">▶</span>
+            <span className="pl-3 font-black text-sm leading-tight group-disabled:text-neutral-400">つうじょう<br />こうげき</span>
+            <span className="w-full text-right text-[10px] font-mono text-gray-500 font-bold group-disabled:text-neutral-500">PP 25</span>
+          </button>
+
+          <button 
+            onClick={() => attack(true)} 
+            disabled={points < 60 || monsterHP <= 0} 
+            className="group relative flex flex-col justify-between items-start text-left bg-[#f8f8f0] disabled:bg-neutral-700 disabled:opacity-30 text-gray-950 p-2.5 rounded-xl border-2 border-transparent hover:border-rose-500 transition-all cursor-pointer disabled:cursor-not-allowed min-h-[76px]"
+          >
+            <span className="absolute left-1 top-3 text-xs opacity-0 group-hover:opacity-100 text-gray-950">▶</span>
+            <span className="pl-3 font-black text-sm leading-tight text-rose-900 group-disabled:text-neutral-400">ひっさつ<br />わざ</span>
+            <span className="w-full text-right text-[10px] font-mono text-gray-500 font-bold group-disabled:text-neutral-500">PP 60</span>
+          </button>
         </div>
-        
-        <p style={{ textAlign: 'center', color: '#d1fae5', fontSize: '13px', fontWeight: 'bold' }}>{message}</p>
+
       </div>
 
-      {/* ガチャ演出 */}
+      {/* 🎰 ド派手なガチャリザルト演出 */}
       {gachaResult && (
-        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.95)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 100 }}>
-          <div style={{ background: 'white', padding: '30px', borderRadius: '35px', textAlign: 'center', border: '6px solid #fbbf24' }}>
-            <div style={{ fontSize: '14px', color: '#666' }}>
-              {gachaResult.isHazure ? "ハズレ..." : 
-               gachaResult.power > weapon.power ? "ぶきを 新しくした！" : "今のぶきのほうが つよい！"}
+        <div className="fixed inset-0 bg-slate-950/90 backdrop-blur-sm flex items-center justify-center z-50 animate-fade-in">
+          <div className="bg-[#f8f8f0] border-8 border-amber-400 p-6 rounded-3xl text-center max-w-xs w-full shadow-[0_0_30px_rgba(245,158,11,0.5)] animate-scale-up">
+            <span className="text-xs font-bold text-gray-500 uppercase tracking-widest block mb-1">Gacha Result</span>
+            <div className="text-[11px] font-black text-slate-700 bg-[#c0c0b8] py-1 px-3 rounded-full inline-block">
+              {gachaResult.isHazure ? "しんぴの クズひろい..." : 
+               gachaResult.power > weapon.power ? "🔥 ぶきを こうしん！" : "🛡️ 今のほうが つよい"}
             </div>
-            <div style={{ fontSize: '80px', margin: '15px 0' }}>{gachaResult.img}</div>
-            <div style={{ fontSize: '22px', fontWeight: 'bold', color: '#064e3b' }}>{gachaResult.name}</div>
-            {!gachaResult.isHazure && <div style={{ color: '#ef4444', fontWeight: 'bold', marginTop: '5px' }}>パワー: {gachaResult.power}</div>}
+            <div className="text-8xl my-6 animate-bounce">{gachaResult.img}</div>
+            <h3 className="text-2xl font-black text-slate-900 tracking-tight">{gachaResult.name}</h3>
+            {!gachaResult.isHazure && (
+              <div className="mt-2 text-rose-600 font-mono font-black text-lg">
+                ATK +{gachaResult.power}
+              </div>
+            )}
           </div>
         </div>
       )}
