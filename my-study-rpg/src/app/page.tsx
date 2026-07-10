@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from 'react';
-import BattleScene from './BattleScene'; // パスが異なる場合は適宜調整してください
+import BattleScene from '../components/BattleScene';
 import { kotobaData } from '../data/gameData'; // クイズデータのパス
 
 export default function GamePage() {
