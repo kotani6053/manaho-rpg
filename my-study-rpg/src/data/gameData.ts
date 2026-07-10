@@ -395,61 +395,75 @@ export type MonsterStyle = {
 };
 
 export const monsterList: MonsterStyle[] = [
-  // --- 1〜10: 始まりの草原・洞窟 ---
+  // ==========================================
+  // エリア1：始まりの草原とピカピカの洞窟 (1〜10体目)
+  // ==========================================
   { name: "プルプルスライム", hp: 150, img: "👾", isRare: false, tier: "ノーマル", elementType: "water", bgGradient: "from-blue-400 to-sky-300", animationClass: "animate-[bounce_2s_infinite]" },
   { name: "迷子のプチ・インプ", hp: 280, img: "😈", isRare: false, tier: "ノーマル", elementType: "dark", bgGradient: "from-purple-500 to-indigo-400", animationClass: "animate-[pulse_1.5s_infinite]" },
-  { name: "✨キンピカ・タートル✨", hp: 400, img: "🐢", isRare: true, tier: "SSR", elementType: "thunder", bgGradient: "from-amber-400 via-yellow-300 to-amber-500", animationClass: "animate-[spin_6s_linear_infinite]" },
+  { name: "✨キンピカ・タートル✨", hp: 420, img: "🐢", isRare: true, tier: "SSR", elementType: "thunder", bgGradient: "from-amber-400 via-yellow-300 to-amber-500", animationClass: "animate-[spin_6s_linear_infinite]" },
   { name: "メラメラくん", hp: 450, img: "🔥", isRare: false, tier: "ノーマル", elementType: "fire", bgGradient: "from-orange-500 to-red-500", animationClass: "animate-[pulse_1s_infinite]" },
   { name: "わんぱくゴブリン", hp: 550, img: "👺", isRare: false, tier: "ノーマル", elementType: "grass", bgGradient: "from-emerald-500 to-green-400", animationClass: "animate-[bounce_1.2s_infinite]" },
-  { name: "かみつきチワワ", hp: 600, img: "🐕", isRare: false, tier: "ノーマル", elementType: "grass", bgGradient: "from-orange-300 to-yellow-200", animationClass: "animate-[pulse_2s_infinite]" },
-  { name: "どろどろマッドマン", hp: 700, img: "💩", isRare: false, tier: "ノーマル", elementType: "dark", bgGradient: "from-yellow-800 to-stone-600", animationClass: "animate-[bounce_2.5s_infinite]" },
-  { name: "パタパタ・コウモリ", hp: 750, img: "🦇", isRare: false, tier: "ノーマル", elementType: "dark", bgGradient: "from-slate-700 to-purple-900", animationClass: "animate-[bounce_1s_infinite]" },
-  { name: "パックン・チェスト", hp: 850, img: "🧳", isRare: false, tier: "レア", elementType: "dark", bgGradient: "from-amber-700 to-stone-800", animationClass: "animate-pulse" },
-  { name: "✨トパーズ・キャット✨", hp: 600, img: "🐱", isRare: true, tier: "SSR", elementType: "thunder", bgGradient: "from-amber-300 via-rose-300 to-yellow-400", animationClass: "animate-[bounce_2s_infinite]" },
+  { name: "かみつきチワワ", hp: 650, img: "🐕", isRare: false, tier: "ノーマル", elementType: "grass", bgGradient: "from-orange-300 to-yellow-200", animationClass: "animate-[pulse_2s_infinite]" },
+  { name: "どろどろマッドマン", hp: 750, img: "💩", isRare: false, tier: "ノーマル", elementType: "dark", bgGradient: "from-yellow-800 to-stone-600", animationClass: "animate-[bounce_2.5s_infinite]" },
+  { name: "パタパタ・コウモリ", hp: 850, img: "🦇", isRare: false, tier: "ノーマル", elementType: "dark", bgGradient: "from-slate-700 to-purple-900", animationClass: "animate-[bounce_1s_infinite]" },
+  { name: "パックン・チェスト", hp: 950, img: "🧳", isRare: false, tier: "レア", elementType: "dark", bgGradient: "from-amber-700 to-stone-800", animationClass: "animate-pulse" },
+  { name: "✨トパーズ・キャット✨", hp: 1100, img: "🐱", isRare: true, tier: "SSR", elementType: "thunder", bgGradient: "from-amber-300 via-rose-300 to-yellow-400", animationClass: "animate-[bounce_2s_infinite]" },
 
-  // --- 11〜25: 迷宮・妖精の森・地底湖 ---
-  { name: "ビリビリ丸", hp: 1100, img: "⚡", isRare: false, tier: "レア", elementType: "thunder", bgGradient: "from-yellow-400 to-amber-300", animationClass: "animate-[pulse_0.5s_infinite]" },
-  { name: "ドクドク・キノコ", hp: 1400, img: "🍄", isRare: false, tier: "ノーマル", elementType: "grass", bgGradient: "from-purple-600 to-emerald-600", animationClass: "animate-pulse" },
-  { name: "✨クリスタル・クラブ✨", hp: 1000, img: "🦀", isRare: true, tier: "SSR", elementType: "water", bgGradient: "from-cyan-400 via-teal-300 to-blue-400", animationClass: "animate-[bounce_1.5s_infinite]" },
-  { name: "おばけカボチャ", hp: 1800, img: "🎃", isRare: false, tier: "レア", elementType: "fire", bgGradient: "from-orange-600 to-yellow-500", animationClass: "animate-[bounce_1.8s_infinite]" },
-  { name: "マッド・パペット", hp: 2100, img: "🧸", isRare: false, tier: "ノーマル", elementType: "grass", bgGradient: "from-amber-600 to-amber-900", animationClass: "animate-[bounce_2.2s_infinite]" },
-  { name: "ストーン・ソルジャー", hp: 2500, img: "🧱", isRare: false, tier: "レア", elementType: "grass", bgGradient: "from-stone-500 to-stone-700", animationClass: "animate-[pulse_3s_infinite]" },
-  { name: "怒りの呪いのワラ人形", hp: 2800, img: "🧍", isRare: false, tier: "レア", elementType: "dark", bgGradient: "from-red-900 to-stone-900", animationClass: "animate-bounce" },
-  { name: "カチコチ・ウッドマン", hp: 3200, img: "🪵", isRare: false, tier: "ノーマル", elementType: "grass", bgGradient: "from-amber-800 to-green-800", animationClass: "animate-pulse" },
-  { name: "深海のクラーケン", hp: 3800, img: "🦑", isRare: false, tier: "レア", elementType: "water", bgGradient: "from-blue-800 to-teal-900", animationClass: "animate-[bounce_2.5s_infinite]" },
-  { name: "アーマード・マンティス", hp: 4300, img: "🐜", isRare: false, tier: "レア", elementType: "grass", bgGradient: "from-emerald-600 to-stone-600", animationClass: "animate-[pulse_1.2s_infinite]" }, // 螳より環境依存の低い🐜に変更
+  // ==========================================
+  // エリア2：迷宮と妖精が隠れる秘密の森 (11〜20体目)
+  // ==========================================
+  { name: "ビリビリ丸", hp: 1300, img: "⚡", isRare: false, tier: "レア", elementType: "thunder", bgGradient: "from-yellow-400 to-amber-300", animationClass: "animate-[pulse_0.5s_infinite]" },
+  { name: "ドクドク・キノコ", hp: 1600, img: "🍄", isRare: false, tier: "ノーマル", elementType: "grass", bgGradient: "from-purple-600 to-emerald-600", animationClass: "animate-pulse" },
+  { name: "✨クリスタル・クラブ✨", hp: 1800, img: "🦀", isRare: true, tier: "SSR", elementType: "water", bgGradient: "from-cyan-400 via-teal-300 to-blue-400", animationClass: "animate-[bounce_1.5s_infinite]" },
+  { name: "おばけカボチャ", hp: 2100, img: "🎃", isRare: false, tier: "レア", elementType: "fire", bgGradient: "from-orange-600 to-yellow-500", animationClass: "animate-[bounce_1.8s_infinite]" },
+  { name: "マッド・パペット", hp: 2400, img: "🧸", isRare: false, tier: "ノーマル", elementType: "grass", bgGradient: "from-amber-600 to-amber-900", animationClass: "animate-[bounce_2.2s_infinite]" },
+  { name: "ストーン・ソルジャー", hp: 2800, img: "🧱", isRare: false, tier: "レア", elementType: "grass", bgGradient: "from-stone-500 to-stone-700", animationClass: "animate-[pulse_3s_infinite]" },
+  { name: "呪いのワラ人形", hp: 3200, img: "🧍", isRare: false, tier: "レア", elementType: "dark", bgGradient: "from-red-900 to-stone-900", animationClass: "animate-bounce" },
+  { name: "カチコチ・ウッドマン", hp: 3600, img: "🪵", isRare: false, tier: "ノーマル", elementType: "grass", bgGradient: "from-amber-800 to-green-800", animationClass: "animate-pulse" },
+  { name: "深海のクラーケン", hp: 4200, img: "🦑", isRare: false, tier: "レア", elementType: "water", bgGradient: "from-blue-800 to-teal-900", animationClass: "animate-[bounce_2.5s_infinite]" },
+  { name: "✨サファイア・ペガサス✨", hp: 4800, img: "🦄", isRare: true, tier: "SSR", elementType: "cosmo", bgGradient: "from-indigo-400 via-sky-300 to-blue-500", animationClass: "animate-[pulse_2s_infinite]" },
 
-  // --- 26〜40: 荒野・天空城・古代遺跡 ---
-  { name: "アイアン・ゴーレム", hp: 4800, img: "🗿", isRare: false, tier: "レア", elementType: "grass", bgGradient: "from-stone-500 to-slate-400", animationClass: "animate-[pulse_3s_infinite]" },
-  { name: "✨黄金のスフィンクス✨", hp: 3500, img: "🦁", isRare: true, tier: "SSR", elementType: "thunder", bgGradient: "from-yellow-500 via-amber-400 to-yellow-600", animationClass: "animate-pulse" },
-  { name: "毒針マッドハチ公", hp: 5300, img: "🐝", isRare: false, tier: "レア", elementType: "thunder", bgGradient: "from-amber-500 to-stone-700", animationClass: "animate-[bounce_1s_infinite]" },
-  { name: "ミイラ男の呪い", hp: 5800, img: "🧻", isRare: false, tier: "ノーマル", elementType: "dark", bgGradient: "from-yellow-100 to-stone-400", animationClass: "animate-pulse" },
-  { name: "密林のシャドウコブラ", hp: 6500, img: "🐍", isRare: false, tier: "レア", elementType: "grass", bgGradient: "from-green-700 to-purple-900", animationClass: "animate-[pulse_1.8s_infinite]" },
-  { name: "マグマ・ギガンテス", hp: 7500, img: "🌋", isRare: false, tier: "レア", elementType: "fire", bgGradient: "from-red-700 to-orange-600", animationClass: "animate-bounce" },
-  { name: "アーマード・ヘヴィビートル", hp: 8500, img: "🪲", isRare: false, tier: "レア", elementType: "grass", bgGradient: "from-cyan-900 to-slate-800", animationClass: "animate-pulse" },
-  { name: "シャドー・ナイトウルフ", hp: 9500, img: "🐺", isRare: false, tier: "レア", elementType: "dark", bgGradient: "from-indigo-900 to-slate-900", animationClass: "animate-[bounce_1.4s_infinite]" },
-  { name: "✨メタル・ジェネラル✨", hp: 6000, img: "🤖", isRare: true, tier: "SSR", elementType: "cosmo", bgGradient: "from-slate-400 via-zinc-300 to-cyan-500", animationClass: "animate-[spin_12s_linear_infinite]" },
-  { name: "氷結のウインタージャイアント", hp: 12000, img: "🧊", isRare: false, tier: "レア", elementType: "water", bgGradient: "from-sky-300 to-blue-500", animationClass: "animate-pulse" },
+  // ==========================================
+  // エリア3：砂に埋もれた古代王国の遺跡 (21〜30体目)
+  // ==========================================
+  { name: "アーマード・アント", hp: 5400, img: "蟻", isRare: false, tier: "レア", elementType: "grass", bgGradient: "from-emerald-600 to-stone-600", animationClass: "animate-[pulse_1.2s_infinite]" },
+  { name: "アイアン・ゴーレム", hp: 6000, img: "🗿", isRare: false, tier: "レア", elementType: "grass", bgGradient: "from-stone-500 to-slate-400", animationClass: "animate-[pulse_3s_infinite]" },
+  { name: "✨黄金のスフィンクス✨", hp: 6600, img: "🦁", isRare: true, tier: "SSR", elementType: "thunder", bgGradient: "from-yellow-500 via-amber-400 to-yellow-600", animationClass: "animate-pulse" },
+  { name: "毒針ハチ公", hp: 7200, img: "🐝", isRare: false, tier: "レア", elementType: "thunder", bgGradient: "from-amber-500 to-stone-700", animationClass: "animate-[bounce_1s_infinite]" },
+  { name: "包帯ミイラ男", hp: 7800, img: "🧻", isRare: false, tier: "ノーマル", elementType: "dark", bgGradient: "from-yellow-100 to-stone-400", animationClass: "animate-pulse" },
+  { name: "シャドウコブラ", hp: 8500, img: "🐍", isRare: false, tier: "レア", elementType: "grass", bgGradient: "from-green-700 to-purple-900", animationClass: "animate-[pulse_1.8s_infinite]" },
+  { name: "マグマ・ギガンテス", hp: 9300, img: "🌋", isRare: false, tier: "レア", elementType: "fire", bgGradient: "from-red-700 to-orange-600", animationClass: "animate-bounce" },
+  { name: "ヘヴィ・ビートル", hp: 10000, img: "🪲", isRare: false, tier: "レア", elementType: "grass", bgGradient: "from-cyan-900 to-slate-800", animationClass: "animate-pulse" },
+  { name: "ナイトウルフ", hp: 11000, img: "🐺", isRare: false, tier: "レア", elementType: "dark", bgGradient: "from-indigo-900 to-slate-900", animationClass: "animate-[bounce_1.4s_infinite]" },
+  { name: "✨ルビー・レパード✨", hp: 12500, img: "🐆", isRare: true, tier: "SSR", elementType: "fire", bgGradient: "from-red-500 via-rose-400 to-orange-500", animationClass: "animate-[pulse_1.5s_infinite]" },
 
-  // --- 41〜55: 地獄の門・試練の塔 ---
-  { name: "古代兵器オメガロボ", hp: 15500, img: "🛸", isRare: false, tier: "レア", elementType: "cosmo", bgGradient: "from-zinc-700 to-purple-800", animationClass: "animate-[spin_8s_linear_infinite]" },
-  { name: "✨エメラルド・フェニックス✨", hp: 8500, img: "🦅", isRare: true, tier: "SSR", elementType: "grass", bgGradient: "from-emerald-400 via-teal-300 to-green-500", animationClass: "animate-[bounce_2.5s_infinite]" },
-  { name: "ヘルハウンド・ケルベロス", hp: 18000, img: "🐕‍🦺", isRare: false, tier: "レア", elementType: "dark", bgGradient: "from-red-800 to-stone-900", animationClass: "animate-[pulse_1s_infinite]" },
-  { name: "毒霧のスモッグ・ガス", hp: 20000, img: "💨", isRare: false, tier: "ノーマル", elementType: "water", bgGradient: "from-teal-600 to-slate-600", animationClass: "animate-pulse" },
-  { name: "死神のシャドウリーパー", hp: 23000, img: "👻", isRare: false, tier: "レア", elementType: "dark", bgGradient: "from-violet-900 to-black", animationClass: "animate-[bounce_2s_infinite]" },
-  { name: "溶岩マント・ファイアコング", hp: 26000, img: "🦍", isRare: false, tier: "レア", elementType: "fire", bgGradient: "from-orange-600 to-red-700", animationClass: "animate-pulse" },
-  { name: "機動要塞パワードスーツ", hp: 30000, img: "🦿", isRare: false, tier: "レア", elementType: "cosmo", bgGradient: "from-slate-600 to-zinc-800", animationClass: "animate-[pulse_2s_infinite]" },
+  // ==========================================
+  // エリア4：天空を貫く天界と試練の塔 (31〜40体目)
+  // ==========================================
+  { name: "メタル・ジェネラル", hp: 14000, img: "🤖", isRare: false, tier: "レア", elementType: "cosmo", bgGradient: "from-slate-400 to-cyan-500", animationClass: "animate-[pulse_2s_infinite]" },
+  { name: "ウインタージャイアント", hp: 16000, img: "🧊", isRare: false, tier: "レア", elementType: "water", bgGradient: "from-sky-300 to-blue-500", animationClass: "animate-pulse" },
+  { name: "✨メタル・UFO・キング✨", hp: 18000, img: "🛸", isRare: true, tier: "SSR", elementType: "cosmo", bgGradient: "from-zinc-400 via-slate-300 to-purple-500", animationClass: "animate-[spin_4s_linear_infinite]" },
+  { name: "オメガロボ", hp: 20000, img: "🦾", isRare: false, tier: "レア", elementType: "cosmo", bgGradient: "from-zinc-700 to-purple-800", animationClass: "animate-[pulse_1.5s_infinite]" },
+  { name: "✨エメラルド・ホーク✨", hp: 23000, img: "🦅", isRare: true, tier: "SSR", elementType: "grass", bgGradient: "from-emerald-400 via-teal-300 to-green-500", animationClass: "animate-[bounce_2.5s_infinite]" },
+  { name: "地獄のケルベロス", hp: 26000, img: "🐕‍🦺", isRare: false, tier: "レア", elementType: "dark", bgGradient: "from-red-800 to-stone-900", animationClass: "animate-[pulse_1s_infinite]" },
+  { name: "スモッグ・ガス", hp: 30000, img: "💨", isRare: false, tier: "ノーマル", elementType: "water", bgGradient: "from-teal-600 to-slate-600", animationClass: "animate-pulse" },
+  { name: "シャドウリーパー", hp: 35000, img: "👻", isRare: false, tier: "レア", elementType: "dark", bgGradient: "from-violet-900 to-black", animationClass: "animate-[bounce_2s_infinite]" },
+  { name: "ファイアコング", hp: 40000, img: "🦍", isRare: false, tier: "レア", elementType: "fire", bgGradient: "from-orange-600 to-red-700", animationClass: "animate-pulse" },
+  { name: "パワードスーツ", hp: 46000, img: "🦿", isRare: false, tier: "レア", elementType: "cosmo", bgGradient: "from-slate-600 to-zinc-800", animationClass: "animate-[pulse_2s_infinite]" },
 
-  // --- 最深部・伝説の神々・ラストボスクラス ---
-  { name: "灼熱 of レベリアドラゴン", hp: 35000, img: "🐲", isRare: false, tier: "レア", elementType: "fire", bgGradient: "from-rose-700 via-red-500 to-amber-600", animationClass: "animate-pulse" },
-  { name: "暗黒騎士すみ", hp: 45000, img: "⚔️", isRare: false, tier: "レア", elementType: "dark", bgGradient: "from-purple-900 via-stone-800 to-black", animationClass: "animate-[pulse_1.2s_infinite]" },
-  { name: "デス・ネクロマンサー", hp: 55000, img: "🧙", isRare: false, tier: "レア", elementType: "dark", bgGradient: "from-fuchsia-900 to-stone-950", animationClass: "animate-bounce" },
-  { name: "✨極光のダイヤモンド竜✨", hp: 20000, img: "💎", isRare: true, tier: "SSR", elementType: "cosmo", bgGradient: "from-fuchsia-400 via-cyan-300 to-indigo-400", animationClass: "animate-[bounce_3s_infinite]" },
-  { name: "古代神マオー・ゼウス", hp: 70000, img: "👿", isRare: false, tier: "GOD", elementType: "dark", bgGradient: "from-violet-800 via-fuchsia-900 to-slate-900", animationClass: "animate-[pulse_0.8s_infinite]" },
-  { name: "世界蛇ヨルムンガンド・コア", hp: 85000, img: "🐉", isRare: false, tier: "GOD", elementType: "water", bgGradient: "from-teal-800 via-cyan-900 to-blue-950", animationClass: "animate-[pulse_1.5s_infinite]" },
-  { name: "冥王ハデス・エタニティ", hp: 100000, img: "💀", isRare: false, tier: "GOD", elementType: "dark", bgGradient: "from-stone-800 via-purple-950 to-black", animationClass: "animate-pulse" },
-  { name: "究極時空超獣クロノス", hp: 120000, img: "🪐", isRare: false, tier: "GOD", elementType: "cosmo", bgGradient: "from-indigo-900 via-purple-600 to-pink-500", animationClass: "animate-[spin_20s_linear_infinite]" },
-  { name: "よしおかしずか（神の化身）", hp: 150000, img: "👑", isRare: false, tier: "GOD", elementType: "cosmo", bgGradient: "from-amber-400 via-rose-400 to-teal-400 animate-pulse", animationClass: "animate-[bounce_0.5s_infinite]" }
+  // ==========================================
+  // エリア5：神々の終焉・最深部の伝説神域 (41〜50体目)
+  // ==========================================
+  { name: "レベリアドラゴン", hp: 53000, img: "🐲", isRare: false, tier: "レア", elementType: "fire", bgGradient: "from-rose-700 via-red-500 to-amber-600", animationClass: "animate-pulse" },
+  { name: "暗黒騎士すみ", hp: 61000, img: "⚔️", isRare: false, tier: "レア", elementType: "dark", bgGradient: "from-purple-900 via-stone-800 to-black", animationClass: "animate-[pulse_1.2s_infinite]" },
+  { name: "デス・ネクロマンサー", hp: 70000, img: "🧙", isRare: false, tier: "レア", elementType: "dark", bgGradient: "from-fuchsia-900 to-stone-950", animationClass: "animate-bounce" },
+  { name: "✨極光のダイヤモンド竜✨", hp: 80000, img: "💎", isRare: true, tier: "SSR", elementType: "cosmo", bgGradient: "from-fuchsia-400 via-cyan-300 to-indigo-400", animationClass: "animate-[bounce_3s_infinite]" },
+  { name: "古代神マオー・ゼウス", hp: 92000, img: "⚡", isRare: false, tier: "GOD", elementType: "thunder", bgGradient: "from-violet-800 via-fuchsia-900 to-slate-900", animationClass: "animate-[pulse_0.8s_infinite]" },
+  { name: "世界蛇ヨルムンガンド", hp: 105000, img: "🐉", isRare: false, tier: "GOD", elementType: "water", bgGradient: "from-teal-800 via-cyan-900 to-blue-950", animationClass: "animate-[pulse_1.5s_infinite]" },
+  { name: "冥王ハデス・エタニティ", hp: 120000, img: "💀", isRare: false, tier: "GOD", elementType: "dark", bgGradient: "from-stone-800 via-purple-950 to-black", animationClass: "animate-pulse" },
+  { name: "究極時空超獣クロノス", hp: 140000, img: "🪐", isRare: false, tier: "GOD", elementType: "cosmo", bgGradient: "from-indigo-900 via-purple-600 to-pink-500", animationClass: "animate-[spin_20s_linear_infinite]" },
+  { name: "✨超神星アストロ・ピカチュウ✨", hp: 165000, img: "🐭", isRare: true, tier: "SSR", elementType: "thunder", bgGradient: "from-yellow-400 via-amber-300 to-yellow-500 animate-pulse", animationClass: "animate-[bounce_0.8s_infinite]" },
+  { name: "よしおかしずか（神の化身）", hp: 200000, img: "👑", isRare: false, tier: "GOD", elementType: "cosmo", bgGradient: "from-amber-400 via-rose-400 to-teal-400 animate-pulse", animationClass: "animate-[bounce_0.5s_infinite]" }
 ];
 
 // ==========================================
