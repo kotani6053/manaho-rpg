@@ -103,7 +103,7 @@ export default function GamePage() {
       const monsters = [
         { name: "ファイヤードラゴン", hp: 150, img: "🐉", isRare: false },
         { name: "ぴかぴかキング", hp: 200, img: "👑", isRare: true },
-        { name: "ぷよぷよおばけ", db: 120, img: "👾", isRare: false }
+        { name: "ぷよぷよおばけ", hp: 120, img: "👾", isRare: false }
       ];
       const nextMonster = monsters[Math.floor(Math.random() * monsters.length)];
       setMonster({
