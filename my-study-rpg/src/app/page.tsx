@@ -1,210 +1,126 @@
 "use client";
 import React, { useState } from 'react';
 import BattleScene from '../components/BattleScene';
-import ActionPanel from '../components/ActionPanel'; 
-import { kotobaData } from '../data/gameData'; 
+import ActionPanel from '../components/ActionPanel';
+import { kotobaData } from '../data/gameData';
 
 export default function GamePage() {
-  // --- ゲームの状態（ステート） ---
-  const [level, setLevel] = useState(5); // まなほのレベル
+  // --- ゲームの状態 ---
+  const [level, setLevel] = useState(5);
   const [score, setScore] = useState(0);
   const [currentQuizIndex, setCurrentQuizIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
 
-  // バトルの演出用状態
   const [isAttacking, setIsAttacking] = useState(false);
   const [isTakingDamage, setIsTakingDamage] = useState(false);
-
-  // 敵モンスターのデータ
-  const [monster, setMonster] = useState({
-    name: "わるいスライム",
-    hp: 100,
-    img: "💧",
-    isRare: false
-  });
   const [monsterHP, setMonsterHP] = useState(100);
+  const [monster, setMonster] = useState({ name: "わるいスライム", hp: 100, img: "💧", isRare: false });
 
-  // 現在のクイズ
   const quiz = kotobaData[currentQuizIndex] || kotobaData[0];
 
-  // --- こうげき・必殺技のアクション ---
-  const handleAttack = () => {
+  // --- アクション連携 ---
+  const handleAttack = (isSpecial: boolean) => {
     if (monsterHP <= 0) return;
     setIsAttacking(true);
+    const damage = isSpecial ? 40 + level * 4 : 15 + level * 2;
     setTimeout(() => {
       setIsAttacking(false);
       setIsTakingDamage(true);
-      const damage = 15 + level * 2;
       setMonsterHP((prev) => Math.max(0, prev - damage));
       setTimeout(() => setIsTakingDamage(false), 500);
     }, 300);
   };
 
-  const handleSpecial = () => {
-    if (monsterHP <= 0) return;
-    setIsAttacking(true);
-    setTimeout(() => {
-      setIsAttacking(false);
-      setIsTakingDamage(true);
-      const damage = 40 + level * 4;
-      setMonsterHP((prev) => Math.max(0, prev - damage));
-      setTimeout(() => setIsTakingDamage(false), 600);
-    }, 300);
-  };
-
-  // --- クイズの答えあわせ ---
   const handleAnswerClick = (option: string) => {
     if (selectedAnswer) return;
     setSelectedAnswer(option);
     const correct = option === quiz.a;
     setIsCorrect(correct);
-    
     if (correct) {
-      const nextScore = score + 10;
-      setScore(nextScore);
-      
-      if (nextScore % 30 === 0) {
-        setLevel((prev) => prev + 5);
-      }
-      handleAttack();
+      setScore((prev) => prev + 10);
+      handleAttack(false);
     } else {
       setIsTakingDamage(true);
       setTimeout(() => setIsTakingDamage(false), 300);
     }
   };
 
-  // 次のクイズへ
   const handleNextQuiz = () => {
     setSelectedAnswer(null);
     setIsCorrect(null);
     setCurrentQuizIndex((prev) => (prev + 1) % kotobaData.length);
-    
     if (monsterHP <= 0) {
-      const monsters = [
-        { name: "ファイヤードラゴン", hp: 150, img: "🐉", isRare: false },
-        { name: "ぴかぴかキング", hp: 200, img: "👑", isRare: true },
-        { name: "ぷよぷよおばけ", hp: 120, img: "👾", isRare: false }
-      ];
-      const nextMonster = monsters[Math.floor(Math.random() * monsters.length)];
-      setMonster({
-        name: nextMonster.name,
-        hp: nextMonster.hp,
-        img: nextMonster.img,
-        isRare: nextMonster.isRare
-      });
-      setMonsterHP(nextMonster.hp);
+      setMonster({ name: "ファイヤードラゴン", hp: 150, img: "🐉", isRare: false });
+      setMonsterHP(150);
     }
   };
 
   return (
-    // 💡 画面ぴったり（h-screen）にしつつ、窮屈感を消すために背景のパディングを適正化
-    <main className="h-screen w-screen bg-slate-900 p-4 sm:p-6 flex flex-col items-center justify-center font-sans select-none text-slate-800 overflow-hidden">
-      
-      {/* 💡 横幅を「max-w-6xl」に広げ、全体の高さを「max-h-[94vh]」にしてPC1画面にゆったり配置 */}
-      <div className="w-full max-w-6xl h-full max-h-[94vh] bg-slate-100 rounded-[2.5rem] border-[6px] border-[#222222] p-5 shadow-[0_12px_0_#000] flex flex-col gap-4 justify-between">
+    <main className="h-screen w-screen bg-slate-900 p-4 flex flex-col items-center justify-center font-sans overflow-hidden">
+      {/* 全体を包むメインコンテナ：窮屈さを解消するため max-w-6xl で広めに設定 */}
+      <div className="w-full max-w-6xl h-full max-h-[94vh] bg-slate-100 rounded-[2.5rem] border-[6px] border-[#222222] p-5 shadow-[0_12px_0_#000] flex flex-col gap-4">
         
-        {/* 🏆 ヘッダー */}
-        <div className="flex justify-between items-center bg-white border-[3px] border-[#222222] rounded-2xl p-3 px-6 shadow-[4px_4px_0_#222222] shrink-0">
-          <div className="text-xl md:text-2xl font-black flex items-center gap-2">
-            <span>🎒</span> まなほ の べんきょうRPG
+        {/* ヘッダー */}
+        <header className="flex justify-between items-center bg-white border-4 border-[#222222] rounded-2xl p-4 shadow-[4px_4px_0_#222222]">
+          <h1 className="text-2xl font-black">🎒 まなほ の べんきょうRPG</h1>
+          <div className="flex items-center gap-4">
+            <button className="bg-pink-400 border-4 border-[#222222] px-6 py-2 rounded-xl font-black text-white shadow-[3px_3px_0_#222222] hover:scale-105 transition-transform">
+              🎰 ガチャをひく
+            </button>
+            <div className="bg-amber-400 border-4 border-[#222222] px-6 py-2 rounded-xl font-black text-lg">
+              スコア: {score}
+            </div>
           </div>
-          <div className="text-lg md:text-xl font-black bg-amber-400 text-slate-900 py-1 px-5 rounded-xl border-2 border-[#222222]">
-            スコア: {score} てん
-          </div>
-        </div>
+        </header>
 
-        {/* 🔗 左右2分割構成（左：バトル、右：クイズ＆ガチャパネル） */}
-        <div className="flex-1 min-h-0 w-full grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
-          
-          {/* 👾 左側：バトルフィールド（ゆったり大きく表示） */}
-          <div className="h-full min-h-0 flex flex-col justify-center">
+        {/* 左右分割コンテンツエリア */}
+        <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6 min-h-0">
+          {/* 左：バトル画面 */}
+          <div className="h-full min-h-0">
             <BattleScene 
               monster={monster} 
               monsterHP={monsterHP} 
               isAttacking={isAttacking} 
-              isTakingDamage={isTakingDamage}
-              playerLevel={level}
-              onAttackClick={handleAttack}
-              onSpecialClick={handleSpecial}
+              isTakingDamage={isTakingDamage} 
+              playerLevel={level} 
             />
           </div>
 
-          {/* 📝 右側：クイズ ＆ ActionPanel（ガチャ・攻撃）エリア */}
-          <div className="h-full min-h-0 flex flex-col gap-4">
-            
-            {/* 上半分：クイズボックス */}
-            <div className="flex-1 bg-white border-[4px] border-[#222222] rounded-[2rem] p-5 shadow-[0_8px_0_#222222] flex flex-col justify-between gap-3 min-h-0">
-              <div className="flex flex-col gap-2">
-                <div className="bg-blue-100 text-blue-800 text-xs md:text-sm font-black py-1 px-4 rounded-full w-fit border-2 border-blue-400">
-                  もんだい
-                </div>
-                <h2 className="text-2xl md:text-3xl font-black text-slate-800 leading-snug">
-                  {quiz.q}
-                </h2>
+          {/* 右：クイズ ＋ 下部：アクションパネル */}
+          <div className="flex flex-col gap-4 min-h-0">
+            {/* クイズボックス */}
+            <div className="flex-1 bg-white border-4 border-[#222222] rounded-[2rem] p-6 shadow-[0_8px_0_#222222] flex flex-col min-h-0">
+              <h2 className="text-2xl font-black mb-6 leading-tight">{quiz.q}</h2>
+              <div className="grid gap-3 overflow-y-auto pr-2">
+                {quiz.options.map((opt) => (
+                  <button 
+                    key={opt} 
+                    onClick={() => handleAnswerClick(opt)} 
+                    disabled={!!selectedAnswer}
+                    className={`text-left text-xl font-black p-5 border-4 border-[#222222] rounded-2xl transition-all shadow-[4px_4px_0_#222222] ${
+                      selectedAnswer === opt 
+                        ? (opt === quiz.a ? "bg-emerald-400 text-white" : "bg-rose-400 text-white") 
+                        : "bg-white hover:bg-slate-50"
+                    }`}
+                  >
+                    {opt}
+                  </button>
+                ))}
               </div>
-
-              {/* 選択肢ボタン（文字が大きく見やすい元のデザイン） */}
-              <div className="flex flex-col gap-2.5 my-auto overflow-y-auto pr-1">
-                {quiz.options.map((option, idx) => {
-                  let btnStyle = "bg-white hover:bg-slate-50 text-slate-800 border-[#222222]";
-                  if (selectedAnswer === option) {
-                    btnStyle = option === quiz.a 
-                      ? "bg-emerald-400 text-white border-emerald-600" 
-                      : "bg-rose-400 text-white border-rose-600";
-                  }
-
-                  return (
-                    <button
-                      key={idx}
-                      disabled={selectedAnswer !== null}
-                      onClick={() => handleAnswerClick(option)}
-                      className={`w-full border-[3px] shadow-[4px_4px_0_#222222] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[0_0_0_#222222] transition-all text-xl font-black py-3 px-5 rounded-2xl text-left flex items-center gap-3 ${btnStyle}`}
-                    >
-                      <span className="bg-slate-200 text-slate-700 text-sm w-7 h-7 rounded-full flex items-center justify-center font-mono border-2 border-slate-400 shrink-0">
-                        {idx + 1}
-                      </span>
-                      {option}
-                    </button>
-                  );
-                })}
-              </div>
-
-              {/* まるばつ結果 & 次へ進むボタン */}
-              <div className="h-16 shrink-0 flex items-center justify-center">
-                {selectedAnswer && (
-                  <div className="w-full p-3 px-5 rounded-xl border-[3px] border-[#222222] flex justify-between items-center gap-2 bg-slate-50 animate-fadeIn shadow-[2px_2px_0_#222222]">
-                    <div className="flex items-center gap-2">
-                      {isCorrect ? (
-                        <span className="text-xl md:text-2xl font-black text-emerald-500 animate-bounce">⭕ せいかい！</span>
-                      ) : (
-                        <span className="text-xl md:text-2xl font-black text-rose-500">❌ こたえ: {quiz.a}</span>
-                      )}
-                    </div>
-                    <button
-                      onClick={handleNextQuiz}
-                      className="bg-blue-500 hover:bg-blue-600 text-white font-black text-base py-1.5 px-5 rounded-lg border-[3px] border-[#222222] shadow-[3px_3px_0_#222222] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0_#222222] transition-all"
-                    >
-                      つぎへ ➡️
-                    </button>
-                  </div>
-                )}
-              </div>
+              
+              {/* 正誤判定後の次へボタン */}
+              {selectedAnswer && (
+                <button onClick={handleNextQuiz} className="mt-4 bg-blue-500 text-white font-black py-3 rounded-xl border-4 border-[#222222] shadow-[4px_4px_0_#222222]">
+                  つぎへ ➡️
+                </button>
+              )}
             </div>
 
-            {/* 下半分：元のActionPanel（ガチャとカラフルな攻撃ボタン）を、必要なデータを渡して完全連動 */}
-            <div className="shrink-0">
-              <ActionPanel 
-                points={score} 
-                monsterHP={monsterHP} 
-                onAttack={handleAttack} 
-              />
-            </div>
-
+            {/* あなたのカラフルな攻撃パネル */}
+            <ActionPanel points={score} monsterHP={monsterHP} onAttack={handleAttack} />
           </div>
-
         </div>
-
       </div>
     </main>
   );
