@@ -15,36 +15,40 @@ type QuizProps = {
 
 export default function Quiz({ quiz, inputValue, setInputValue, onCheckAnswer }: QuizProps) {
   return (
-    <div className="bg-[#f8f8f0] border-4 border-[#c0c0b8] rounded-2xl p-4 shadow-[-4px_4px_0_0_#c0c0b8] text-gray-950">
-      <span className="text-[10px] bg-[#c0c0b8] px-2 py-0.5 rounded font-bold text-gray-700 uppercase tracking-wider">
+    <div className="bg-white border-4 border-[#222222] rounded-2xl p-6 shadow-[5px_5px_0_#222222]">
+      <span className="text-[10px] bg-[#222222] px-2 py-1 rounded-full font-black text-white uppercase tracking-wider">
         {quiz.type === "math" ? "🔢 さんすうクエスト" : "🔤 ことばクエスト"}
       </span>
-      <h2 className="text-center text-3xl font-black my-4 tracking-tight text-slate-900">{quiz.q}</h2>
+      
+      <h2 className="text-center text-3xl font-black my-6 tracking-tight text-slate-900">{quiz.q}</h2>
       
       {quiz.type === "math" ? (
-        <div className="flex flex-col gap-3">
-          <div className="text-2xl text-center bg-slate-950 text-emerald-400 rounded-xl h-12 flex items-center justify-center border-2 border-[#c0c0b8] font-mono font-bold shadow-inner">
+        <div className="flex flex-col gap-4">
+          <div className="text-3xl text-center bg-slate-800 text-emerald-400 rounded-xl h-16 flex items-center justify-center border-4 border-[#222222] font-mono font-black shadow-inner">
             {inputValue || " "}
           </div>
-          <div className="grid grid-cols-3 gap-1.5 font-mono">
+          <div className="grid grid-cols-3 gap-2 font-mono">
             {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map(n => (
-              <button key={n} onClick={() => setInputValue(v => v + n)} className="h-10 bg-white border-2 border-[#c0c0b8] rounded-lg font-black text-lg text-slate-800 shadow hover:bg-gray-100 active:translate-y-0.5 transition-all">
+              <button key={n} onClick={() => setInputValue(v => v + n)} className="h-12 bg-white border-4 border-[#222222] rounded-xl font-black text-xl text-slate-800 shadow-[2px_2px_0_#222222] hover:bg-slate-100 active:translate-y-0.5 transition-none">
                 {n}
               </button>
             ))}
-            <button onClick={() => setInputValue("")} className="h-10 bg-rose-100 border-2 border-rose-300 rounded-lg font-black text-rose-700 shadow hover:bg-rose-200 active:translate-y-0.5 transition-all">
+            <button onClick={() => setInputValue("")} className="h-12 bg-rose-200 border-4 border-[#222222] rounded-xl font-black text-rose-800 shadow-[2px_2px_0_#222222] hover:bg-rose-300 active:translate-y-0.5 transition-none">
               C
             </button>
-            <button onClick={() => onCheckAnswer(inputValue)} className="h-10 bg-emerald-600 border-2 border-emerald-800 text-white rounded-lg font-black text-sm shadow hover:bg-emerald-500 active:translate-y-0.5 transition-all">
+            <button onClick={() => onCheckAnswer(inputValue)} className="h-12 bg-emerald-500 border-4 border-[#222222] text-white rounded-xl font-black text-xl shadow-[2px_2px_0_#222222] hover:bg-emerald-600 active:translate-y-0.5 transition-none">
               OK!
             </button>
           </div>
         </div>
       ) : (
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-1 gap-3">
           {quiz.options?.map((opt: string) => (
-            <button key={opt} onClick={() => onCheckAnswer(opt)} className="group relative text-left pl-6 pr-2 py-3 bg-white border-2 border-[#c0c0b8] rounded-xl font-bold text-xs text-slate-800 shadow hover:border-amber-500 hover:bg-amber-50/50 active:translate-y-0.5 transition-all">
-              <span className="absolute left-2 opacity-0 group-hover:opacity-100 text-amber-600 transition-opacity">▶</span>
+            <button 
+              key={opt} 
+              onClick={() => onCheckAnswer(opt)} 
+              className="text-left px-6 py-4 bg-white border-4 border-[#222222] rounded-xl font-black text-lg text-slate-800 shadow-[4px_4px_0_#222222] hover:bg-slate-100 active:translate-y-0.5 transition-none"
+            >
               {opt}
             </button>
           ))}
