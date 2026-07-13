@@ -1,11 +1,13 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import BattleScene from '../components/BattleScene';
 import ActionPanel from '../components/ActionPanel'; 
 import { kotobaData } from '../data/gameData';
 
 export default function GamePage() {
-  const [score, setScore] = useState(100);
+  // スコアを0からスタート
+  const [score, setScore] = useState(0);
+  const [shuffledQuiz, setShuffledQuiz] = useState<any[]>([]);
   const [currentQuizIndex, setCurrentQuizIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
@@ -13,7 +15,13 @@ export default function GamePage() {
   const [isAttacking, setIsAttacking] = useState(false);
   const [isTakingDamage, setIsTakingDamage] = useState(false);
 
-  const quiz = kotobaData[currentQuizIndex] || kotobaData[0];
+  // 初回読み込み時にクイズをランダム化
+  useEffect(() => {
+    const shuffled = [...kotobaData].sort(() => Math.random() - 0.5);
+    setShuffledQuiz(shuffled);
+  }, []);
+
+  const quiz = shuffledQuiz[currentQuizIndex] || kotobaData[0];
 
   const handleAttack = (isSpecial: boolean) => {
     const cost = isSpecial ? 60 : 25;
@@ -38,14 +46,14 @@ export default function GamePage() {
   const handleNextQuiz = () => {
     setSelectedAnswer(null);
     setIsCorrect(null);
-    setCurrentQuizIndex((prev) => (prev + 1) % kotobaData.length);
+    // 次の問題へ（最後なら最初に戻る）
+    setCurrentQuizIndex((prev) => (prev + 1) % shuffledQuiz.length);
   };
 
   return (
     <main className="h-screen w-screen bg-slate-900 p-4 flex flex-col items-center justify-center overflow-hidden">
       <div className="w-full max-w-6xl h-full max-h-[95vh] bg-slate-100 rounded-[2rem] border-[6px] border-[#222222] p-6 shadow-[0_10px_0_#000] flex flex-col gap-6">
         
-        {/* ヘッダー：ガチャ消費を100に変更 */}
         <header className="flex justify-between items-center bg-white border-4 border-[#222222] rounded-2xl p-4 shrink-0">
           <h1 className="text-2xl font-black">🎒 まなほ の べんきょうRPG</h1>
           <div className="flex items-center gap-4">
@@ -59,7 +67,6 @@ export default function GamePage() {
           </div>
         </header>
 
-        {/* 左右分割 */}
         <div className="flex-1 grid grid-cols-2 gap-6 min-h-0">
           <div className="flex flex-col min-h-0">
             <BattleScene 
