@@ -4,10 +4,19 @@ import BattleScene from '../components/BattleScene';
 import ActionPanel from '../components/ActionPanel'; 
 import { kotobaData } from '../data/gameData';
 
+// Fisher-Yatesシャッフルアルゴリズム
+const shuffleArray = <T,>(array: T[]): T[] => {
+  const arr = [...array];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+};
+
 export default function GamePage() {
-  // スコアを0からスタート
   const [score, setScore] = useState(0);
-  const [shuffledQuiz, setShuffledQuiz] = useState<any[]>([]);
+  const [quizList, setQuizList] = useState<any[]>([]); // シャッフル後の配列
   const [currentQuizIndex, setCurrentQuizIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
@@ -15,13 +24,15 @@ export default function GamePage() {
   const [isAttacking, setIsAttacking] = useState(false);
   const [isTakingDamage, setIsTakingDamage] = useState(false);
 
-  // 初回読み込み時にクイズをランダム化
+  // 初回マウント時に確実にシャッフルする
   useEffect(() => {
-    const shuffled = [...kotobaData].sort(() => Math.random() - 0.5);
-    setShuffledQuiz(shuffled);
+    setQuizList(shuffleArray(kotobaData));
   }, []);
 
-  const quiz = shuffledQuiz[currentQuizIndex] || kotobaData[0];
+  // quizListがセットされるまで待つ
+  if (quizList.length === 0) return null;
+
+  const quiz = quizList[currentQuizIndex];
 
   const handleAttack = (isSpecial: boolean) => {
     const cost = isSpecial ? 60 : 25;
@@ -46,8 +57,13 @@ export default function GamePage() {
   const handleNextQuiz = () => {
     setSelectedAnswer(null);
     setIsCorrect(null);
-    // 次の問題へ（最後なら最初に戻る）
-    setCurrentQuizIndex((prev) => (prev + 1) % shuffledQuiz.length);
+    // 最後まで行ったら再度シャッフルしてループ
+    if (currentQuizIndex + 1 >= quizList.length) {
+      setQuizList(shuffleArray(kotobaData));
+      setCurrentQuizIndex(0);
+    } else {
+      setCurrentQuizIndex((prev) => prev + 1);
+    }
   };
 
   return (
@@ -82,7 +98,7 @@ export default function GamePage() {
             <div className="flex-1 bg-white border-4 border-[#222222] rounded-2xl p-6 flex flex-col gap-4 overflow-y-auto">
               <h2 className="text-2xl font-black">{quiz.q}</h2>
               <div className="grid gap-3">
-                {quiz.options.map((opt) => (
+                {quiz.options.map((opt: string) => (
                   <button 
                     key={opt} 
                     onClick={() => handleAnswerClick(opt)} 
