@@ -89,7 +89,7 @@ export default function BattleScene({
             </div>
           </div>
           <div className="bg-white/95 border-[5px] border-[#222222] rounded-2xl p-3 px-4 shadow-[5px_5px_0_#222222] min-w-[200px] ml-2 mb-2">
-            <div className="text-xs font-bold text-blue-600">プレイヤー: まなほ & 男の子</div>
+            <div className="text-xs font-bold text-blue-600">プレイヤー: まなほ
             <div className="font-black text-slate-800 text-base">{buddy.name}</div>
           </div>
         </div>
