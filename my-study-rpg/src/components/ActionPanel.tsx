@@ -9,25 +9,23 @@ type ActionPanelProps = {
 
 export default function ActionPanel({ points, monsterHP, onAttack }: ActionPanelProps) {
   return (
-    <div className="bg-[#101010] border-4 border-[#c0c0b8] rounded-2xl p-2.5 grid grid-cols-2 gap-2 shadow-[-4px_4px_0_0_#c0c0b8]">
+    <div className="bg-white border-[4px] border-[#222222] rounded-2xl p-4 grid grid-cols-2 gap-4 shadow-[6px_6px_0_#222222]">
       <button 
         onClick={() => onAttack(false)} 
         disabled={points < 25 || monsterHP <= 0} 
-        className="group relative flex flex-col justify-between items-start text-left bg-[#f8f8f0] disabled:bg-neutral-700 disabled:opacity-30 text-gray-950 p-2.5 rounded-xl border-2 border-transparent hover:border-amber-500 transition-all cursor-pointer disabled:cursor-not-allowed min-h-[76px]"
+        className="flex flex-col items-center justify-center bg-red-500 hover:bg-red-600 disabled:bg-slate-300 text-white p-5 rounded-xl border-[3px] border-[#222222] transition-all cursor-pointer disabled:cursor-not-allowed"
       >
-        <span className="absolute left-1 top-3 text-xs opacity-0 group-hover:opacity-100 text-gray-950">▶</span>
-        <span className="pl-3 font-black text-sm leading-tight group-disabled:text-neutral-400">つうじょう<br />こうげき</span>
-        <span className="w-full text-right text-[10px] font-mono text-gray-500 font-bold group-disabled:text-neutral-500">PP 25</span>
+        <span className="text-3xl mb-1">⚔️</span>
+        <span className="font-black text-lg">こうげき</span>
       </button>
 
       <button 
         onClick={() => onAttack(true)} 
         disabled={points < 60 || monsterHP <= 0} 
-        className="group relative flex flex-col justify-between items-start text-left bg-[#f8f8f0] disabled:bg-neutral-700 disabled:opacity-30 text-gray-950 p-2.5 rounded-xl border-2 border-transparent hover:border-rose-500 transition-all cursor-pointer disabled:cursor-not-allowed min-h-[76px]"
+        className="flex flex-col items-center justify-center bg-yellow-400 hover:bg-yellow-500 disabled:bg-slate-300 text-slate-900 p-5 rounded-xl border-[3px] border-[#222222] transition-all cursor-pointer disabled:cursor-not-allowed"
       >
-        <span className="absolute left-1 top-3 text-xs opacity-0 group-hover:opacity-100 text-gray-950">▶</span>
-        <span className="pl-3 font-black text-sm leading-tight text-rose-900 group-disabled:text-neutral-400">ひっさつ<br />わざ</span>
-        <span className="w-full text-right text-[10px] font-mono text-gray-500 font-bold group-disabled:text-neutral-500">PP 60</span>
+        <span className="text-3xl mb-1">✨</span>
+        <span className="font-black text-lg">ひっさつ</span>
       </button>
     </div>
   );
