@@ -78,13 +78,13 @@ export default function BattleScene({
           </div>
         </div>
 
-        {/* まなほと相棒エリア（男の子を追加） */}
+        {/* まなほと相棒エリア（全身の男の子に変更） */}
         <div className="flex items-end pl-2 mt-2 w-full">
-          <div className="relative w-36 h-28 flex items-center justify-center gap-2">
-            {/* 男の子 */}
-            <div className="text-6xl select-none">👦</div>
+          <div className="relative w-40 h-28 flex items-center justify-center gap-2">
+            {/* 全身の男の子（少し大きく、立ち姿を意識） */}
+            <div className="text-7xl select-none transform translate-y-2">🧍</div> 
             {/* モフニャン */}
-            <div className={`text-7xl select-none z-20 ${isAttacking ? 'translate-x-20 -translate-y-16 scale-125' : ''}`}>
+            <div className={`text-7xl select-none z-20 ${isAttacking ? 'translate-x-16 -translate-y-16 scale-125' : ''}`}>
               {buddy.img}
             </div>
           </div>
