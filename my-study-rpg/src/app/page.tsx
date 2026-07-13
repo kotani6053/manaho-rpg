@@ -45,13 +45,13 @@ export default function GamePage() {
     <main className="h-screen w-screen bg-slate-900 p-4 flex flex-col items-center justify-center overflow-hidden">
       <div className="w-full max-w-6xl h-full max-h-[95vh] bg-slate-100 rounded-[2rem] border-[6px] border-[#222222] p-6 shadow-[0_10px_0_#000] flex flex-col gap-6">
         
-        {/* ヘッダー */}
+        {/* ヘッダー：ガチャ消費を100に変更 */}
         <header className="flex justify-between items-center bg-white border-4 border-[#222222] rounded-2xl p-4 shrink-0">
           <h1 className="text-2xl font-black">🎒 まなほ の べんきょうRPG</h1>
           <div className="flex items-center gap-4">
             <button className="flex flex-col items-center bg-pink-500 border-4 border-[#222222] px-4 py-1.5 rounded-xl font-black text-white hover:opacity-90">
               <span>🎰 ガチャ</span>
-              <span className="text-[10px] bg-black/20 px-2 rounded-full">消費: 30</span>
+              <span className="text-[10px] bg-black/20 px-2 rounded-full">消費: 100</span>
             </button>
             <div className="bg-amber-400 border-4 border-[#222222] px-6 py-2 rounded-xl font-black text-lg">
               スコア: {score}
